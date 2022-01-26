@@ -4,6 +4,10 @@
 #include "CollectionBase.h"
 #include "ProgressBar.h"
 
+#define DEFUALT_PLAYER_HP		100
+#define DEFULAT_PLAYER_POWER	10
+#define DEFAULT_LIFE_COUNT		3
+
 class PlayerManager
 {
 public:

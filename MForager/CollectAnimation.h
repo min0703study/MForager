@@ -1,6 +1,7 @@
 #pragma once
+#include "AnimationBase.h"
 
-class CollectAnimation
+class CollectAnimation : public AnimationBase
 {
 public:
 	enum class State {
@@ -11,15 +12,8 @@ public:
 		END
 	};
 
+	CollectAnimation():AnimationBase((int)State::END) {};
 	void setAnimationImage(State state, string key, char * fileName, int frameX, int frameY, int frameXCount, int frameYCount);
-	void init(POINT startPt, State initState);
-	void render(HDC hdc);
-private:
-	string imageKey[(int)State::END];
-
-	POINT _startPt;
-	State _currentState;
-
-	int _delayCount;
+	void init(POINTF startPt, State initState);
 };
 

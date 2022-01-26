@@ -1,6 +1,6 @@
 #include "Stdafx.h"
 #include "Player.h"
-
+#define State					 PlayerAnimation::State
 Player::Player(POINTF pt, int maxHp, int power, int lifeCount):
 	_currentPt(pt),
 	_currentRc({ (LONG)pt.x, (LONG)pt.y, (LONG)pt.x + PLAYER_SIZE_X, (LONG)pt.y + PLAYER_SIZE_Y }),
@@ -60,7 +60,7 @@ void Player::directionCheck(POINT pt)
 
 void Player::playAnimation(HDC hdc)
 {
-	_animation->render(hdc, POINT{ _currentRc.left, _currentRc.top });
+	_animation->render(hdc);
 }
 
 bool Player::ptIsClickable(POINT pt)

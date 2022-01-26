@@ -40,6 +40,9 @@
     <Filter Include="UI">
       <UniqueIdentifier>{c98e8984-4a08-423b-9b47-4ff36c5316bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameManager">
+      <UniqueIdentifier>{a1bf57db-d48c-4b80-bcc3-7ce0e6ff3489}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Map.cpp">
@@ -91,14 +94,8 @@
     <ClCompile Include="CollectAnimation.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
-    <ClCompile Include="CollectionManager.cpp">
-      <Filter>Collect</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerAnimation.cpp">
       <Filter>Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerManager.cpp">
-      <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="ProgressBar.cpp">
       <Filter>UI</Filter>
@@ -106,14 +103,23 @@
     <ClCompile Include="Stone.cpp">
       <Filter>Items</Filter>
     </ClCompile>
-    <ClCompile Include="ItemManager.cpp">
-      <Filter>Items</Filter>
-    </ClCompile>
     <ClCompile Include="ItemBase.cpp">
       <Filter>Items</Filter>
     </ClCompile>
     <ClCompile Include="ItemAnimation.cpp">
       <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationBase.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionManager.cpp">
+      <Filter>GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>GameManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,17 +183,11 @@
     <ClInclude Include="CollectAnimation.h">
       <Filter>Animation</Filter>
     </ClInclude>
-    <ClInclude Include="CollectionManager.h">
-      <Filter>Collect</Filter>
-    </ClInclude>
     <ClInclude Include="RandomFuction.h">
       <Filter>Utillity</Filter>
     </ClInclude>
     <ClInclude Include="PlayerAnimation.h">
       <Filter>Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerManager.h">
-      <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="ProgressBar.h">
       <Filter>UI</Filter>
@@ -195,14 +195,23 @@
     <ClInclude Include="Stone.h">
       <Filter>Items</Filter>
     </ClInclude>
-    <ClInclude Include="ItemManager.h">
-      <Filter>Items</Filter>
-    </ClInclude>
     <ClInclude Include="ItemBase.h">
       <Filter>Items</Filter>
     </ClInclude>
     <ClInclude Include="ItemAnimation.h">
       <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationBase.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionManager.h">
+      <Filter>GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>GameManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

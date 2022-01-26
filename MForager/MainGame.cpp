@@ -83,13 +83,13 @@ void MainGame::mouseMoveEvent(POINT& currentPoint)
 void MainGame::clickEvent(POINT & pt, bool isClickDown)
 {
 	if (isClickDown) {
-		_pm->_player->_animation->setState(State::action_left);
+		_pm->_player->_animation->setState(PlayerAnimation::State::action_left);
 		if (_cm->_isSelect) {
 			_pm->actionCollect(_cm->getSelectCollect());
 		}
 	}
 	else {
-		_pm->_player->_animation->setState(State::stop_left);
+		_pm->_player->_animation->setState(PlayerAnimation::State::stop_left);
 	}
 }
 
