@@ -19,6 +19,6 @@ public:
 	void release();
 
 	void render(HDC hdc);
-	void actionCollect(CollectionBase* collect);
+	void actionCollect();
 };
 

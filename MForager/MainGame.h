@@ -10,10 +10,11 @@ class MainGame: public GameNode
 {
 private:
 	Map* _map;
+
 	CollectionManager* _cm;
 	PlayerManager* _pm;
 	ItemManager* _im;
-	int delayCount;
+
 public:
 	HRESULT init(void);
 	void update(void);

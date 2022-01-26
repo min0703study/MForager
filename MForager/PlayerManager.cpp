@@ -7,7 +7,6 @@ HRESULT PlayerManager::init()
 	POINTF pt = POINTF(120, 215);
 	_player = new Player(pt, DEFUALT_PLAYER_HP, DEFULAT_PLAYER_POWER, DEFAULT_LIFE_COUNT);
 	_player->setKey('A', 'D', 'W', 'S', 'F');
-
 	_player->_animation->setAnimationImage( PlayerAnimation::State::stop_right, "Stop_Right", "Resource/Images/Motion/stop_right.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
 	_player->_animation->setAnimationImage(PlayerAnimation::State::stop_left, "Stop_Left", "Resource/Images/Motion/stop_left.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
 	_player->_animation->setAnimationImage(PlayerAnimation::State::action_right, "Action_Right", "Resource/Images/Motion/action_right.bmp", PLAYER_SIZE_X, PLAYER_SIZE_Y, 1, 1);
@@ -41,11 +40,10 @@ void PlayerManager::render(HDC hdc)
 	for (int i = 0; i < 3; i++) {
 		IMAGEMANAGER->render(_player->_lifeCount < (i + 1) ? "blank_heart" : "heart", hdc, (i * 50) + 10, 50);
 	}
-	_player->_animation->render(hdc);
+	_player->playAnimation(hdc);
 }
 
-void PlayerManager::actionCollect(CollectionBase* collect)
+void PlayerManager::actionCollect()
 {
-	collect->hit(_player->_power);
 	_player->actionCollect();
 }

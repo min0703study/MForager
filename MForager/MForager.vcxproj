@@ -27,6 +27,7 @@
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="ItemAnimation.cpp" />
     <ClCompile Include="ItemBase.cpp" />
     <ClCompile Include="ItemManager.cpp" />
@@ -58,6 +59,7 @@
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="ItemAnimation.h" />
     <ClInclude Include="ItemBase.h" />
     <ClInclude Include="ItemManager.h" />

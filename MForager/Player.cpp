@@ -1,6 +1,6 @@
 #include "Stdafx.h"
 #include "Player.h"
-#define State					 PlayerAnimation::State
+
 Player::Player(POINTF pt, int maxHp, int power, int lifeCount):
 	_currentPt(pt),
 	_currentRc({ (LONG)pt.x, (LONG)pt.y, (LONG)pt.x + PLAYER_SIZE_X, (LONG)pt.y + PLAYER_SIZE_Y }),
@@ -39,10 +39,10 @@ void Player::setDirection(Direction direction)
 void Player::setWalkAnimation()
 {
 	if (_currentDirection == D_LEFT) {
-		_animation->setState(State::walk_left);
+		_animation->setState(PlayerAnimation::State::walk_left);
 	}
 	else {
-		_animation->setState(State::walk_right);
+		_animation->setState(PlayerAnimation::State::walk_right);
 	}
 }
 
@@ -60,6 +60,7 @@ void Player::directionCheck(POINT pt)
 
 void Player::playAnimation(HDC hdc)
 {
+	_animation->setStartPoint(_currentPt);
 	_animation->render(hdc);
 }
 

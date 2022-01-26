@@ -121,6 +121,9 @@
     <ClCompile Include="ItemManager.cpp">
       <Filter>GameManager</Filter>
     </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map.h">
@@ -212,6 +215,9 @@
     </ClInclude>
     <ClInclude Include="ItemManager.h">
       <Filter>GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

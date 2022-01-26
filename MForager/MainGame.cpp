@@ -19,7 +19,6 @@ HRESULT MainGame::init(void)
 
 	_im = new ItemManager();
 	_im->init();
-	delayCount = 0;
 
 	return S_OK;
 }
@@ -27,11 +26,12 @@ HRESULT MainGame::init(void)
 void MainGame::update(void)
 {
 	GameNode::update();
-	delayCount++;
+
 	makeRandomCollection();
 
 	_pm->update();
 	_cm->update();
+	_im->RcCollisionCheckForDropItem(_pm->_player->_clickableRect);
 	_im->update();
 
 	_pm->_player->moveKeyCheck(_map);
@@ -53,9 +53,12 @@ void MainGame::render(void)
 	_map->render(getMemDc());
 
 	if (_cm->_isSelect) {
+		/*
 		if (delayCount % 3 == 0) {
 			IMAGEMANAGER->nextFrame("select_cursor");
 		}
+		*/
+		IMAGEMANAGER->nextFrame("select_cursor");
 		IMAGEMANAGER->frameRender("select_cursor", getMemDc(),  _cm->_collectObjects[_cm->_selectIndex]->_currentPt);
 	}
 
@@ -85,7 +88,10 @@ void MainGame::clickEvent(POINT & pt, bool isClickDown)
 	if (isClickDown) {
 		_pm->_player->_animation->setState(PlayerAnimation::State::action_left);
 		if (_cm->_isSelect) {
-			_pm->actionCollect(_cm->getSelectCollect());
+			_pm->actionCollect();
+			if (_cm->hitCollect(_pm->_player->_power)) {
+				_im->createDropItem(_cm->getDropItem());
+			};
 		}
 	}
 	else {

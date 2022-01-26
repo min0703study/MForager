@@ -16,11 +16,7 @@ void CollectionManager::release()
 
 void CollectionManager::update()
 {
-	for (int i = 0; i < COLLECT_OBJECT_COUNT; i++) {
-		if (_collectObjects[i]->_isBeforDrop) {
-			SAFE_DELETE(_collectObjects[i]);
-		}
-	}
+
 }
 
 bool CollectionManager::loadSaveFile()
@@ -36,6 +32,22 @@ void CollectionManager::makeRandomCollection(int x, int y)
 			break;
 		}
 	}
+}
+
+bool CollectionManager::hitCollect(int power)
+{
+	return _collectObjects[_selectIndex]->hit(power);
+}
+
+vector<ItemBase*> CollectionManager::getDropItem()
+{
+	vector<ItemBase*> returnVector = _collectObjects[_selectIndex]->getDropItem();
+	delete _collectObjects[_selectIndex];
+	
+	_isSelect = false;
+	_selectIndex = - 1;
+	
+	return returnVector;
 }
 
 bool CollectionManager::isFull()

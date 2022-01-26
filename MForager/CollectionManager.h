@@ -26,6 +26,11 @@ public:
 	bool loadSaveFile();
 
 	void makeRandomCollection(int x, int y);
+
+	bool hitCollect(int power);
+
+	vector<ItemBase*> getDropItem();
+
 	bool isFull();
 
 	inline void setSelectFlag(bool isSelect) { _isSelect = isSelect; };

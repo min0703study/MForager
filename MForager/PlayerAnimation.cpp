@@ -8,6 +8,11 @@ void PlayerAnimation::setState(State state)
 	}
 }
 
+void PlayerAnimation::setStartPoint(POINTF pt)
+{
+	_startPt = pt;
+}
+
 void PlayerAnimation::setAnimationImage(State state, string key, char * fileName, int frameX, int frameY, int frameXCount, int frameYCount)
 {
 	AnimationBase::setAnimationImage((int)state, key, fileName, frameX, frameY, frameXCount, frameYCount);
