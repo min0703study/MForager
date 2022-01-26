@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="DesignPattern">
+      <UniqueIdentifier>{c1edae32-c9ba-4f45-b3d9-598884e22b48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utillity">
+      <UniqueIdentifier>{e59b0405-ace0-4c8a-b2cd-5ec83d3158e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{4609c00b-3d06-4ca2-93e5-0b6e86d6c9d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items">
+      <UniqueIdentifier>{74063baf-40b8-41f9-a050-ec346db17dd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collect">
+      <UniqueIdentifier>{61ac8db3-8925-464d-975e-963c5d05c787}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{49b736d4-13b0-4d3a-9b68-2557745256f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{35fa069a-fcff-42ab-84b9-bcd402007a6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{894f6c78-6c3d-4b78-a384-1ef4ad7533a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stdafx">
+      <UniqueIdentifier>{af54150f-0824-4697-911d-f5102f3f4eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameNode">
+      <UniqueIdentifier>{4b122b3a-d98f-49db-bc46-2a8ef1ee2836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image">
+      <UniqueIdentifier>{a5ffa274-4a7d-4807-a7f8-ed818bc398c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{eaa42dac-0318-4a61-a1b3-dfe1ff66aa8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{c98e8984-4a08-423b-9b47-4ff36c5316bd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Map.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="GameNode.cpp">
+      <Filter>GameNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Stdafx.cpp">
+      <Filter>Stdafx</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="Image.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameImage.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>GameNode</Filter>
+    </ClCompile>
+    <ClCompile Include="MapTool.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TempSoundManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionBase.cpp">
+      <Filter>Collect</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>Collect</Filter>
+    </ClCompile>
+    <ClCompile Include="Rock.cpp">
+      <Filter>Collect</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionManager.cpp">
+      <Filter>Collect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Stone.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBase.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Map.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapStruct.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GameNode.h">
+      <Filter>GameNode</Filter>
+    </ClInclude>
+    <ClInclude Include="SingletonBase.h">
+      <Filter>DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Stdafx.h">
+      <Filter>Stdafx</Filter>
+    </ClInclude>
+    <ClInclude Include="FileUtil.h">
+      <Filter>Utillity</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameImage.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>GameNode</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeFunction.h">
+      <Filter>Utillity</Filter>
+    </ClInclude>
+    <ClInclude Include="MapTool.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="TempSoundManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionBase.h">
+      <Filter>Collect</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>Collect</Filter>
+    </ClInclude>
+    <ClInclude Include="Rock.h">
+      <Filter>Collect</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionManager.h">
+      <Filter>Collect</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomFuction.h">
+      <Filter>Utillity</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Stone.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBase.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
