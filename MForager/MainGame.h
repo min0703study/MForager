@@ -5,16 +5,15 @@
 #include "PlayerManager.h"
 #include "CollectionManager.h"
 #include "ItemManager.h"
+#include "MapManager.h"
 
 class MainGame: public GameNode
 {
 private:
-	Map* _map;
-
+	MapManager* _mm;
 	CollectionManager* _cm;
 	PlayerManager* _pm;
 	ItemManager* _im;
-
 public:
 	HRESULT init(void);
 	void update(void);
@@ -23,6 +22,4 @@ public:
 
 	void mouseMoveEvent(POINT& currentPoint) override;
 	void clickEvent(POINT& pt, bool isClickDown) override;
-
-	void makeRandomCollection();
 };

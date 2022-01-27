@@ -8,8 +8,9 @@ HRESULT MainGame::init(void)
 	IMAGEMANAGER->addFileImage("cursor", RES_CURSOR_PATH, 20, 20, true);
 	IMAGEMANAGER->addFrameImage("select_cursor", RES_SELECT_CURSOR_PATH, (TILE_SIZE + 20) * 5, (TILE_SIZE + 20), 5, 1);
 	
-	_map = new Map();
-	_map->init();
+	
+	_mm = new MapManager();
+	_mm->init();
 
 	_cm = new CollectionManager();
 	_cm->init();
@@ -20,6 +21,12 @@ HRESULT MainGame::init(void)
 	_im = new ItemManager();
 	_im->init();
 
+	_pm->_itemManager = _im;
+	_pm->_mapManager = _mm;
+
+	_im->_playerManager = _pm;
+	_cm->_mapManager = _mm;
+
 	return S_OK;
 }
 
@@ -27,21 +34,18 @@ void MainGame::update(void)
 {
 	GameNode::update();
 
-	makeRandomCollection();
-
 	_pm->update();
 	_cm->update();
+	_mm->update();
 	_im->RcCollisionCheckForDropItem(_pm->_player->_clickableRect);
 	_im->update();
-
-	_pm->_player->moveKeyCheck(_map);
 }
 
 void MainGame::release(void)
 {
 	GameNode::release();
-
-	_map->release();
+	_im->release();
+	_mm->release();
 	_cm->release();
 	_pm->release();
 }
@@ -50,14 +54,9 @@ void MainGame::render(void)
 {
 	PatBlt(getMemDc(), 0, 0, _winsizeX, _winsizeY, BLACKNESS);
 
-	_map->render(getMemDc());
+	_mm->render(getMemDc());
 
 	if (_cm->_isSelect) {
-		/*
-		if (delayCount % 3 == 0) {
-			IMAGEMANAGER->nextFrame("select_cursor");
-		}
-		*/
 		IMAGEMANAGER->nextFrame("select_cursor");
 		IMAGEMANAGER->frameRender("select_cursor", getMemDc(),  _cm->_collectObjects[_cm->_selectIndex]->_currentPt);
 	}
@@ -96,20 +95,5 @@ void MainGame::clickEvent(POINT & pt, bool isClickDown)
 	}
 	else {
 		_pm->_player->_animation->setState(PlayerAnimation::State::stop_left);
-	}
-}
-
-void MainGame::makeRandomCollection()
-{
-	int x = 0;
-	int y = 0;
-
-	while (!_cm->isFull()) {
-		x = RND->getInt(TILE_X_COUNT) * TILE_SIZE;
-		y = RND->getInt(TILE_Y_COUNT) * TILE_SIZE;
-
-		if (!_map->ptInCollsionTile(x, y)) {
-			_cm->makeRandomCollection(x, y);
-		};
 	}
 }

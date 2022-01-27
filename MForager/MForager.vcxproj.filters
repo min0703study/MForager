@@ -4,9 +4,6 @@
     <Filter Include="DesignPattern">
       <UniqueIdentifier>{c1edae32-c9ba-4f45-b3d9-598884e22b48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utillity">
-      <UniqueIdentifier>{e59b0405-ace0-4c8a-b2cd-5ec83d3158e0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager">
       <UniqueIdentifier>{4609c00b-3d06-4ca2-93e5-0b6e86d6c9d2}</UniqueIdentifier>
     </Filter>
@@ -42,6 +39,9 @@
     </Filter>
     <Filter Include="GameManager">
       <UniqueIdentifier>{a1bf57db-d48c-4b80-bcc3-7ce0e6ff3489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utillity">
+      <UniqueIdentifier>{e59b0405-ace0-4c8a-b2cd-5ec83d3158e0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +123,12 @@
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MapManager.cpp">
+      <Filter>GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuManager.cpp">
+      <Filter>GameManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +224,12 @@
     </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
+      <Filter>GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuManager.h">
+      <Filter>GameManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -21,8 +21,10 @@ public:
 	void release();
 
 	bool ptInCollsionTile(int x, int y);
-	bool ptCollsionCheck(POINT pt);
+
+	bool ptCollsionCheck(POINTF pt);
 	bool ptCollsionCheck(int x, int y);
+	
 	bool RectCollsionCheck(RECT rc);
 
 };

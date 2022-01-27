@@ -1,9 +1,23 @@
 #include "Stdafx.h"
+
+#include "ItemManager.h"
 #include "PlayerManager.h"
+#include "MapManager.h"
+
 #include "ProgressBar.h"
+
+void PlayerManager::moveKeyCheck()
+{
+}
+
+void PlayerManager::addInventoryItem(ItemBase* item)
+{
+	_inventory->_items.push_back(item);
+}
 
 HRESULT PlayerManager::init()
 {
+	_inventory = new Inventory;
 	POINTF pt = POINTF(120, 215);
 	_player = new Player(pt, DEFUALT_PLAYER_HP, DEFULAT_PLAYER_POWER, DEFAULT_LIFE_COUNT);
 	_player->setKey('A', 'D', 'W', 'S', 'F');
@@ -27,6 +41,32 @@ HRESULT PlayerManager::init()
 void PlayerManager::update()
 {
 	_hpGage->setValue(_player->getHp());
+
+	if (KEYMANAGER->isStayKeyDown(_player->_moveLeft)) {
+		if (!_mapManager->ptCollsionCheck({ _player->_moveRc.left, _player->_moveRc.bottom })) {
+			_player->move(-PLAYER_SPEED, true);
+		}
+	}
+
+	if (KEYMANAGER->isStayKeyDown(_player->_moveRight)) {
+		if (!_mapManager->ptCollsionCheck({ _player->_moveRc.right,  _player->_moveRc.top })) {
+			_player->move(PLAYER_SPEED, true);
+		}
+	}
+
+	/*
+	if (KEYMANAGER->isStayKeyDown(_player->_moveUp)) {
+		if (!map->ptCollsionCheck(_moveRc.left, _moveRc.top)) {
+			move(-PLAYER_SPEED, false);
+		}
+	}
+
+	if (KEYMANAGER->isStayKeyDown(_player->_moveDown)) {
+		if (!map->ptCollsionCheck(_moveRc.left, _moveRc.bottom)) {
+			move(PLAYER_SPEED, false);
+		}
+	}
+	*/
 }
 
 void PlayerManager::release()

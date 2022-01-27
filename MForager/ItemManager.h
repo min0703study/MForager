@@ -1,5 +1,6 @@
 #pragma once
 #include "Stone.h"
+class PlayerManager;
 
 class ItemManager
 {
@@ -28,6 +29,7 @@ public:
 	};
 
 	vector<DropItem*> _dropItems;
+	PlayerManager* _playerManager;
 
 	HRESULT init();
 	void release();

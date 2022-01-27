@@ -57,10 +57,10 @@ bool Map::ptInCollsionTile(int x, int y)
 	return false;
 }
 
-bool Map::ptCollsionCheck(POINT pt)
+bool Map::ptCollsionCheck(POINTF pt)
 {
 	for (int i = 0; i < _collisionTilesCount; i++) {
-		if (PtInRect(&_collisionTiles[i]->rc, pt)) {
+		if (PtInRect(&_collisionTiles[i]->rc, pt.toPOINT())) {
 			return true;
 		}
 	}

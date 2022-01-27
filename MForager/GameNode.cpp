@@ -52,13 +52,6 @@ void GameNode::update(void) {
 
 void GameNode::keyboardDownEvent(HWND& hWnd, WPARAM& wParam)
 {
-	switch (wParam)
-	{
-	case VK_ESCAPE:
-		this->release();
-		PostMessage(hWnd, WM_DESTROY, 0, 0);
-		break;
-	}
 }
 
 void GameNode::addTimer(int sec, int timerId)

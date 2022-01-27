@@ -11,8 +11,6 @@ Player::Player(POINTF pt, int maxHp, int power, int lifeCount):
 {
 	_clickableRect = { _currentRc.left - TILE_SIZE ,_currentRc.top - TILE_SIZE, _currentRc.right + TILE_SIZE ,  _currentRc.bottom + TILE_SIZE };
 	_moveRc = { _currentRc.left + 10, _currentRc.top + 20,  _currentRc.right - 10, _currentRc.bottom };
-
-	_power = 10;
 	_animation = new PlayerAnimation();
 }
 
@@ -57,7 +55,6 @@ void Player::directionCheck(POINT pt)
 	}
 }
 
-
 void Player::playAnimation(HDC hdc)
 {
 	_animation->setStartPoint(_currentPt);
@@ -67,37 +64,6 @@ void Player::playAnimation(HDC hdc)
 bool Player::ptIsClickable(POINT pt)
 {
 	return PtInRect(&_clickableRect, pt);
-}
-
-void Player::moveKeyCheck(Map * map)
-{
-	if (KEYMANAGER->isStayKeyDown(_moveLeft)) {
-		setWalkAnimation();
-		if (!map->ptCollsionCheck(_moveRc.left, _moveRc.bottom)) {
-			move(-PLAYER_SPEED, true);
-		}
-	}
-
-	if (KEYMANAGER->isStayKeyDown(_moveRight)) {
-		setWalkAnimation();
-		if (!map->ptCollsionCheck(_moveRc.right, _moveRc.top)) {
-			move(PLAYER_SPEED, true);
-		}
-	}
-
-	if (KEYMANAGER->isStayKeyDown(_moveUp)) {
-		setWalkAnimation();
-		if (!map->ptCollsionCheck(_moveRc.left, _moveRc.top)) {
-			move(-PLAYER_SPEED, false);
-		}
-	}
-
-	if (KEYMANAGER->isStayKeyDown(_moveDown)) {
-		setWalkAnimation();
-		if (!map->ptCollsionCheck(_moveRc.left, _moveRc.bottom)) {
-			move(PLAYER_SPEED, false);
-		}
-	}
 }
 
 void Player::move(int addValue, bool isX)

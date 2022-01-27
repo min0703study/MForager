@@ -16,7 +16,7 @@ void CollectionManager::release()
 
 void CollectionManager::update()
 {
-
+	makeRandomCollection();
 }
 
 bool CollectionManager::loadSaveFile()
@@ -92,5 +92,20 @@ void CollectionManager::render(HDC hdc)
 				_hitGage->render(hdc);
 			}
 		}
+	}
+}
+
+void CollectionManager::makeRandomCollection()
+{
+	int x = 0;
+	int y = 0;
+
+	while (!isFull()) {
+		x = RND->getInt(TILE_X_COUNT) * TILE_SIZE;
+		y = RND->getInt(TILE_Y_COUNT) * TILE_SIZE;
+
+		if (!_mapManager->ptInCollsionTile(x, y)) {
+			makeRandomCollection(x, y);
+		};
 	}
 }

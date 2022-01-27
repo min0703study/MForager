@@ -3,11 +3,13 @@
 #include "Rock.h"
 #include "Tree.h"
 #include "ProgressBar.h"
-
+#include "MapManager.h"
 #define COLLECT_OBJECT_COUNT	12
 
 class CollectionManager
 {
+public:
+	MapManager* _mapManager;
 public:
 	CollectionBase* _collectObjects[COLLECT_OBJECT_COUNT];
 	ProgressBar* _hitGage;
@@ -22,6 +24,8 @@ public:
 	void release();
 	void update();
 	void render(HDC hdc);
+
+	void makeRandomCollection();
 
 	bool loadSaveFile();
 

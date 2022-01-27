@@ -1,4 +1,5 @@
 #include "Stdafx.h"
+#include "PlayerManager.h"
 #include "ItemManager.h"
 
 HRESULT ItemManager::init()
@@ -43,9 +44,10 @@ void ItemManager::RcCollisionCheckForDropItem(RECT & rc)
 {
 	RECT tempRect;
 	for (DropItem* dropItem : _dropItems) {
-		if (!dropItem->_isEndDrop) continue;
+		if (!dropItem->_isEndDrop || dropItem->_isDropToPlayer) continue;
 		if (IntersectRect(&tempRect, &rc, &dropItem->_dropRc)) {
 			dropItem->_isDropToPlayer = true;
+			_playerManager->addInventoryItem(dropItem->_dropItem);
 		}
 	}
 }

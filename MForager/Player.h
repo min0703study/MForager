@@ -41,7 +41,7 @@ public:
 
 	void setWalkAnimation();
 
-	void moveKeyCheck(Map* map);
+	void moveKeyCheck();
 	void move(int addValue, bool isX);
 	
 	void actionCollect();
