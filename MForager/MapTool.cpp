@@ -4,6 +4,7 @@
 HRESULT MapTool::init(void)
 {
 	GameNode::init();
+	ShowCursor(true);
 
 	IMAGEMANAGER->addFrameImage(
 		B_GROUND_IMG_KEY, 
@@ -47,7 +48,6 @@ void MapTool::update(void)
 	if (KEYMANAGER->isOnceKeyDown('L')) {
 		loadMap();
 	}
-	
 }
 
 void MapTool::release(void)
@@ -59,12 +59,11 @@ void MapTool::render(void)
 {
 	PatBlt(getMemDc(), 0, 0, _winsizeX, _winsizeY, BLACKNESS);
 
+	
 	for (RECT rc : _drawRc) {
 		RectangleMake(getMemDc(), rc);
 	}
-
-	IMAGEMANAGER->render(B_GROUND_IMG_KEY, getMemDc(), TILE_X_COUNT * TILE_SIZE, 0);
-
+	
 	for (TILE tile : _drawTiles)
 	{
 		if (tile.pt.x == -1) continue;
@@ -72,6 +71,7 @@ void MapTool::render(void)
 		IMAGEMANAGER->frameRender(B_GROUND_IMG_KEY, getMemDc(), tile.pt);
 	}
 
+	IMAGEMANAGER->render(B_GROUND_IMG_KEY, getMemDc(), TILE_X_COUNT * TILE_SIZE, 0);
 	IMAGEMANAGER->render(getBackBufferKey(), getHdc());
 }
 
@@ -94,7 +94,6 @@ void MapTool::clickEvent(POINT & pt, bool isClickDown)
 				_drawTiles[i] = _currentSelectTile;
 				_drawTiles[i].rc = _drawRc[i];
 				_drawTiles[i].pt = { _drawRc[i].left, _drawRc[i].top };
-
 			}
 		}
 

@@ -1,13 +1,11 @@
 #pragma once
 #include "CollectAnimation.h"
 #include "Stone.h"
-class CollectionBase
+#include "UI.h"
+class CollectionBase: public UI
 {
 public:
 	CollectAnimation* _animation;
-
-	POINT _currentPt;
-	RECT _currentRc;
 
 	ItemBase* _dropItem;
 	int _dropItemCount;

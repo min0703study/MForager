@@ -12,6 +12,7 @@ HRESULT Map::init()
 		B_GROUND_Y_COUNT);
 	
 	this->Load();
+
 	_collisionTilesCount = 0;
 	for (TILE& tile : _tiles)
 	{
@@ -43,42 +44,8 @@ void Map::render(HDC hdc)
 
 void Map::release()
 {
-
-}
-
-bool Map::ptInCollsionTile(int x, int y)
-{
-	RECT tempRect;
-	for (int i = 0; i < _collisionTilesCount; i++) {
-		if (_collisionTiles[i]->pt.x == x && _collisionTiles[i]->pt.y == y) {
-			return true;
-		}
+	for (TILE* tile : _collisionTiles) {
+		SAFE_DELETE(tile);
 	}
-	return false;
 }
 
-bool Map::ptCollsionCheck(POINTF pt)
-{
-	for (int i = 0; i < _collisionTilesCount; i++) {
-		if (PtInRect(&_collisionTiles[i]->rc, pt.toPOINT())) {
-			return true;
-		}
-	}
-	return false;
-}
-
-bool Map::ptCollsionCheck(int x, int y)
-{
-	return this->ptCollsionCheck({ x, y });
-}
-
-bool Map::RectCollsionCheck(RECT rc)
-{
-	RECT tempRect;
-	for (int i = 0; i < _collisionTilesCount; i++) {
-		if (IntersectRect(&tempRect, &rc, &_collisionTiles[i]->rc)) {
-			return true;
-		}
-	}
-	return false;
-}

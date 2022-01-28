@@ -14,7 +14,7 @@ HRESULT GameNode::init(bool managerInit)
 	_isManagerInit = managerInit;
 
 	_backBufferKey = "backBuffer";
-	_backBuffer = IMAGEMANAGER->addImage(_backBufferKey, WINSIZE_X, WINSIZE_Y);
+	_backBuffer = IMAGEMANAGER->addImage(_backBufferKey, _winsizeX, _winsizeY);
 
 	_hdc = GetDC(_hWnd);
 	setlocale(LC_ALL, "Korean");

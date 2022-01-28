@@ -85,9 +85,6 @@
     <ClCompile Include="CollectionBase.cpp">
       <Filter>Collect</Filter>
     </ClCompile>
-    <ClCompile Include="Tree.cpp">
-      <Filter>Collect</Filter>
-    </ClCompile>
     <ClCompile Include="Rock.cpp">
       <Filter>Collect</Filter>
     </ClCompile>
@@ -129,6 +126,27 @@
     </ClCompile>
     <ClCompile Include="MenuManager.cpp">
       <Filter>GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomCursor.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectPtBox.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleAnimation.cpp">
+      <Filter>Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,9 +201,6 @@
     <ClInclude Include="CollectionBase.h">
       <Filter>Collect</Filter>
     </ClInclude>
-    <ClInclude Include="Tree.h">
-      <Filter>Collect</Filter>
-    </ClInclude>
     <ClInclude Include="Rock.h">
       <Filter>Collect</Filter>
     </ClInclude>
@@ -230,6 +245,27 @@
     </ClInclude>
     <ClInclude Include="MenuManager.h">
       <Filter>GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomCursor.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectPtBox.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleAnimation.h">
+      <Filter>Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

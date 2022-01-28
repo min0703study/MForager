@@ -1,11 +1,14 @@
 #pragma once
 #include "ItemAnimation.h"
-class ItemBase
+#include "UI.h"
+class ItemBase: public UI
 {
 public:
-	ItemAnimation* _animation;
+	int _ItemId;
 
-	POINTF _currentPt;
-	RECT _currentRc;
+	ItemAnimation* _animation;
+	ItemBase(POINTF pt, int widht, int height);
+
+	virtual int getId() { return 0; };
 };
 

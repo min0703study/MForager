@@ -34,11 +34,8 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 		ChangeDisplaySettings(&dm, 0);
 	}
 
-	_winsizeX = TILE_SIZE * TILE_X_COUNT;
-	_winsizeY = TILE_SIZE * TILE_Y_COUNT;
-
-	//winsizeX = WINSIZE_X;
-	//_winsizeY = WINSIZE_Y;
+	_winsizeX = WINSIZE_X;
+	_winsizeY = WINSIZE_Y;
 
 
 	_winRealSizeX = _winsizeX - 15;
@@ -68,8 +65,8 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 		WINSTYLE,
 		WINSTART_X,
 		WINSTART_Y,
-		_winsizeX,
-		_winsizeY,
+		CAMERASIZE_X,
+		CAMERASIZE_Y,
 		NULL,
 		(HMENU)NULL,
 		hInstance,

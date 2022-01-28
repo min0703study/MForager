@@ -20,9 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimationBase.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CollectAnimation.cpp" />
     <ClCompile Include="CollectionBase.cpp" />
     <ClCompile Include="CollectionManager.cpp" />
+    <ClCompile Include="CustomCursor.cpp" />
     <ClCompile Include="FrameImage.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -43,19 +46,25 @@
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Rock.cpp" />
+    <ClCompile Include="SelectPtBox.cpp" />
+    <ClCompile Include="SimpleAnimation.cpp" />
     <ClCompile Include="Stone.cpp" />
     <ClCompile Include="TempSoundManager.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationBase.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CollectAnimation.h" />
     <ClInclude Include="CollectionBase.h" />
     <ClInclude Include="CollectionManager.h" />
+    <ClInclude Include="CustomCursor.h" />
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="FrameImage.h" />
     <ClInclude Include="GameNode.h" />
@@ -79,12 +88,15 @@
     <ClInclude Include="RandomFuction.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Rock.h" />
+    <ClInclude Include="SelectPtBox.h" />
     <ClInclude Include="ShapeFunction.h" />
+    <ClInclude Include="SimpleAnimation.h" />
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="Stone.h" />
     <ClInclude Include="TempSoundManager.h" />
     <ClInclude Include="Stdafx.h" />
-    <ClInclude Include="Tree.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -51,6 +51,7 @@ using namespace std;
 #define SAFE_DELETE(p)         {if(p != NULL) {delete (p); (p)=nullptr;}}
 #define SAFE_DELETE_ARRAY(p)   {if(p) {delete[] (p); (p)=nullptr;}}
 #define SAFE_RELEASE(p)         {if(p) {(p)->release(); (p)=nullptr;}}
+#define SAFE_NULL_CHECK(p)      (p) == nullptr
 
 typedef struct tagPointf {
 	float x;
@@ -111,9 +112,15 @@ typedef struct tagPointf {
 #define WINSIZE_X		TILE_SIZE * TILE_X_COUNT
 #define WINSIZE_Y		TILE_SIZE * TILE_Y_COUNT
 
+#define CAMERASIZE_X		TILE_SIZE * 12
+#define CAMERASIZE_Y		TILE_SIZE * 10
+
 #define PLAYER_SIZE_X		(TILE_SIZE + 10)
 #define PLAYER_SIZE_Y		(TILE_SIZE + 10)
-#define PLAYER_SPEED		7
+
+#define PLAYER_SPEED		5.0f
+
+#define ABSOLUTE_POS		TRUE
 
 extern HINSTANCE	_hInstance;
 extern HWND			_hWnd;

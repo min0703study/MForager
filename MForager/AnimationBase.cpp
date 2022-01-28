@@ -21,9 +21,14 @@ void AnimationBase::update()
 
 void AnimationBase::render(HDC hdc)
 {
+	render(hdc, _startPt);
+}
+
+void AnimationBase::render(HDC hdc, POINTF startPt)
+{
 	FrameImage* img = (FrameImage*)IMAGEMANAGER->findImage(_imageKeys[(int)_currentState]);
 
-	IMAGEMANAGER->frameRender(_imageKeys[(int)_currentState], hdc, _startPt);
+	IMAGEMANAGER->frameRender(_imageKeys[(int)_currentState], hdc, startPt);
 
 	_delayCount++;
 	if (_delayCount % 6 == 0) {

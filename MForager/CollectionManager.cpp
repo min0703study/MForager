@@ -1,9 +1,11 @@
 #include "Stdafx.h"
 #include "CollectionManager.h"
+#include "ItemManager.h"
+#include "MapManager.h"
+#include "UIManager.h"
 
 HRESULT CollectionManager::init()
 {
-	_hitGage = new ProgressBar(TILE_SIZE, TILE_SIZE * 0.4, C_PG_COLLECT_GAGE_TOP, C_PG_COLLECT_GAGE_BOTTOM);
 	return S_OK;
 }
 
@@ -16,38 +18,38 @@ void CollectionManager::release()
 
 void CollectionManager::update()
 {
-	makeRandomCollection();
+
 }
 
-bool CollectionManager::loadSaveFile()
+void CollectionManager::hitCollect(int power)
 {
-	return false;
-}
 
-void CollectionManager::makeRandomCollection(int x, int y)
-{
-	for (int i = 0; i < COLLECT_OBJECT_COUNT; i++) {
-		if (_collectObjects[i] == nullptr) {
-			_collectObjects[i] = new Rock(Rock::TYPE::ROCK, { x, y });
-			break;
-		}
+	if (_collectObjects[_selectIndex]->hit(power)) {
+		_itemManager->createDropItem(_collectObjects[_selectIndex]->getDropItem());
+		_uiManager->deleteUI(_collectObjects[_selectIndex]);
+		SAFE_DELETE(_collectObjects[_selectIndex]);
+
+		_uiManager->deleteUI(_hitGage[_selectIndex]);
+		SAFE_DELETE(_hitGage[_selectIndex]);
+
+		_selectIndex = -1;
+		_isSelect = false;
 	}
-}
+	else {
+		if (SAFE_NULL_CHECK(_hitGage[_selectIndex])) {
+			_hitGage[_selectIndex] = new ProgressBar(
+				_collectObjects[_selectIndex]->getAPt(), 
+				TILE_SIZE, 
+				TILE_SIZE * 0.4,
+				_collectObjects[_selectIndex]->_maxHitGage,
+				_collectObjects[_selectIndex]->_hitGage,
+				C_PG_COLLECT_GAGE_TOP, 
+				C_PG_COLLECT_GAGE_BOTTOM);
+			_uiManager->addUI(_hitGage[_selectIndex]);
+		}
 
-bool CollectionManager::hitCollect(int power)
-{
-	return _collectObjects[_selectIndex]->hit(power);
-}
-
-vector<ItemBase*> CollectionManager::getDropItem()
-{
-	vector<ItemBase*> returnVector = _collectObjects[_selectIndex]->getDropItem();
-	delete _collectObjects[_selectIndex];
-	
-	_isSelect = false;
-	_selectIndex = - 1;
-	
-	return returnVector;
+		_hitGage[_selectIndex]->setValue(_collectObjects[_selectIndex]->_hitGage);
+	}
 }
 
 bool CollectionManager::isFull()
@@ -60,18 +62,17 @@ bool CollectionManager::isFull()
 	return true;
 }
 
-CollectionBase * CollectionManager::getPtInCollect(POINT pt)
+bool CollectionManager::isPtInCollect(POINT pt)
 {
+	_isSelect = false;
 	for (int i = 0; i < COLLECT_OBJECT_COUNT; i++) {
-		if (PtInRect(&_collectObjects[i]->_currentRc, pt)) {
+		if (SAFE_NULL_CHECK(_collectObjects[i])) continue;
+		if (PtInRect(&_uiManager->getRelRect(_collectObjects[i]), pt)) {
 			_isSelect = true;
 			_selectIndex = i;
-			return _collectObjects[i];
 		}
 	}
-
-	_isSelect = false;
-	return nullptr;
+	return _isSelect;
 }
 
 CollectionBase* CollectionManager::getSelectCollect()
@@ -81,18 +82,6 @@ CollectionBase* CollectionManager::getSelectCollect()
 
 void CollectionManager::render(HDC hdc)
 {
-	for (int i = 0; i < COLLECT_OBJECT_COUNT; i++) {
-		if (_collectObjects[i] != nullptr && !_collectObjects[i]->_isBeforDrop) {
-			_collectObjects[i]->_animation->render(hdc);
-
-			if (_collectObjects[i]->_isHitStart) {
-				_hitGage->setValue({_collectObjects[i]->_currentRc.left , _collectObjects[i]->_currentRc.bottom + 10}, 
-					_collectObjects[i]->_maxHitGage, 
-					_collectObjects[i]->_hitGage);
-				_hitGage->render(hdc);
-			}
-		}
-	}
 }
 
 void CollectionManager::makeRandomCollection()
@@ -100,12 +89,14 @@ void CollectionManager::makeRandomCollection()
 	int x = 0;
 	int y = 0;
 
-	while (!isFull()) {
+	for (int i = 0; i < COLLECT_OBJECT_COUNT;) {
 		x = RND->getInt(TILE_X_COUNT) * TILE_SIZE;
 		y = RND->getInt(TILE_Y_COUNT) * TILE_SIZE;
 
 		if (!_mapManager->ptInCollsionTile(x, y)) {
-			makeRandomCollection(x, y);
+			_collectObjects[i] = new Rock(Rock::TYPE::ROCK, { x, y });
+			_uiManager->addUI(_collectObjects[i]);
+			i++;
 		};
 	}
 }

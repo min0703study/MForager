@@ -10,22 +10,53 @@
 class Map
 {
 public:
-	TILE _tiles[TILE_COUNT];
-	TILE* _collisionTiles[TILE_COUNT];
-	int _collisionTilesCount;
+	TILE _tiles[TILE_COUNT];	//타일
+	TILE* _collisionTiles[TILE_COUNT]; //충돌 타일
+	int _collisionTilesCount; //충돌 타일 수
 
 	HRESULT init();
-
 	void Load();
 	void render(HDC hdc);
 	void release();
-
-	bool ptInCollsionTile(int x, int y);
-
-	bool ptCollsionCheck(POINTF pt);
-	bool ptCollsionCheck(int x, int y);
-	
-	bool RectCollsionCheck(RECT rc);
-
 };
+
+/*
+
+bool Map::ptInCollsionTile(int x, int y)
+{
+	RECT tempRect;
+	for (int i = 0; i < _collisionTilesCount; i++) {
+		if (_collisionTiles[i]->pt.x == x && _collisionTiles[i]->pt.y == y) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Map::ptCollsionCheck(POINTF pt)
+{
+	for (int i = 0; i < _collisionTilesCount; i++) {
+		if (PtInRect(&_collisionTiles[i]->rc, pt.toPOINT())) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Map::ptCollsionCheck(int x, int y)
+{
+	return this->ptCollsionCheck({ x, y });
+}
+
+bool Map::RectCollsionCheck(RECT rc)
+{
+	RECT tempRect;
+	for (int i = 0; i < _collisionTilesCount; i++) {
+		if (IntersectRect(&tempRect, &rc, &_collisionTiles[i]->rc)) {
+			return true;
+		}
+	}
+	return false;
+}
+*/
 

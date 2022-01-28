@@ -151,6 +151,7 @@ inline void RectangleMake(HDC hdc, int x, int y, int width, int height, bool isC
 		x = x - width / 2;
 		y = y - height / 2;
 	}
+
 	Rectangle(hdc, x, y, x + width, y + height);
 }
 
@@ -176,4 +177,8 @@ inline RECT RectMakeF(POINTF pt, float width, float height)
 {
 	RECT rc = { pt.x, pt.y, pt.x + width, pt.y + height };
 	return rc;
+}
+
+inline POINTF FindCenterPt(RECT rc) {
+	return { (rc.left + rc.right) / 2, (rc.bottom + rc.top) / 2 };
 }

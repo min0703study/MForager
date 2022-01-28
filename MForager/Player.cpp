@@ -1,17 +1,17 @@
 #include "Stdafx.h"
 #include "Player.h"
 
-Player::Player(POINTF pt, int maxHp, int power, int lifeCount):
-	_currentPt(pt),
-	_currentRc({ (LONG)pt.x, (LONG)pt.y, (LONG)pt.x + PLAYER_SIZE_X, (LONG)pt.y + PLAYER_SIZE_Y }),
+Player::Player(POINTF pt,int width, int height, int maxHp, int power, int lifeCount)
+	:UI(pt, width, height),
 	_maxHp(maxHp),
 	_currentHp(maxHp),
 	_power(power),
 	_lifeCount(lifeCount)
 {
-	_clickableRect = { _currentRc.left - TILE_SIZE ,_currentRc.top - TILE_SIZE, _currentRc.right + TILE_SIZE ,  _currentRc.bottom + TILE_SIZE };
-	_moveRc = { _currentRc.left + 10, _currentRc.top + 20,  _currentRc.right - 10, _currentRc.bottom };
+	//_clickableRect = { _absRc.left - TILE_SIZE, _absRc.top - TILE_SIZE, _absRc.right + TILE_SIZE,  _absRc.bottom + TILE_SIZE };
+	//_moveRc = { _absRc.left + 10, _absRc.top + 20,  _absRc.right - 10, _absRc.bottom };
 	_animation = new PlayerAnimation();
+	UI::_bAnimation = _animation;
 }
 
 Player::~Player()
@@ -27,13 +27,6 @@ void Player::setKey(int moveLeft , int moveRight, int moveUp, int moveDown, int 
 	this->_actionKey = action;
 }
 
-void Player::setDirection(Direction direction)
-{
-	if (_currentDirection != direction) {
-		_currentDirection = direction;
-	}
-}
-
 void Player::setWalkAnimation()
 {
 	if (_currentDirection == D_LEFT) {
@@ -44,53 +37,17 @@ void Player::setWalkAnimation()
 	}
 }
 
-void Player::directionCheck(POINT pt)
-{
-	if (pt.x > _currentPt.x + 30)
-	{
-		_currentDirection = Direction::D_RIGHT;
-	}
-	else {
-		_currentDirection = Direction::D_LEFT;
-	}
-}
-
-void Player::playAnimation(HDC hdc)
-{
-	_animation->setStartPoint(_currentPt);
-	_animation->render(hdc);
-}
-
-bool Player::ptIsClickable(POINT pt)
-{
-	return PtInRect(&_clickableRect, pt);
-}
-
-void Player::move(int addValue, bool isX)
+void Player::move(float addValue, bool isX)
 {
 	if (isX) {
-		_currentPt.x += addValue;
-		_currentRc.left += addValue;
-		_currentRc.right += addValue;
-
-		_moveRc.left += addValue;
-		_moveRc.right += addValue;
-
-		_clickableRect.left += addValue;
-		_clickableRect.right += addValue;
-
+		_absPt.x += addValue;
+		_absRc.left += addValue;
+		_absRc.right += addValue;
 	}
 	else {
-		_currentPt.y += addValue;
-		
-		_currentRc.top += addValue;
-		_currentRc.bottom += addValue;
-
-		_moveRc.top += addValue;
-		_moveRc.bottom += addValue;
-
-		_clickableRect.top += addValue;
-		_clickableRect.bottom += addValue;
+		_absPt.y += addValue;
+		_absRc.top += addValue;
+		_absRc.bottom += addValue;
 	}
 }
 
@@ -101,4 +58,9 @@ void Player::actionCollect()
 		_lifeCount--;
 		_currentHp = _maxHp;
 	}
+}
+
+RECT Player::getClickableRect(RECT relRc)
+{
+	return { relRc.left - TILE_SIZE, relRc.top - TILE_SIZE, relRc.right + TILE_SIZE,  relRc.bottom + TILE_SIZE };
 }

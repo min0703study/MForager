@@ -15,6 +15,8 @@ protected:
 	int _currentState;
 public:
 	void render(HDC hdc);
+	void render(HDC hdc, POINTF startPt);
+
 	void update();
 	void release();
 

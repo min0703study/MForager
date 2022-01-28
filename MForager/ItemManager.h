@@ -1,10 +1,12 @@
 #pragma once
 #include "Stone.h"
 class PlayerManager;
+class UIManager;
 
 class ItemManager
 {
 public:
+	UIManager* _uiManager;
 	struct DropItem {
 		const int _dropSpeed = 2;
 		RECT _dropRc;

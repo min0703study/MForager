@@ -18,7 +18,7 @@ void MenuManager::render(HDC hdc)
 		switch (_curMenu)
 		{
 		case M_INVENTORY:
-						
+			
 			break;
 		default:
 			break;

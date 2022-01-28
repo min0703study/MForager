@@ -1,5 +1,6 @@
 #pragma once
-class ProgressBar
+#include "UI.h"
+class ProgressBar: public UI
 {
 private:
 	RECT _bgRect;
@@ -25,6 +26,9 @@ public:
 	~ProgressBar();
 
 	void setValue(int value);
+	void setValueRelRect();
 	void setValue(POINTF startPt, int maxValue, int currentValue);
 	void render(HDC hdc);
+
+	virtual void play(HDC hdc, POINTF cameraPt);
 };
