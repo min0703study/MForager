@@ -1,28 +1,16 @@
 #pragma once
+#include "FixedUI.h"
 #include "AnimationBase.h"
-class UI
+
+static int UI_AMOUNT = 1;
+
+class UI: public FixedUI
 {
 protected:
-	AnimationBase* _bAnimation;
-
-	POINTF _absPt;
-	RECT _absRc;
-
 	POINTF _relPt;
 	RECT _relRc;
-
-	int _width;
-	int _height;
-
-	bool _isShowing;
-
 public:
-	UI(POINTF absPt, int width, int height) : 
-		_absPt(absPt), 
-		_width(width), 
-		_height(height), 
-		_absRc(RectMake(absPt, width, height)),
-		_isShowing(true) {};
+	UI(POINTF absPt, int width, int height);
 
 	POINTF getRPt(POINTF cameraPt) {
 		_relPt.x = _absPt.x - cameraPt.x;
@@ -43,20 +31,13 @@ public:
 		return RectMake(getRPt(pt), _width, _height);
 	}
 
-	POINTF getAPt() {
-		return _absPt;
-	}
-
-	RECT getARect() {
-		return _absRc;
-	}
-
-	void setApt(POINTF pt) {
-		this->_absPt = pt;
-	}
-
 	void setIsShowing(bool isShowing) { this->_isShowing = isShowing; }
 
 	virtual void play(HDC hdc, POINTF cameraPt);
+	virtual void initAnimation();
+
+	void setAnimationImage(int state, char * fileName, int frameXCount, int frameYCount);
+	void setStopImage(int state, char * fileName);
+
 };
 

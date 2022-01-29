@@ -10,6 +10,10 @@ public:
 
 	~RandomFunction() {}
 
+	inline bool getFlag() {
+		return (rand() % 20) % 2 == 0;
+	}
+
 	inline int getInt(int num)
 	{
 		return rand() % num;

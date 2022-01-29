@@ -43,6 +43,9 @@
     <Filter Include="Utillity">
       <UniqueIdentifier>{e59b0405-ace0-4c8a-b2cd-5ec83d3158e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Industrial">
+      <UniqueIdentifier>{88fa6705-3b7c-4af0-89aa-6c7dfc0dc949}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Map.cpp">
@@ -127,9 +130,6 @@
     <ClCompile Include="MenuManager.cpp">
       <Filter>GameManager</Filter>
     </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
-      <Filter>GameManager</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
@@ -147,6 +147,36 @@
     </ClCompile>
     <ClCompile Include="SimpleAnimation.cpp">
       <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Heart.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Industrial.cpp">
+      <Filter>Industrial</Filter>
+    </ClCompile>
+    <ClCompile Include="Furanace.cpp">
+      <Filter>Industrial</Filter>
+    </ClCompile>
+    <ClCompile Include="AlphaImage.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="NightFocus.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="FixedUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>Collect</Filter>
+    </ClCompile>
+    <ClCompile Include="Wood.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Food.cpp">
+      <Filter>Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -246,9 +276,6 @@
     <ClInclude Include="MenuManager.h">
       <Filter>GameManager</Filter>
     </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>GameManager</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Camera</Filter>
     </ClInclude>
@@ -266,6 +293,36 @@
     </ClInclude>
     <ClInclude Include="SimpleAnimation.h">
       <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Heart.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Industrial.h">
+      <Filter>Industrial</Filter>
+    </ClInclude>
+    <ClInclude Include="Furanace.h">
+      <Filter>Industrial</Filter>
+    </ClInclude>
+    <ClInclude Include="AlphaImage.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="NightFocus.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="FixedUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>Collect</Filter>
+    </ClInclude>
+    <ClInclude Include="Wood.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Food.h">
+      <Filter>Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

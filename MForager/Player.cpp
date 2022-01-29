@@ -6,12 +6,11 @@ Player::Player(POINTF pt,int width, int height, int maxHp, int power, int lifeCo
 	_maxHp(maxHp),
 	_currentHp(maxHp),
 	_power(power),
-	_lifeCount(lifeCount)
+	_lifeCount(lifeCount),
+	_moveRect(DRECT(&_absRc, 20, 40, -20, 0)),
+	_clickableRect(DRECT(&_absRc, -TILE_SIZE, -TILE_SIZE, TILE_SIZE, TILE_SIZE))
 {
-	//_clickableRect = { _absRc.left - TILE_SIZE, _absRc.top - TILE_SIZE, _absRc.right + TILE_SIZE,  _absRc.bottom + TILE_SIZE };
-	//_moveRc = { _absRc.left + 10, _absRc.top + 20,  _absRc.right - 10, _absRc.bottom };
-	_animation = new PlayerAnimation();
-	UI::_bAnimation = _animation;
+	initAnimation();
 }
 
 Player::~Player()
@@ -27,28 +26,11 @@ void Player::setKey(int moveLeft , int moveRight, int moveUp, int moveDown, int 
 	this->_actionKey = action;
 }
 
-void Player::setWalkAnimation()
-{
-	if (_currentDirection == D_LEFT) {
-		_animation->setState(PlayerAnimation::State::walk_left);
-	}
-	else {
-		_animation->setState(PlayerAnimation::State::walk_right);
-	}
-}
+void Player::move(float x, float y) {
+	_absPt.x += x;
+	_absPt.y += y;
 
-void Player::move(float addValue, bool isX)
-{
-	if (isX) {
-		_absPt.x += addValue;
-		_absRc.left += addValue;
-		_absRc.right += addValue;
-	}
-	else {
-		_absPt.y += addValue;
-		_absRc.top += addValue;
-		_absRc.bottom += addValue;
-	}
+	ChangeRect(_absPt, &_absRc, _width, _height);
 }
 
 void Player::actionCollect()
@@ -60,7 +42,28 @@ void Player::actionCollect()
 	}
 }
 
-RECT Player::getClickableRect(RECT relRc)
+DRECT Player::getClickableRect()
 {
-	return { relRc.left - TILE_SIZE, relRc.top - TILE_SIZE, relRc.right + TILE_SIZE,  relRc.bottom + TILE_SIZE };
+	return _clickableRect;
+}
+
+DRECT Player::getMoveRect()
+{
+	return _moveRect;
+}
+
+void Player::initAnimation()
+{
+	_animation = new PlayerAnimation();
+
+	_animation->setAnimationImage(PlayerAnimation::State::stop_right, "Stop_Right", "Resource/Images/Motion/stop_right.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
+	_animation->setAnimationImage(PlayerAnimation::State::stop_left, "Stop_Left", "Resource/Images/Motion/stop_left.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
+	_animation->setAnimationImage(PlayerAnimation::State::action_right, "Action_Right", "Resource/Images/Motion/action_right.bmp", PLAYER_SIZE_X, PLAYER_SIZE_Y, 1, 1);
+	_animation->setAnimationImage(PlayerAnimation::State::action_left, "Action_Left", "Resource/Images/Motion/action_left.bmp", PLAYER_SIZE_X, PLAYER_SIZE_Y, 1, 1);
+	_animation->setAnimationImage(PlayerAnimation::State::walk_right, "Walk_Right", "Resource/Images/Motion/walk_right.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
+	_animation->setAnimationImage(PlayerAnimation::State::walk_left, "Walk_Left", "Resource/Images/Motion/walk_left.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
+
+	_animation->setState(PlayerAnimation::State::stop_right);
+	
+	_bAnimation = _animation;
 }

@@ -5,29 +5,21 @@ HRESULT MainGame::init(void)
 {
 	GameNode::init();
 
+	ShowCursor(false);
+	addTimer(1, TICK_TIMER_ID);
+
 	_mm = new MapManager();
-	_mm->init();
-
 	_cm = new CollectionManager();
-	_cm->init();
-
 	_uim = new UIManager;
-	_uim->init();
-
+	_uim->initCamera();
 	_pm = new PlayerManager();
-	_pm->_uiManager = _uim;
-	_pm->init();
-
 	_im = new ItemManager();
-	_im->init();
 
-	_cmm = new CameraManager;
-	_cmm->init();
-
+	_pm->_uiManager = _uim;
+	_uim->_playerManager = _pm;
 
 	_pm->_itemManager = _im;
 	_pm->_mapManager = _mm;
-	_pm->_cameraManager = _cmm;
 	_pm->_collectionManager = _cm;
 
 	_im->_playerManager = _pm;
@@ -37,11 +29,15 @@ HRESULT MainGame::init(void)
 	_cm->_uiManager = _uim;
 	_cm->_itemManager = _im;
 
-	_mm->_cameraManager = _cmm;
-
-	_uim->_cameraManager = _cmm;
-	_uim->_playerManager = _pm;
+	_mm->_uiManager = _uim;
 	_uim->_collectionManager = _cm;
+
+	_pm->init();
+	_uim->init();
+	_cm->init();
+	_mm->init();
+	_im->init();
+
 
 	_cm->makeRandomCollection();
 
@@ -55,7 +51,8 @@ void MainGame::update(void)
 	_pm->update();
 	_cm->update();
 	_mm->update();
-//	_im->RcCollisionCheckForDropItem(_pm->_player->_clickableRect);
+	_uim->update();
+	_im->RcCollisionCheckForDropItem();
 	_im->update();
 }
 
@@ -70,17 +67,27 @@ void MainGame::release(void)
 
 void MainGame::render(void)
 {
-	PatBlt(getMemDc(), 0, 0, _winsizeX, _winsizeY, BLACKNESS);
+	PatBlt(getMemDc(), 0, 0, _winsizeX, _winsizeY, WHITENESS);
+	
+	RECT rcBackground = RectMake(0, 0, CAMERASIZE_X, CAMERASIZE_Y);
+	HBRUSH brush = CreateSolidBrush(RGB(0, 142, 239));
+	FillRect(getMemDc(), &rcBackground, brush);
+	DeleteObject(brush);
 
-	_mm->render(getMemDc());
 	_uim->render(getMemDc());
 
 	IMAGEMANAGER->render(getBackBufferKey(), getHdc());
 }
 
+void MainGame::timerEvent(int timerId)
+{
+	if (timerId == TICK_TIMER_ID) {
+		_uim->addGameTime();
+	}
+}
+
 void MainGame::mouseMoveEvent(POINT& currentPoint)
 {
-	//_pm->_player->directionCheck(currentPoint);
 	_uim->mouseMoveEvent(currentPoint);
 }
 

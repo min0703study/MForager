@@ -20,95 +20,137 @@ void PlayerManager::addInventoryItem(ItemBase* item)
 HRESULT PlayerManager::init()
 {
 	_inventory = new Inventory;
-	POINTF pt = POINTF(120, 215);
-	_player = new Player(pt,PLAYER_SIZE_X,PLAYER_SIZE_Y, DEFUALT_PLAYER_HP, DEFULAT_PLAYER_POWER, DEFAULT_LIFE_COUNT);
-	_player->setKey('A', 'D', 'W', 'S', 'F');
-	_player->_animation->setAnimationImage( PlayerAnimation::State::stop_right, "Stop_Right", "Resource/Images/Motion/stop_right.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
-	_player->_animation->setAnimationImage(PlayerAnimation::State::stop_left, "Stop_Left", "Resource/Images/Motion/stop_left.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
-	_player->_animation->setAnimationImage(PlayerAnimation::State::action_right, "Action_Right", "Resource/Images/Motion/action_right.bmp", PLAYER_SIZE_X, PLAYER_SIZE_Y, 1, 1);
-	_player->_animation->setAnimationImage(PlayerAnimation::State::action_left, "Action_Left", "Resource/Images/Motion/action_left.bmp", PLAYER_SIZE_X, PLAYER_SIZE_Y, 1, 1);
-	_player->_animation->setAnimationImage(PlayerAnimation::State::walk_right, "Walk_Right", "Resource/Images/Motion/walk_right.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
-	_player->_animation->setAnimationImage(PlayerAnimation::State::walk_left, "Walk_Left", "Resource/Images/Motion/walk_left.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
 
-	_player->_animation->setState(PlayerAnimation::State::stop_right);
-	_uiManager->addUI(_player);
-
-	IMAGEMANAGER->addFileImage("heart", RES_HEART_PATH, TILE_SIZE * 0.7, TILE_SIZE * 0.7, true);
-	IMAGEMANAGER->addFileImage("blank_heart", RES_HEART_BLANK_PATH, TILE_SIZE * 0.7, TILE_SIZE * 0.7, true);
-
-	_hpGage = new ProgressBar({ 10, 10 }, TILE_SIZE * 1.3, TILE_SIZE * 0.5, DEFUALT_PLAYER_HP, DEFUALT_PLAYER_HP, C_PG_HP_TOP, C_PG_HP_BOTTOM);
-
+	POINTF pt = FindCenterPt(_uiManager->getRcCamera());
 	
+	pt.x -= PLAYER_SIZE_X / 2;
+	pt.y -= PLAYER_SIZE_Y / 2;
+
+	_player = new Player(pt, PLAYER_SIZE_X,PLAYER_SIZE_Y, DEFUALT_PLAYER_HP, DEFULAT_PLAYER_POWER, DEFAULT_LIFE_COUNT);
+	_player->setKey('A', 'D', 'W', 'S', 'F');
+	
+	_uiManager->addUI(_player);
+	_uiManager->addDevelopUI(_player->getMoveRect());
 
 	return S_OK;
 }
 
 void PlayerManager::update()
 {
-	_hpGage->setValue(_player->getHp());
 
 	if (KEYMANAGER->isStayKeyDown(_player->_moveLeft)) {
-		move(-PLAYER_SPEED, true);
+		move(-PLAYER_SPEED, 0, M_LEFT);
 	}
 
 	if (KEYMANAGER->isStayKeyDown(_player->_moveRight)) {
-		move(PLAYER_SPEED, true);
-		//if (!_mapManager->ptCollsionCheck({ _player->_moveRc.right,  _player->_moveRc.top })) {
-
-		//}
+		move(PLAYER_SPEED, 0, M_RIGHT);
 	}
 
 	if (KEYMANAGER->isStayKeyDown(_player->_moveUp)) {
-		move(-PLAYER_SPEED, false);
-		//if (!_mapManager->ptCollsionCheck({ _player->_moveRc.left, _player->_moveRc.top })) {
-			//move(-PLAYER_SPEED, false);
-		//}
+		move(0, -PLAYER_SPEED, M_TOP);
 	}
 
 	if (KEYMANAGER->isStayKeyDown(_player->_moveDown)) {
-		move(PLAYER_SPEED, false);
-		//if (!_mapManager->ptCollsionCheck({ _player->_moveRc.left, _player->_moveRc.bottom })) {
-			//move(PLAYER_SPEED, false);
-		//}
+		move(0, PLAYER_SPEED, M_BOTTOM);
 	}
-	
-}
-void PlayerManager::move(float addValue, bool isX) {
-	_player->_animation->setState(PlayerAnimation::State::walk_right);
-	_player->move(addValue, isX);
-	if (isX) {
-		_cameraManager->moveCameraX(addValue);
-	}
-	else {
-		_cameraManager->moveCameraY(addValue);
+
+	if (
+		KEYMANAGER->isOnceKeyUp(_player->_moveLeft) ||
+		KEYMANAGER->isOnceKeyUp(_player->_moveRight) ||
+		KEYMANAGER->isOnceKeyUp(_player->_moveUp) ||
+		KEYMANAGER->isOnceKeyUp(_player->_moveDown) ||
+		KEYMANAGER->isOnceKeyUp(_player->_actionKey)
+		) {
+		setState(WALK, false);
 	}
 }
+
+void PlayerManager::move(int addX, int addY, MOVE_DIRECTION mDirection)
+{
+	setState(WALK, true);
+
+	RECT rc = _player->getMoveRect().getARect();
+
+	rc.left += addX;
+	rc.right += addX;
+	rc.top += addY;
+	rc.bottom += addY;
+
+	if (!_mapManager->rcCollsionCheck(rc)) {
+		_player->getMoveRect().getRRect(_uiManager->getRcCamera());
+		_uiManager->moveCamera(addX, addY, mDirection);
+		_player->move(addX, addY);
+	}
+}
+
 void PlayerManager::release()
 {
 	SAFE_DELETE(_player);
 }
 
-void PlayerManager::render(HDC hdc)
-{
-	_hpGage->render(hdc);
-	for (int i = 0; i < 3; i++) {
-		IMAGEMANAGER->render(_player->_lifeCount < (i + 1) ? "blank_heart" : "heart", hdc, (i * 50) + 10, 50);
-	}
-	_player->_animation->setStartPoint(_player->getRPt(_cameraManager->getCurPt()));
-	_player->_animation->render(hdc);
-}
-
 void PlayerManager::actionCollect()
 {
+	setState(ACTION, true);
+
 	_player->actionCollect();
 	_collectionManager->hitCollect(_player->_power);
 }
 
+void PlayerManager::stopAction()
+{
+	setState(ACTION, false);
+}
+
 bool PlayerManager::ptIsClickable(POINTF pt)
 {
-	return PtInRect(&_player->getClickableRect(_uiManager->getRelRect(_player)), pt.toPOINT());
+	return PtInRect(&_player->getClickableRect().getARect(), pt.toPOINT());
 }
 
 RECT PlayerManager::getPlayerRelRect() {
 	return _uiManager->getRelRect(_player);
-};
+}
+
+POINTF PlayerManager::getPlayerRelPt()
+{
+	return _uiManager->getRelPt(_player);
+}
+void PlayerManager::setState(ACTION_TYPE act, BOOL isStart)
+{
+	_curActType = isStart ? act : STOP;
+	changeAnimation();
+}
+
+void PlayerManager::changeDirection() {
+	changeAnimation();
+}
+
+void PlayerManager::changeAnimation()
+{
+	if (_uiManager->getCursorDirection() == C_LEFT) {
+		switch (_curActType)
+		{
+		case STOP:
+			_player->_animation->setState(PlayerAnimation::State::stop_left);
+			break;
+		case WALK:
+			_player->_animation->setState(PlayerAnimation::State::walk_left);
+			break;
+		case ACTION:
+			_player->_animation->setState(PlayerAnimation::State::action_left);
+			break;
+		}
+	}
+	else {
+		switch (_curActType)
+		{
+		case STOP:
+			_player->_animation->setState(PlayerAnimation::State::stop_right);
+			break;
+		case WALK:
+			_player->_animation->setState(PlayerAnimation::State::walk_right);
+			break;
+		case ACTION:
+			_player->_animation->setState(PlayerAnimation::State::action_right);
+		}
+	}
+}

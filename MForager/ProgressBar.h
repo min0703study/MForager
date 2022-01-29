@@ -22,13 +22,15 @@ private:
 
 public:
 	ProgressBar(POINTF startPt, float _bgWidth, float _bgHeight, int maxValue, int currentValue, COLORREF _topColor, COLORREF _bottomColor);
-	ProgressBar(float bgWidth, float bgHeight, COLORREF top, COLORREF bottom);
+	ProgressBar(float bgWidth, float bgHeight, COLORREF topColor, COLORREF bottomColordsawwdssawaddsadsdwwadssdawwwsawasdwdsasasssssdawdsdwswasdwawdawdsawsawsaw);
 	~ProgressBar();
 
 	void setValue(int value);
 	void setValueRelRect();
-	void setValue(POINTF startPt, int maxValue, int currentValue);
-	void render(HDC hdc);
 
-	virtual void play(HDC hdc, POINTF cameraPt);
+	virtual void play(HDC hdc, POINTF cameraPt) override;
+	virtual void play(HDC hdc) override;
+
+	void initAnimation() {};
+
 };

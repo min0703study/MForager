@@ -7,6 +7,12 @@ void AnimationBase::setAnimationImage(int state, string key, char * fileName, in
 	IMAGEMANAGER->addFrameImage(key, fileName, frameX, frameY, frameXCount, frameYCount, true);
 }
 
+void AnimationBase::setStopImage(int state, string key, char * fileName, int frameX, int frameY)
+{
+	_imageKeys[(int)state] = key;
+	IMAGEMANAGER->addFileImage(key, fileName, frameX, frameY, true);
+}
+
 void AnimationBase::init(POINTF startPt, int initState)
 {
 	_startPt = startPt;
@@ -26,14 +32,15 @@ void AnimationBase::render(HDC hdc)
 
 void AnimationBase::render(HDC hdc, POINTF startPt)
 {
-	FrameImage* img = (FrameImage*)IMAGEMANAGER->findImage(_imageKeys[(int)_currentState]);
+	Image* img = IMAGEMANAGER->findImage(_imageKeys[(int)_currentState]);
+	IMAGEMANAGER->render(_imageKeys[(int)_currentState], hdc, startPt);
 
-	IMAGEMANAGER->frameRender(_imageKeys[(int)_currentState], hdc, startPt);
-
-	_delayCount++;
-	if (_delayCount % 6 == 0) {
-		_delayCount = 0;
-		IMAGEMANAGER->nextFrame(_imageKeys[(int)_currentState]);
+	if (img->_type == Image::FRAME) {
+		_delayCount++;
+		if (_delayCount % 6 == 0) {
+			_delayCount = 0;
+			IMAGEMANAGER->nextFrame(_imageKeys[(int)_currentState]);
+		}
 	}
 }
 

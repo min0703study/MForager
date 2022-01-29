@@ -2,7 +2,6 @@
 #include "PlayerAnimation.h"
 #include "UI.h"
 
-
 class Player: public UI
 {
 public:
@@ -15,11 +14,11 @@ public:
 	~Player();
 
 	PlayerAnimation* _animation;
-
-	//RECT _clickableRect;
-	//RECT _moveRc;
-
 	Direction _currentDirection;
+
+	DRECT _moveRect;
+	DRECT _clickableRect;
+	
 public:
 	int _moveLeft;
 	int _moveRight;
@@ -33,20 +32,20 @@ public:
 	int _lifeCount;
 	int _power;
 
-	void directionCheck(POINT pt);
-
-	void setWalkAnimation();
-
-	void move(float addValue, bool isX);
-	
+	void move(float x, float y);
 	void actionCollect();
 
-	RECT getClickableRect(RECT relRc);
+	DRECT getClickableRect();
+	DRECT getMoveRect();
 
-	//getter/setter
+
+	virtual void initAnimation();
+
+	//getter, setter
 	int getHp() { return _currentHp; }
 	int getLifeCount() { return _lifeCount; }
+
+
 	void setKey(int moveFront, int moveBack, int jump, int attack, int defense);
-	void setDirection(Direction direction);
 
 };

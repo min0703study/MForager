@@ -40,18 +40,19 @@ void ItemManager::createDropItem(vector<ItemBase*> dropItems)
 	for (ItemBase* dItem : dropItems) {
 		DropItem* dropItem = new DropItem(dItem, {dItem->getAPt().x, dItem->getAPt().y + 20}, i);
 		i *= -1;
-		_uiManager->addUI(dropItem->_dropItem);
+		_uiManager->addUI(dItem);
 		_dropItems.push_back(dropItem);
 	}
 }
 
-void ItemManager::RcCollisionCheckForDropItem(RECT & rc)
+void ItemManager::RcCollisionCheckForDropItem()
 {
 	RECT tempRect;
 	for (DropItem* dropItem : _dropItems) {
 		if (!dropItem->_isEndDrop || dropItem->_isDropToPlayer) continue;
-		if (IntersectRect(&tempRect, &rc, &dropItem->_dropRc)) {
+		if (IntersectRect(&tempRect, &_playerManager->getPlayerRelRect(), &_uiManager->getRelRect(dropItem->_dropItem))) {
 			dropItem->_isDropToPlayer = true;
+			dropItem->_dropItem->setIsShowing(false);
 		}
 	}
 }

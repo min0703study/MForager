@@ -5,11 +5,13 @@
 #define TILE_IMG_KEY			"TILE_IMG_KEY"
 
 #define B_GROUND_X_COUNT	9
-#define B_GROUND_Y_COUNT	4
+#define B_GROUND_Y_COUNT	5
 
-class Map
+class Map: public UI
 {
 public:
+	Map() : UI({ 0,0 }, TILE_X_COUNT * TILE_SIZE, TILE_Y_COUNT * TILE_SIZE) {};
+
 	TILE _tiles[TILE_COUNT];	//타일
 	TILE* _collisionTiles[TILE_COUNT]; //충돌 타일
 	int _collisionTilesCount; //충돌 타일 수
@@ -18,6 +20,8 @@ public:
 	void Load();
 	void render(HDC hdc);
 	void release();
+
+	virtual void play(HDC hdc, POINTF cameraPt);
 };
 
 /*

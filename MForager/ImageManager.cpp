@@ -76,7 +76,7 @@ Image* ImageManager::addFrameImage(string strKey, const char * fileName, int wid
 	return img;
 }
 
-/*
+
 Image* ImageManager::addAlphaImage(string strKey, const char * fileName, int width, int height)
 {
 	AlphaImage* img = (AlphaImage*)findImage(strKey);
@@ -95,7 +95,7 @@ Image* ImageManager::addAlphaImage(string strKey, const char * fileName, int wid
 
 	return img;
 }
-*/
+
 Image* ImageManager::findImage(string strKey)
 {
 	auto key = _mImageList.find(strKey);
@@ -141,6 +141,24 @@ bool ImageManager::deleteAll()
 	return true;
 }
 
+void ImageManager::render(string strKey, HDC hdc, POINTF position)
+{
+	
+	Image* img = findImage(strKey);
+	if (img) {
+		switch (img->_type)
+		{
+			case Image::FRAME:
+				_renderer->renderFrame(hdc, (FrameImage*)img, position);
+				break;
+			case Image::DEFAULT:
+				_renderer->renderPtf(hdc, img, position);
+				break;
+		}
+	}
+}
+
+
 void ImageManager::render(string strKey, HDC hdc, int destX, int destY, bool isCenter)
 {
 	Image* img = findImage(strKey);
@@ -177,10 +195,16 @@ void ImageManager::loopRender(string strKey, HDC hdc, const LPRECT drawArea, int
 	if (img) _renderer->renderLoop(hdc, img, drawArea, offsetX, offsetY);
 }
 
-/*
+
 void ImageManager::alphaRender(string strKey, HDC hdc, BYTE alpha)
 {
 	AlphaImage* img = (AlphaImage*)findImage(strKey);
 	if (img) _renderer->renderAlpha(hdc, img, alpha);
 }
-*/
+
+void ImageManager::alphaRender(string strKey, HDC hdc, POINTF pt, BYTE alpha)
+{
+	AlphaImage* img = (AlphaImage*)findImage(strKey);
+	if (img) _renderer->renderAlpha(hdc, img, pt, alpha);
+}
+

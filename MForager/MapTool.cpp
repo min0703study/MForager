@@ -33,6 +33,8 @@ HRESULT MapTool::init(void)
 
 	for (int i = 0; i < TILE_COUNT; i++) {
 		_drawTiles[i].pt = { -1,-1 };
+		_drawTiles[i].xIndex = -1;
+		_drawTiles[i].yIndex = -1;
 	}
 
 	return S_OK;
@@ -59,14 +61,25 @@ void MapTool::render(void)
 {
 	PatBlt(getMemDc(), 0, 0, _winsizeX, _winsizeY, BLACKNESS);
 
-	
 	for (RECT rc : _drawRc) {
 		RectangleMake(getMemDc(), rc);
+	}
+
+	for (int i = 0; i < TILE_Y_COUNT; i++) {
+		for (int j = 0; j < TILE_X_COUNT; j++) {
+			if (i == (TILE_X_COUNT - 12) /2 && j == (TILE_Y_COUNT - 12) / 2) {
+				RectangleMake(getMemDc(), POINTF(i * TILE_SIZE, j * TILE_SIZE), 10, 10);
+			}
+
+			if (i == (TILE_X_COUNT - 12) / 2 && j == (TILE_Y_COUNT - 12) / 2 + 12) {
+				RectangleMake(getMemDc(), POINTF(i * TILE_SIZE, j * TILE_SIZE), 10, 10);
+			}
+		}
 	}
 	
 	for (TILE tile : _drawTiles)
 	{
-		if (tile.pt.x == -1) continue;
+		if (tile.xIndex == -1) continue;
 		IMAGEMANAGER->setCurrentFrame(B_GROUND_IMG_KEY, tile.ground % B_GROUND_X_COUNT, tile.ground / B_GROUND_X_COUNT);
 		IMAGEMANAGER->frameRender(B_GROUND_IMG_KEY, getMemDc(), tile.pt);
 	}
@@ -83,6 +96,14 @@ void MapTool::saveMap(void)
 void MapTool::loadMap(void)
 {
 	LoadFile<TILE[TILE_COUNT]>(RES_SAVE_MAP_PATH, _drawTiles, sizeof(TILE) * TILE_COUNT);
+	for (TILE& tile : _drawTiles)
+	{
+		if (tile.xIndex == -1) continue;
+		tile.pt = POINTF(tile.xIndex * TILE_SIZE, tile.yIndex * TILE_SIZE);
+		tile.rc = RectMakeF(tile.pt, TILE_SIZE, TILE_SIZE);
+	}
+
+	
 }
 
 void MapTool::clickEvent(POINT & pt, bool isClickDown)
@@ -92,6 +113,10 @@ void MapTool::clickEvent(POINT & pt, bool isClickDown)
 		for (int i = 0; i < TILE_COUNT; i++) {
 			if (PtInRect(&_drawRc[i], pt)) {
 				_drawTiles[i] = _currentSelectTile;
+				
+				_drawTiles[i].xIndex = i % TILE_Y_COUNT;
+				_drawTiles[i].yIndex = i / TILE_Y_COUNT;
+
 				_drawTiles[i].rc = _drawRc[i];
 				_drawTiles[i].pt = { _drawRc[i].left, _drawRc[i].top };
 			}
@@ -112,6 +137,10 @@ void MapTool::mouseMoveEvent(POINT & pt)
 		for (int i = 0; i < TILE_COUNT; i++) {
 			if (PtInRect(&_drawRc[i], pt)) {
 				_drawTiles[i] = _currentSelectTile;
+
+				_drawTiles[i].xIndex = i % TILE_Y_COUNT;
+				_drawTiles[i].yIndex = i / TILE_Y_COUNT;
+
 				_drawTiles[i].rc = _drawRc[i];
 				_drawTiles[i].pt = { _drawRc[i].left, _drawRc[i].top };
 

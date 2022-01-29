@@ -1,7 +1,8 @@
 #pragma once
 #include "CollectAnimation.h"
-#include "Stone.h"
+#include "ItemBase.h"
 #include "UI.h"
+
 class CollectionBase: public UI
 {
 public:
@@ -9,6 +10,8 @@ public:
 
 	ItemBase* _dropItem;
 	int _dropItemCount;
+
+	POINTF _hitPt;
 
 	int _xSizeOfTile; //타일 x 기준 사이즈
 	int _ySizeOfTile; //타일 y 기준 사이즈
@@ -20,12 +23,21 @@ public:
 	int _maxHitGage;
 	int _hitGage; //지워지는 게이지
 
+	CollectionBase(POINTF hitPt, int xSizeOfTile, int ySizeOfTile);
+
 	bool hit(int power);
 	bool isHitStart() { return _isHitStart; };
+	
+	RECT getHitRect() { return RectMake(_hitPt, TILE_SIZE, TILE_SIZE); }
+	POINTF getHitPt() { return _hitPt; }
+	POINTF getProgressPt() { 
+		RECT rc = getHitRect();
+		return { rc.left , rc.bottom + 5 };
+	}
 
-	vector<ItemBase*> getDropItem();
-
-	CollectionBase(POINT pt, int maxHitGage, int xSizeOfTile, int ySizeOfTile);
+	virtual vector<ItemBase*> getDropItem();
+	void initAnimation() override;
+	void setAnimationImageAuto(CollectAnimation::State state, string key, char * fileName, int frameXCount, int frameYCount);
 	virtual ~CollectionBase() {};
 };
 

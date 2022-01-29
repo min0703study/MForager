@@ -37,8 +37,8 @@ void CollectionManager::hitCollect(int power)
 	}
 	else {
 		if (SAFE_NULL_CHECK(_hitGage[_selectIndex])) {
-			_hitGage[_selectIndex] = new ProgressBar(
-				_collectObjects[_selectIndex]->getAPt(), 
+			_hitGage[_selectIndex] = new ProgressBar (
+				_collectObjects[_selectIndex]->getProgressPt(), 
 				TILE_SIZE, 
 				TILE_SIZE * 0.4,
 				_collectObjects[_selectIndex]->_maxHitGage,
@@ -62,12 +62,12 @@ bool CollectionManager::isFull()
 	return true;
 }
 
-bool CollectionManager::isPtInCollect(POINT pt)
+bool CollectionManager::isPtInCollect(POINTF pt)
 {
 	_isSelect = false;
 	for (int i = 0; i < COLLECT_OBJECT_COUNT; i++) {
 		if (SAFE_NULL_CHECK(_collectObjects[i])) continue;
-		if (PtInRect(&_uiManager->getRelRect(_collectObjects[i]), pt)) {
+		if (PtInRect(&_collectObjects[i]->getHitRect(), pt.toPOINT())) {
 			_isSelect = true;
 			_selectIndex = i;
 		}
@@ -80,10 +80,6 @@ CollectionBase* CollectionManager::getSelectCollect()
 	return _collectObjects[_selectIndex];
 }
 
-void CollectionManager::render(HDC hdc)
-{
-}
-
 void CollectionManager::makeRandomCollection()
 {
 	int x = 0;
@@ -94,7 +90,17 @@ void CollectionManager::makeRandomCollection()
 		y = RND->getInt(TILE_Y_COUNT) * TILE_SIZE;
 
 		if (!_mapManager->ptInCollsionTile(x, y)) {
-			_collectObjects[i] = new Rock(Rock::TYPE::ROCK, { x, y });
+			switch(RND->getInt(3)) {
+				case 0:
+					_collectObjects[i] = new Rock({ x, y }, Rock::TYPE::IRON);
+					break;
+				case 1:
+					_collectObjects[i] = new Rock({ x, y },Rock::TYPE::ROCK);
+					break;
+				case 2:
+					_collectObjects[i] = new Tree({ x, y }, Tree::TYPE::NOMAL);
+					break;
+			};
 			_uiManager->addUI(_collectObjects[i]);
 			i++;
 		};

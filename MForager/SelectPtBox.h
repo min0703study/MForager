@@ -9,8 +9,12 @@ public:
 
 	SelectPtBox(POINTF pt, int width, int height) :UI(pt, width, height) {
 		setIsShowing(false);
+		initAnimation();
+	};
+
+	void initAnimation() {
 		_animation = new SimpleAnimation;
 		_bAnimation = _animation;
-	};
+	}
 };
 

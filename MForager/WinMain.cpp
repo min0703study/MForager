@@ -55,8 +55,6 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	wndClass.lpszMenuName = NULL;
 	wndClass.style = CS_HREDRAW | CS_VREDRAW;
 
-	ShowCursor(false);
-
 	RegisterClass(&wndClass);
 
 	_hWnd = CreateWindow(

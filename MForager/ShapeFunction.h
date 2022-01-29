@@ -155,20 +155,47 @@ inline void RectangleMake(HDC hdc, int x, int y, int width, int height, bool isC
 	Rectangle(hdc, x, y, x + width, y + height);
 }
 
-inline RECT RectMake(int x, int y, int width, int height)
+inline void RectangleMake(HDC hdc, POINTF pt, int width, int height, bool isCenterPt = false)
 {
+	RectangleMake(hdc, pt.x, pt.y,width, height, isCenterPt);
+}
+
+inline void ChangeRect(POINTF pt, LPRECT lrc, int width, int height)
+{
+	lrc->left = pt.x;
+	lrc->top = pt.y; 
+	lrc->right = pt.x + width;
+	lrc->bottom = pt.y + height;
+}
+
+
+inline RECT RectMake(int x, int y, int width, int height, bool isCenterPt = false)
+{
+	if (isCenterPt) {
+		x = x - width / 2;
+		y = y - height / 2;
+	}
+
 	RECT rc = { x, y, x + width, y + height };
 	return rc;
 }
 
-inline RECT RectMake(POINT pt, int width, int height)
+inline RECT RectMake(POINT pt, int width, int height, bool isCenterPt = false)
 {
+	if (isCenterPt) {
+		pt.x = pt.x - width / 2;
+		pt.y = pt.y - height / 2;
+	}
 	RECT rc = { pt.x, pt.y, pt.x + width, pt.y + height };
 	return rc;
 }
 
-inline RECT RectMake(POINTF pt, int width, int height)
+inline RECT RectMake(POINTF pt, int width, int height,  bool isCenterPt = false)
 {
+	if (isCenterPt) {
+		pt.x = pt.x - width / 2;
+		pt.y = pt.y - height / 2;
+	}
 	RECT rc = { pt.x, pt.y, pt.x + width, pt.y + height };
 	return rc;
 }

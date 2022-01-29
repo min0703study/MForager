@@ -10,5 +10,6 @@ public:
 	ItemBase(POINTF pt, int widht, int height);
 
 	virtual int getId() { return 0; };
+	void initAnimation() override;
 };
 

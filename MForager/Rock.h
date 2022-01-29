@@ -2,6 +2,11 @@
 #include "CollectionBase.h"
 #include "Stone.h"
 
+#define ROCK_X_SIZE TILE_SIZE
+#define ROCK_Y_SIZE TILE_SIZE
+#define NOMAL_ROCK_HIT_GAGE			20
+#define IRON_ROCK_HIT_GAGE			20
+
 class Rock: public CollectionBase
 {
 public:
@@ -13,7 +18,8 @@ public:
 	};
 
 	TYPE _type;
-
-	Rock(TYPE type, POINT point);
+	virtual vector<ItemBase*> getDropItem();
+	
+	Rock(POINTF hitPt, TYPE type);
 };
 

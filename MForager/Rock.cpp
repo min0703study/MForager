@@ -1,22 +1,60 @@
 #include "Stdafx.h"
 #include "Rock.h"
 
-Rock::Rock(TYPE type, POINT pt) : _type(type), CollectionBase(pt,100, 1, 1)
-{
-	_animation = new CollectAnimation();
-	_bAnimation = _animation;
 
+Rock::Rock(POINTF hitPt, TYPE type) : CollectionBase(hitPt, 1, 1),  _type(type)
+{
 	switch (type) {
+		case ROCK:
+			if (RND->getFlag()) {
+				setStopImage((int)CollectAnimation::State::stop ,RES_ROCK_NORMAL_STOP_1_PATH);
+			} else {
+				setStopImage((int)CollectAnimation::State::stop, RES_ROCK_NORMAL_STOP_2_PATH);
+			}
+
+			_hitGage = NOMAL_ROCK_HIT_GAGE;
+			_maxHitGage = NOMAL_ROCK_HIT_GAGE;
+
+			break;
+		case COAL:
+			break;
+		case IRON:
+			if (RND->getFlag()) {
+				setStopImage((int)CollectAnimation::State::stop, RES_ROCK_IRON_STOP_1_PATH);
+			}
+			else {
+				setStopImage((int)CollectAnimation::State::stop, RES_ROCK_IRON_STOP_2_PATH);
+			}
+
+			_hitGage = IRON_ROCK_HIT_GAGE;
+			_maxHitGage = IRON_ROCK_HIT_GAGE;
+			break;
+		case GOLD:
+			break;
+	}
+
+	_animation->init(_absPt, CollectAnimation::State::stop);
+}
+
+
+vector<ItemBase*> Rock::getDropItem()
+{
+	vector<ItemBase*> _dropItem;
+	switch (_type) {
 	case ROCK:
-		_hitGage = 100;
-		_animation->setAnimationImage(CollectAnimation::State::stop,"ROCK_1", RES_ROCK_NORMAL_STOP_PATH, 70, 70, 1, 1);
-		_animation->init(pt, CollectAnimation::State::stop);
+		_dropItem.push_back(new Stone(_absPt, Stone::STONE));
+		_dropItem.push_back(new Stone(_absPt, Stone::STONE));
 		break;
 	case COAL:
 		break;
 	case IRON:
+		_dropItem.push_back(new Stone(_absPt, Stone::IRON_ORE));
+		_dropItem.push_back(new Stone(_absPt, Stone::IRON_ORE));
 		break;
 	case GOLD:
 		break;
 	}
+
+
+	return _dropItem;
 }

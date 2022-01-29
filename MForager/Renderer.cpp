@@ -156,15 +156,15 @@ void Renderer::renderLoop(HDC hdc, Image* img, const LPRECT drawArea, int offset
 		}
 	}
 }
-/*
 
-void Renderer::renderAlpha(HDC hdc, AlphaImage* img, BYTE alpha)
+
+void Renderer::renderAlpha(HDC hdc, AlphaImage* img, POINTF pt, BYTE alpha)
 {
 	img->_blendFunc.SourceConstantAlpha = alpha;
-
+	
 	AlphaBlend(
 		hdc,
-		0, 0,
+		pt.x, pt.y,
 		img->_width,
 		img->_height,
 		img->_hMemDC,
@@ -174,4 +174,9 @@ void Renderer::renderAlpha(HDC hdc, AlphaImage* img, BYTE alpha)
 		img->_blendFunc
 	);
 }
-*/
+
+void Renderer::renderAlpha(HDC hdc, AlphaImage * img, BYTE alpha)
+{
+	renderAlpha(hdc, img, { 0,0 }, alpha);
+}
+

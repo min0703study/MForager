@@ -40,14 +40,21 @@ enum GROUND {
 	TOP_LEFT_RIGHT_CORNER,
 	RIGHT_TOP_BOTTOM_CORNER,
 	LEFT_ALONE,
-	RIGHT_ALONE
+	RIGHT_ALONE,
+
+	SEE_ALONE = 36,
+	CENTER_10,
+	CENTER_11,
+	RIGHT_OVER_FLOWER_2
 };
 
-const int COLLISION_GROUND[4] = {
+const int CG_SIZE = 5;
+const int COLLISION_GROUND[CG_SIZE] = {
 		SEE,
 		SEE_TO_GROUND_LEFT,
 		SEE_TO_GROUND_CENTER,
 		SEE_TO_GROUND_RIGHT,
+		SEE_ALONE
 };
 
 
@@ -59,7 +66,10 @@ enum PICKAXE {
 typedef struct tagTile
 {
 	GROUND ground;
+	
+	int xIndex;
+	int yIndex;
 
 	RECT rc;
-	POINT pt;
+	POINTF pt;
 } TILE;

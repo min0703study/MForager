@@ -2,7 +2,7 @@
 #include "ProgressBar.h"
 
 ProgressBar::ProgressBar(POINTF startPt, float bgWidth, float bgHeight, int maxValue, int currentValue, COLORREF top, COLORREF bottom)
-	:UI(startPt, _bgWidth, _bgHeight)
+	:UI(startPt, bgWidth, bgHeight)
 	, _bgWidth(bgWidth)
 	, _bgHeight(bgHeight)
 	, _valueWidth(bgWidth * 0.8)
@@ -19,6 +19,8 @@ ProgressBar::ProgressBar(POINTF startPt, float bgWidth, float bgHeight, int maxV
 
 	_valueRect[0] = RectMake(valueStartPt, _valueWidth, _valueHeight / 2);
 	_valueRect[1] = RectMake(POINTF{ valueStartPt.x, valueStartPt.y + _valueHeight / 2 }, _valueWidth, _valueHeight / 2);
+
+	initAnimation();
 }
 
 
@@ -68,24 +70,28 @@ void ProgressBar::setValueRelRect() {
 
 void ProgressBar::play(HDC hdc, POINTF cameraPt)
 {
-	HBRUSH hBBrush = CreateSolidBrush(BLACK);
-	HBRUSH hWBrush = CreateSolidBrush(WHITE);
-	HBRUSH hTBrush = CreateSolidBrush(_topColor);
-	HBRUSH hBTBrush = CreateSolidBrush(_bottomColor);
-	
 	_bgRect = getRRect(cameraPt);
 	setValueRelRect();
+	this->play(hdc);
+}
 
-	hTBrush = CreateSolidBrush(_topColor);
+void ProgressBar::play(HDC hdc) {
+	HBRUSH hBBrush = CreateSolidBrush(BLACK);
+	RectangleMake(hdc, _bgRect);
+	FillRect(hdc, &_bgRect, hBBrush);
+	DeleteObject(hBBrush);
+
+	HBRUSH hWBrush = CreateSolidBrush(WHITE);
+	FrameRect(hdc, &_bgRect, hWBrush);
+	DeleteObject(hWBrush);
+
+	HBRUSH hTBrush = CreateSolidBrush(_topColor);
 	RectangleMake(hdc, _valueRect[0]);
 	FillRect(hdc, &_valueRect[0], hTBrush);
+	DeleteObject(hTBrush);
 
-	hBTBrush = CreateSolidBrush(_bottomColor);
+	HBRUSH hBTBrush = CreateSolidBrush(_bottomColor);
 	RectangleMake(hdc, _valueRect[1]);
 	FillRect(hdc, &_valueRect[1], hBTBrush);
-
-	DeleteObject(hBBrush);
-	DeleteObject(hWBrush);
-	DeleteObject(hTBrush);
 	DeleteObject(hBTBrush);
 }

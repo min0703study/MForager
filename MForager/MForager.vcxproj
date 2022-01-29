@@ -19,17 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AlphaImage.cpp" />
     <ClCompile Include="AnimationBase.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CollectAnimation.cpp" />
     <ClCompile Include="CollectionBase.cpp" />
     <ClCompile Include="CollectionManager.cpp" />
     <ClCompile Include="CustomCursor.cpp" />
+    <ClCompile Include="FixedUI.cpp" />
+    <ClCompile Include="Food.cpp" />
     <ClCompile Include="FrameImage.cpp" />
+    <ClCompile Include="Furanace.cpp" />
     <ClCompile Include="GameNode.cpp" />
+    <ClCompile Include="Heart.cpp" />
+    <ClCompile Include="HeartAnimation.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="Industrial.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="ItemAnimation.cpp" />
     <ClCompile Include="ItemBase.cpp" />
@@ -40,6 +46,7 @@
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="MapTool.cpp" />
     <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="NightFocus.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAnimation.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
@@ -53,23 +60,31 @@
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Tree.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="Wood.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlphaImage.h" />
     <ClInclude Include="AnimationBase.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CollectAnimation.h" />
     <ClInclude Include="CollectionBase.h" />
     <ClInclude Include="CollectionManager.h" />
     <ClInclude Include="CustomCursor.h" />
     <ClInclude Include="FileUtil.h" />
+    <ClInclude Include="FixedUI.h" />
+    <ClInclude Include="Food.h" />
     <ClInclude Include="FrameImage.h" />
+    <ClInclude Include="Furanace.h" />
     <ClInclude Include="GameNode.h" />
+    <ClInclude Include="Heart.h" />
+    <ClInclude Include="HeartAnimation.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="Industrial.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="ItemAnimation.h" />
     <ClInclude Include="ItemBase.h" />
@@ -81,6 +96,7 @@
     <ClInclude Include="MapStruct.h" />
     <ClInclude Include="MapTool.h" />
     <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="NightFocus.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAnimation.h" />
     <ClInclude Include="PlayerManager.h" />
@@ -95,8 +111,10 @@
     <ClInclude Include="Stone.h" />
     <ClInclude Include="TempSoundManager.h" />
     <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="Tree.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIManager.h" />
+    <ClInclude Include="Wood.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

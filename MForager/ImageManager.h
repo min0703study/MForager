@@ -1,5 +1,6 @@
 #pragma once
 #include "FrameImage.h"
+#include "AlphaImage.h"
 #include "Renderer.h"
 #include "SingletonBase.h"
 
@@ -26,12 +27,15 @@ public:
 	void frameRender(string strKey, HDC hdc, POINT position);
 	void loopRender(string strKey, HDC hdc, const LPRECT drawArea, int offsetX, int offsetY);
 	void alphaRender(string strKey, HDC hdc, BYTE alpha);
+	void alphaRender(string strKey,HDC hdc, POINTF pt, BYTE alpha);
 	
 	void nextFrame(string strKey);
 	void setCurrentFrame(string strKey, int x, int y);
 
 	bool deleteImage(string strKey);
 	bool deleteAll();
+
+	void render(string strKey, HDC hdc, POINTF position);
 
 	void render(string strKey, HDC hdc, int destX = 0, int destY = 0, bool isCenter = false);
 

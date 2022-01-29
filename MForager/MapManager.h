@@ -1,5 +1,6 @@
 #pragma once
-#include "CameraManager.h"
+
+#include "UIManager.h"
 #include "Map.h"
 
 class MapManager
@@ -7,16 +8,17 @@ class MapManager
 private:
 	Map* _map;
 public:
-	CameraManager* _cameraManager;
+	UIManager* _uiManager;
 
 	HRESULT init();
-	RECT rectToCamera(RECT _rc);
-	POINTF ptToCamera(POINTF pt);
+\
 	void release(void);
 	void render(HDC hdc);
 	void update();
 
 	bool ptCollsionCheck(POINTF pt);
+	bool rcCollsionCheck(RECT & rc);
+
 	bool ptInCollsionTile(int x, int y);
 };
 

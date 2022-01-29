@@ -30,6 +30,8 @@ HRESULT Image::initFile(const char * fileName, int width, int height, bool isTra
 {
 	HDC hdc = GetDC(_hWnd);
 
+	_type = DEFAULT;
+
 	_loadType = LOAD_FILE;
 	_hMemDC = CreateCompatibleDC(hdc);
 	_hBit = (HBITMAP)LoadImage(_hInstance, fileName, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);

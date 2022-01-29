@@ -10,6 +10,8 @@ HRESULT FrameImage::initFile(const char * fileName, int width, int height, int f
 {
 	Image::initFile(fileName, width, height, isTrans);
 
+	_type = FRAME;
+
 	_frameWidth = width / frameXCount;
 	_frameHeight = height / frameYCount;
 

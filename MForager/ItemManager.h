@@ -39,6 +39,7 @@ public:
 	void render(HDC hdc);
 
 	void createDropItem(vector<ItemBase*> _dropItem);
+	void RcCollisionCheckForDropItem();
 	void RcCollisionCheckForDropItem(RECT& rc);
 };
 
