@@ -13,12 +13,9 @@ public:
 	HRESULT init();
 \
 	void release(void);
-	void render(HDC hdc);
 	void update();
 
-	bool ptCollsionCheck(POINTF pt);
 	bool rcCollsionCheck(RECT & rc);
-
 	bool ptInCollsionTile(int x, int y);
 };
 

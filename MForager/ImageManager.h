@@ -16,12 +16,17 @@ public:
 	HRESULT init(void);
 	void release(void);
 
+	Image * addImage(int strKey, int width, int height);
+	Image * addImage(string strKey, int width, int height);
+
 	Image* findImage(string strKey);
 
-	Image* addImage(string strKey, int width, int height, bool isTranse = false);
 	Image* addFileImage(string strKey, const char * fileName, int width, int height, bool isTranse = false);
+	Image* addFileImage(int intKey, const char * fileName, int width, int height, bool isTranse = false);
 	Image* addFrameImage(string strKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse = true);
+	Image* addFrameImage(int intKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse = true);
 	Image* addAlphaImage(string strKey, const char * fileName, int width, int height);
+	Image* addAlphaImage(int intKey, const char * fileName, int width, int height);
 
 	void frameRender(string strKey, HDC hdc, POINTF position);
 	void frameRender(string strKey, HDC hdc, POINT position);

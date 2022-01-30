@@ -1,0 +1,23 @@
+{
+	"map" : 			"Resource/Map/mapsave.map",
+	"map_sprite" : 			"Resource/Map/map_sprite.bmp",
+	"save_map" : 			"Resource/Map/save_map.map",
+	"cursor" : 			"Resource/images/cursor.bmp",
+	"select_box" : 			"Resource/images/select_cursor.bmp",
+	"rock_normal_stop_1" : 			"Resource/images/Rock/rock_normal_stop_1.bmp",
+	"rock_normal_stop_2" : 			"Resource/images/Rock/rock_normal_stop_2.bmp",
+	"rock_iron_stop_1" : 			"Resource/images/Rock/rock_iron_stop_1.bmp",
+	"rock_iron_stop_2" : 			"Resource/images/Rock/rock_iron_stop_2.bmp",
+	"tree_normal_stop_1" : 			"Resource/images/Tree/tree_normal_stop.bmp"
+}
+
+"Resource/Map/mapsave.map"
+"Resource/Map/map_sprite.bmp"
+"Resource/Map/save_map.map"
+"Resource/images/cursor.bmp"
+"Resource/images/select_cursor.bmp"
+"Resource/images/Rock/rock_normal_stop_1.bmp"
+"Resource/images/Rock/rock_normal_stop_2.bmp"
+"Resource/images/Rock/rock_iron_stop_1.bmp"
+"Resource/images/Rock/rock_iron_stop_2.bmp"
+"Resource/images/Tree/tree_normal_stop.bmp"

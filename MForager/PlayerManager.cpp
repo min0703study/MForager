@@ -110,6 +110,10 @@ RECT PlayerManager::getPlayerRelRect() {
 	return _uiManager->getRelRect(_player);
 }
 
+RECT PlayerManager::getPlayerAbsRect() {
+	return _player->getARect();
+}
+
 POINTF PlayerManager::getPlayerRelPt()
 {
 	return _uiManager->getRelPt(_player);

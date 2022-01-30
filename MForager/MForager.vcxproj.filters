@@ -46,6 +46,9 @@
     <Filter Include="Industrial">
       <UniqueIdentifier>{88fa6705-3b7c-4af0-89aa-6c7dfc0dc949}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Json">
+      <UniqueIdentifier>{b687e785-bf39-4473-87a2-805ebb0d9c9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Map.cpp">
@@ -177,6 +180,9 @@
     </ClCompile>
     <ClCompile Include="Food.cpp">
       <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>Json</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,6 +329,15 @@
     </ClInclude>
     <ClInclude Include="Food.h">
       <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="json/json.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="json/json-forwards.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonData.h">
+      <Filter>Utillity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

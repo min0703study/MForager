@@ -21,17 +21,8 @@ void ItemManager::update()
 			dItem->_dropRc = RectMake(dItem->_dropItem->getAPt(), 50, 50);
 		}
 	}
-}
 
-void ItemManager::render(HDC hdc)
-{
-	/*
-	for (DropItem* dItem : _dropItems) {
-		if(!dItem->_isDropToPlayer)
-			dItem->_dropItem->_animation->render(hdc);
-	}
-	
-	*/
+	RcCollisionCheckForDropItem();
 }
 
 void ItemManager::createDropItem(vector<ItemBase*> dropItems)

@@ -7,6 +7,7 @@ class ItemManager
 {
 public:
 	UIManager* _uiManager;
+
 	struct DropItem {
 		const int _dropSpeed = 2;
 		RECT _dropRc;
@@ -36,10 +37,8 @@ public:
 	HRESULT init();
 	void release();
 	void update();
-	void render(HDC hdc);
 
 	void createDropItem(vector<ItemBase*> _dropItem);
 	void RcCollisionCheckForDropItem();
-	void RcCollisionCheckForDropItem(RECT& rc);
 };
 

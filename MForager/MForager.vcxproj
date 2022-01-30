@@ -57,6 +57,7 @@
     <ClCompile Include="SimpleAnimation.cpp" />
     <ClCompile Include="Stone.cpp" />
     <ClCompile Include="TempSoundManager.cpp" />
+    <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -73,6 +74,7 @@
     <ClInclude Include="CollectAnimation.h" />
     <ClInclude Include="CollectionBase.h" />
     <ClInclude Include="CollectionManager.h" />
+    <ClInclude Include="CommonData.h" />
     <ClInclude Include="CustomCursor.h" />
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="FixedUI.h" />
@@ -113,6 +115,8 @@
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="json/json.h" />
+    <ClInclude Include="json/json-forwards.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Wood.h" />
   </ItemGroup>

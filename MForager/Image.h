@@ -23,12 +23,6 @@ public:
 	COLORREF _transColor;
 
 public:
-	enum IMAGE_TYPE {
-		DEFAULT,
-		FRAME,
-		ALPHA,
-	};
-
 	IMAGE_TYPE _type;
 
 	HRESULT init(int width, int height);

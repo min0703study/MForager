@@ -13,14 +13,22 @@
 #include <assert.h>
 
 #include <iostream>
+#include <fstream>
 #include <random>
 
 #include <bitset>
 #include <vector>
 #include <map>
 
+#include "json/json.h"
+
 using namespace std;
 
+enum IMAGE_TYPE {
+	DEFAULT = 0,
+	FRAME,
+	ALPHA,
+};
 //==Singleton
 #define IMAGEMANAGER		ImageManager::getSingleton()
 #define KEYMANAGER			KeyManager::getSingleton()
@@ -136,6 +144,7 @@ typedef struct tagPosInfo
 #include "ShapeFunction.h"
 #include "KeyManager.h"
 #include "RandomFuction.h"
+#include "CommonData.h"
 //CommonFunction==
 
 //resource
@@ -155,7 +164,7 @@ typedef struct tagPosInfo
 
 //ITEM
 #define RES_STONE_NORMAL_STOP_PATH			"Resource/images/Item/stone_stop.bmp"
-#define RES_IRON_ORE_STOP_PATH		"Resource/images/Item/iron_ore_stop.bmp"
+#define RES_IRON_ORE_STOP_PATH				"Resource/images/Item/iron_ore_stop.bmp"
 #define RES_WOOD_NORMAL_STOP_PATH			"Resource/images/Item/wood_stop.bmp"
 
 #define RES_HEART_PATH						"Resource/images/Etc/heart.bmp"
@@ -210,6 +219,7 @@ enum CURSOR_DIRECTION {
 	C_RIGHT
 };
 
+
 //DevelopMode
-//#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 

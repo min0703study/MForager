@@ -6,6 +6,8 @@
 #include "ItemManager.h"
 #include "MapManager.h"
 #include "UIManager.h"
+#include "json/json.h"
+#include <fstream>
 
 #define TICK_TIMER_ID			201
 

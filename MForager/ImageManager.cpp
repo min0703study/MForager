@@ -18,24 +18,9 @@ void ImageManager::release(void)
 	this->deleteAll();
 }
 
-
-Image* ImageManager::addImage(string strKey, int width, int height, bool isTranse)
+Image * ImageManager::addFileImage(int intKey, const char * fileName, int width, int height, bool isTranse)
 {
-	Image* img = findImage(strKey);
-
-	if (img) return img;
-
-	img = new Image;
-
-	if (FAILED(img->init(width, height)))
-	{
-		SAFE_DELETE(img);
-		return NULL;
-	}
-
-	_mImageList.insert(make_pair(strKey, img));
-
-	return img;
+	return addFileImage(to_string(intKey), fileName, width, height, isTranse);
 }
 
 Image * ImageManager::addFileImage(string strKey, const char * fileName, int width, int height, bool isTranse)
@@ -76,6 +61,11 @@ Image* ImageManager::addFrameImage(string strKey, const char * fileName, int wid
 	return img;
 }
 
+Image * ImageManager::addFrameImage(int intKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse)
+{
+	return addFrameImage(to_string(intKey), fileName, width, height, frameXCount, frameYCount, isTranse);
+}
+
 
 Image* ImageManager::addAlphaImage(string strKey, const char * fileName, int width, int height)
 {
@@ -94,6 +84,32 @@ Image* ImageManager::addAlphaImage(string strKey, const char * fileName, int wid
 	_mImageList.insert(make_pair(strKey, img));
 
 	return img;
+}
+
+Image * ImageManager::addAlphaImage(int intKey, const char * fileName, int width, int height)
+{
+	return addAlphaImage(to_string(intKey), fileName, width, height);
+}
+
+Image * ImageManager::addImage(string strKey, int width, int height)
+{
+	{
+		Image* img = findImage(strKey);
+
+		if (img) return img;
+
+		img = new Image;
+
+		if (FAILED(img->init(width, height)))
+		{
+			SAFE_DELETE(img);
+			return NULL;
+		}
+
+		_mImageList.insert(make_pair(strKey, img));
+
+		return img;
+	}
 }
 
 Image* ImageManager::findImage(string strKey)
@@ -148,10 +164,10 @@ void ImageManager::render(string strKey, HDC hdc, POINTF position)
 	if (img) {
 		switch (img->_type)
 		{
-			case Image::FRAME:
+			case FRAME:
 				_renderer->renderFrame(hdc, (FrameImage*)img, position);
 				break;
-			case Image::DEFAULT:
+			case DEFAULT:
 				_renderer->renderPtf(hdc, img, position);
 				break;
 		}

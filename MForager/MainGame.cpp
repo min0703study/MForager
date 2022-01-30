@@ -1,10 +1,12 @@
 #include "Stdafx.h"
 #include "MainGame.h"
+#include "CommonData.h"
 
 HRESULT MainGame::init(void)
 {
 	GameNode::init();
-
+	CommonDatainit();
+	cout << MAP << endl;
 	ShowCursor(false);
 	addTimer(1, TICK_TIMER_ID);
 
@@ -52,7 +54,6 @@ void MainGame::update(void)
 	_cm->update();
 	_mm->update();
 	_uim->update();
-	_im->RcCollisionCheckForDropItem();
 	_im->update();
 }
 

@@ -35,7 +35,7 @@ void AnimationBase::render(HDC hdc, POINTF startPt)
 	Image* img = IMAGEMANAGER->findImage(_imageKeys[(int)_currentState]);
 	IMAGEMANAGER->render(_imageKeys[(int)_currentState], hdc, startPt);
 
-	if (img->_type == Image::FRAME) {
+	if (img->_type == FRAME) {
 		_delayCount++;
 		if (_delayCount % 6 == 0) {
 			_delayCount = 0;

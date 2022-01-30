@@ -53,6 +53,7 @@ public:
 	bool ptIsClickable(POINTF pt);
 
 	RECT getPlayerRelRect();
+	RECT getPlayerAbsRect();
 	POINTF getPlayerRelPt();
 
 	void setState(ACTION_TYPE act, BOOL isStart);
