@@ -42,19 +42,18 @@ vector<ItemBase*> Rock::getDropItem()
 	vector<ItemBase*> _dropItem;
 	switch (_type) {
 	case ROCK:
-		_dropItem.push_back(new Stone(_absPt, Stone::STONE));
-		_dropItem.push_back(new Stone(_absPt, Stone::STONE));
+		//_dropItem.push_back(new Stone(_absPt, ITEM::STONE::STONE));
+		//_dropItem.push_back(new Stone(_absPt, ITEM::STONE::STONE));
 		break;
 	case COAL:
 		break;
 	case IRON:
-		_dropItem.push_back(new Stone(_absPt, Stone::IRON_ORE));
-		_dropItem.push_back(new Stone(_absPt, Stone::IRON_ORE));
+		//_dropItem.push_back(new Stone(_absPt, ITEM::STONE::IRON_ORE));
+		//_dropItem.push_back(new Stone(_absPt, ITEM::STONE::IRON_ORE));
 		break;
 	case GOLD:
 		break;
 	}
-
 
 	return _dropItem;
 }

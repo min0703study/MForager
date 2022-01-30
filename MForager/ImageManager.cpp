@@ -205,6 +205,15 @@ void ImageManager::setCurrentFrame(string strKey, int x, int y)
 	if (img) img->setCurrentFrame(x, y);
 }
 
+IMAGE_TYPE ImageManager::getType(string strKey)
+{
+	Image* img = findImage(strKey);
+	if (img) {
+		return img->_type;
+	}
+	return ERR;
+}
+
 void ImageManager::loopRender(string strKey, HDC hdc, const LPRECT drawArea, int offsetX, int offsetY)
 {
 	Image* img = findImage(strKey);

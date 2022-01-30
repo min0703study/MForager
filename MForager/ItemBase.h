@@ -7,9 +7,12 @@ public:
 	int _ItemId;
 
 	ItemAnimation* _animation;
-	ItemBase(POINTF pt, int widht, int height);
+	ItemBase(int _itemId, POINTF pt, int widht, int height);
 
-	virtual int getId() { return 0; };
 	void initAnimation() override;
-};
+	int getId() { return _ItemId; };
 
+	bool _isIngredient;
+	bool _isRaw;
+
+};

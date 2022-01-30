@@ -28,6 +28,7 @@ enum IMAGE_TYPE {
 	DEFAULT = 0,
 	FRAME,
 	ALPHA,
+	ERR
 };
 //==Singleton
 #define IMAGEMANAGER		ImageManager::getSingleton()
@@ -137,16 +138,6 @@ typedef struct tagPosInfo
 
 } POSINFO;
 
-//==CommonFunction
-#include "FileUtil.h"
-#include "MapStruct.h"
-#include "ImageManager.h"
-#include "ShapeFunction.h"
-#include "KeyManager.h"
-#include "RandomFuction.h"
-#include "CommonData.h"
-//CommonFunction==
-
 //resource
 #define	RES_MAP_PATH						"Resource/Map/mapsave.map"
 #define	RES_MAP_SPRITE_PATH					"Resource/Map/map_sprite.bmp"
@@ -158,6 +149,16 @@ typedef struct tagPosInfo
 #define RES_ROCK_IRON_STOP_1_PATH			"Resource/images/Rock/rock_iron_stop_1.bmp"
 #define RES_ROCK_IRON_STOP_2_PATH			"Resource/images/Rock/rock_iron_stop_2.bmp"
 #define RES_TREE_NORMAL_STOP_1_PATH			"Resource/images/Tree/tree_normal_stop.bmp"
+//==CommonFunction
+#include "FileUtil.h"
+#include "MapStruct.h"
+#include "ImageManager.h"
+#include "ShapeFunction.h"
+#include "KeyManager.h"
+#include "RandomFuction.h"
+#include "CommonData.h"
+//CommonFunction==
+
 
 //FOOD
 #define RES_FOOD_BERRY_STOP_1_PATH			"Resource/images/Tree/tree_normal_stop.bmp"
@@ -179,7 +180,7 @@ typedef struct tagPosInfo
 #define CAMERA_TILE_X_COUNT		17
 #define CAMERA_TILE_Y_COUNT		10
 
-#define TILE_COUNT			TILE_X_COUNT * TILE_Y_COUNT
+//#define TILE_COUNT			TILE_X_COUNT * TILE_Y_COUNT
 
 #define WINNAME			(LPSTR)(TEXT("MForager"))
 #define WINSTYLE		WS_CAPTION | WS_SYSMENU

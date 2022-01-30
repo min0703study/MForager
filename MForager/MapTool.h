@@ -7,7 +7,7 @@ class MapTool : public GameNode
 private:
 	RECT _drawRc[TILE_COUNT];
 	TILE _drawTiles[TILE_COUNT];
-	TILE _selectTiles[B_GROUND_X_COUNT * B_GROUND_Y_COUNT];
+	//TILE _selectTiles[B_GROUND_X_COUNT * B_GROUND_Y_COUNT];
 	
 	TILE _currentSelectTile;
 	bool isDrag;

@@ -2,7 +2,7 @@
 #include "Food.h"
 
 Food::Food(POINTF pt, TYPE type):
-	ItemBase(pt, TILE_SIZE, TILE_SIZE)
+	ItemBase(0, pt, TILE_SIZE, TILE_SIZE)
 {
 	initAnimation();
 

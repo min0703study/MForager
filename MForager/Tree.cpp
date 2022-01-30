@@ -6,11 +6,10 @@ vector<ItemBase*> Tree::getDropItem()
 	vector<ItemBase*> _dropItem;
 	switch (_type) {
 		case NOMAL:
-			_dropItem.push_back(new Wood(_absPt));
-			_dropItem.push_back(new Wood(_absPt));
+			//_dropItem.push_back(new Wood(_absPt));
+			//_dropItem.push_back(new Wood(_absPt));
 			break;
 	}
-
 
 	return _dropItem;
 }
