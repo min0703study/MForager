@@ -184,6 +184,9 @@
     <ClCompile Include="jsoncpp.cpp">
       <Filter>Json</Filter>
     </ClCompile>
+    <ClCompile Include="GdiPlusManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map.h">
@@ -338,6 +341,9 @@
     </ClInclude>
     <ClInclude Include="CommonData.h">
       <Filter>Utillity</Filter>
+    </ClInclude>
+    <ClInclude Include="GdiPlusManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

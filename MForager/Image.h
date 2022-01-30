@@ -1,5 +1,5 @@
 #pragma once
-class Image
+class ImageBase
 {
 protected:
 	enum IMAGE_LOAD_KIND

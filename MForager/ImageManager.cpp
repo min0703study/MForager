@@ -18,18 +18,18 @@ void ImageManager::release(void)
 	this->deleteAll();
 }
 
-Image * ImageManager::addFileImage(int intKey, const char * fileName, int width, int height, bool isTranse)
+ImageBase * ImageManager::addFileImage(int intKey, const char * fileName, int width, int height, bool isTranse)
 {
 	return addFileImage(to_string(intKey), fileName, width, height, isTranse);
 }
 
-Image * ImageManager::addFileImage(string strKey, const char * fileName, int width, int height, bool isTranse)
+ImageBase * ImageManager::addFileImage(string strKey, const char * fileName, int width, int height, bool isTranse)
 {
-	Image* img = findImage(strKey);
+	ImageBase* img = findImage(strKey);
 
 	if (img) return img;
 
-	img = new Image;
+	img = new ImageBase;
 
 	if (FAILED(img->initFile(fileName, width, height, isTranse)))
 	{
@@ -42,7 +42,7 @@ Image * ImageManager::addFileImage(string strKey, const char * fileName, int wid
 	return img;
 }
 
-Image* ImageManager::addFrameImage(string strKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse)
+ImageBase* ImageManager::addFrameImage(string strKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse)
 {
 	FrameImage* img = (FrameImage*)findImage(strKey);
 
@@ -61,13 +61,13 @@ Image* ImageManager::addFrameImage(string strKey, const char * fileName, int wid
 	return img;
 }
 
-Image * ImageManager::addFrameImage(int intKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse)
+ImageBase * ImageManager::addFrameImage(int intKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse)
 {
 	return addFrameImage(to_string(intKey), fileName, width, height, frameXCount, frameYCount, isTranse);
 }
 
 
-Image* ImageManager::addAlphaImage(string strKey, const char * fileName, int width, int height)
+ImageBase* ImageManager::addAlphaImage(string strKey, const char * fileName, int width, int height)
 {
 	AlphaImage* img = (AlphaImage*)findImage(strKey);
 
@@ -86,19 +86,19 @@ Image* ImageManager::addAlphaImage(string strKey, const char * fileName, int wid
 	return img;
 }
 
-Image * ImageManager::addAlphaImage(int intKey, const char * fileName, int width, int height)
+ImageBase * ImageManager::addAlphaImage(int intKey, const char * fileName, int width, int height)
 {
 	return addAlphaImage(to_string(intKey), fileName, width, height);
 }
 
-Image * ImageManager::addImage(string strKey, int width, int height)
+ImageBase * ImageManager::addImage(string strKey, int width, int height)
 {
 	{
-		Image* img = findImage(strKey);
+		ImageBase* img = findImage(strKey);
 
 		if (img) return img;
 
-		img = new Image;
+		img = new ImageBase;
 
 		if (FAILED(img->init(width, height)))
 		{
@@ -112,7 +112,7 @@ Image * ImageManager::addImage(string strKey, int width, int height)
 	}
 }
 
-Image* ImageManager::findImage(string strKey)
+ImageBase* ImageManager::findImage(string strKey)
 {
 	auto key = _mImageList.find(strKey);
 	if (key != _mImageList.end())
@@ -160,7 +160,7 @@ bool ImageManager::deleteAll()
 void ImageManager::render(string strKey, HDC hdc, POINTF position)
 {
 	
-	Image* img = findImage(strKey);
+	ImageBase* img = findImage(strKey);
 	if (img) {
 		switch (img->_type)
 		{
@@ -177,7 +177,7 @@ void ImageManager::render(string strKey, HDC hdc, POINTF position)
 
 void ImageManager::render(string strKey, HDC hdc, int destX, int destY, bool isCenter)
 {
-	Image* img = findImage(strKey);
+	ImageBase* img = findImage(strKey);
 	if (img)  _renderer->renderPt(hdc, img, { destX, destY }, isCenter);
 }
 
@@ -207,7 +207,7 @@ void ImageManager::setCurrentFrame(string strKey, int x, int y)
 
 IMAGE_TYPE ImageManager::getType(string strKey)
 {
-	Image* img = findImage(strKey);
+	ImageBase* img = findImage(strKey);
 	if (img) {
 		return img->_type;
 	}
@@ -216,7 +216,7 @@ IMAGE_TYPE ImageManager::getType(string strKey)
 
 void ImageManager::loopRender(string strKey, HDC hdc, const LPRECT drawArea, int offsetX, int offsetY)
 {
-	Image* img = findImage(strKey);
+	ImageBase* img = findImage(strKey);
 	if (img) _renderer->renderLoop(hdc, img, drawArea, offsetX, offsetY);
 }
 

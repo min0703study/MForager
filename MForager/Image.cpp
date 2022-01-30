@@ -1,7 +1,7 @@
 #include "Stdafx.h"
 #include "Image.h"
 
-HRESULT Image::init(int width, int height)
+HRESULT ImageBase::init(int width, int height)
 {
 	HDC hdc = GetDC(_hWnd);
 
@@ -26,7 +26,7 @@ HRESULT Image::init(int width, int height)
 	return S_OK;
 }
 
-HRESULT Image::initFile(const char * fileName, int width, int height, bool isTrans)
+HRESULT ImageBase::initFile(const char * fileName, int width, int height, bool isTrans)
 {
 	HDC hdc = GetDC(_hWnd);
 
@@ -56,7 +56,7 @@ HRESULT Image::initFile(const char * fileName, int width, int height, bool isTra
 	ReleaseDC(_hWnd, hdc);
 }
 
-void Image::release(void)
+void ImageBase::release(void)
 {
 	SelectObject(_hMemDC, _hOBit);
 	DeleteObject(_hBit);

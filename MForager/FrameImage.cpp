@@ -3,12 +3,12 @@
 
 void FrameImage::release(void)
 {
-	Image::release();
+	ImageBase::release();
 }
 
 HRESULT FrameImage::initFile(const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTrans)
 {
-	Image::initFile(fileName, width, height, isTrans);
+	ImageBase::initFile(fileName, width, height, isTrans);
 
 	_type = FRAME;
 

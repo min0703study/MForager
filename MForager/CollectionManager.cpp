@@ -85,10 +85,11 @@ void CollectionManager::makeRandomCollection()
 	int x = 0;
 	int y = 0;
 
-	for (int i = 0; i < COLLECT_OBJECT_COUNT;) {
+	//for (int i = 0; i < COLLECT_OBJECT_COUNT;) {
 		x = RND->getInt(TILE_X_COUNT) * TILE_SIZE;
 		y = RND->getInt(TILE_Y_COUNT) * TILE_SIZE;
 
+		/*
 		if (!_mapManager->ptInCollsionTile(x, y)) {
 			switch(RND->getInt(3)) {
 				case 0:
@@ -104,5 +105,6 @@ void CollectionManager::makeRandomCollection()
 			_uiManager->addUI(_collectObjects[i]);
 			i++;
 		};
-	}
+		*/
+	//}
 }

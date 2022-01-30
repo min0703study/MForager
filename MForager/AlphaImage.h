@@ -1,7 +1,7 @@
 #pragma once
 #include "Image.h"
 
-class AlphaImage : public Image
+class AlphaImage : public ImageBase
 {
 public:
 	BLENDFUNCTION		_blendFunc;

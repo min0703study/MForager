@@ -1,12 +1,11 @@
 #include "Stdafx.h"
 #include "MainGame.h"
-#include "CommonData.h"
 
 HRESULT MainGame::init(void)
 {
 	GameNode::init();
+	
 	CommonDatainit();
-	cout << MAP << endl;
 	ShowCursor(false);
 	addTimer(1, TICK_TIMER_ID);
 
@@ -74,9 +73,8 @@ void MainGame::render(void)
 	HBRUSH brush = CreateSolidBrush(RGB(0, 142, 239));
 	FillRect(getMemDc(), &rcBackground, brush);
 	DeleteObject(brush);
-
+	
 	_uim->render(getMemDc());
-
 	IMAGEMANAGER->render(getBackBufferKey(), getHdc());
 }
 

@@ -3,7 +3,6 @@
 //#include "Wood.h"
 
 #define NOMAL_TREE_HIT_GAGE		20
-
 using namespace COLLECT::TREE;
 
 class Tree : public CollectionBase

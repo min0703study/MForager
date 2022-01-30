@@ -41,7 +41,7 @@ void Renderer::render(HDC& hdc,
 	}
 }
 
-void Renderer::renderPtf(HDC hdc, Image* img, POINTF pt, bool ptIsCenter)
+void Renderer::renderPtf(HDC hdc, ImageBase* img, POINTF pt, bool ptIsCenter)
 {
 	if (ptIsCenter) {
 		pt.x = pt.x - img->_width / 2;
@@ -67,7 +67,7 @@ void Renderer::renderPtf(HDC hdc, Image* img, POINTF pt, bool ptIsCenter)
 
 }
 
-void Renderer::renderPt(HDC hdc, Image * img, POINT pt, bool ptIsCenter)
+void Renderer::renderPt(HDC hdc, ImageBase * img, POINT pt, bool ptIsCenter)
 {
 	this->renderPtf(hdc, img, pt, ptIsCenter);
 }
@@ -99,7 +99,7 @@ void Renderer::renderFrame(HDC hdc, FrameImage* img, POINTF pt)
 	}
 }
 
-void Renderer::renderLoop(HDC hdc, Image* img, const LPRECT drawArea, int offsetX, int offsetY)
+void Renderer::renderLoop(HDC hdc, ImageBase* img, const LPRECT drawArea, int offsetX, int offsetY)
 {
 	if (offsetX < 0) offsetX = img->_width + (offsetX % img->_width);
 	if (offsetY < 0) offsetY = img->_height + (offsetY % img->_height);

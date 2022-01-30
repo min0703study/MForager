@@ -1,5 +1,4 @@
 #pragma once
-
 enum RIK {
 	MAP = 700,
 	MAP_SPRITE,
@@ -11,6 +10,7 @@ enum RIK {
 	ROCK_IRON_STOP_1,
 	ROCK_IRON_STOP_2,
 	TREE_NORMAL_STOP,
+	PICKAXES_NORMAL,
 	END
 };
 
@@ -115,6 +115,12 @@ inline void CommonDatainit() {
 		UI_INFO::MAP::SPRITE_Y_SIZE,
 		UI_INFO::MAP::SPRITE_X_COUNT,
 		UI_INFO::MAP::SPRITE_Y_COUNT,
+		true);
+
+	GDIPLUSMANAGER->addImage((int)RIK::PICKAXES_NORMAL,
+		resJson["pickaxes_normal"].asCString(),
+		UI_INFO::MAP::SPRITE_X_SIZE,
+		UI_INFO::MAP::SPRITE_Y_SIZE,
 		true);
 
 	Json::Value furance = LoadJsonFile("jsonFile/furanace_crafting.json");

@@ -6,7 +6,7 @@
 HRESULT UIManager::init()
 {
 	//커스텀 cursor
-	IMAGEMANAGER->addFileImage("cursor", RES_CURSOR_PATH, 20, 20, true);
+	IMAGEMANAGER->addFileImage("cursor", "Resource/images/cursor.bmp", 20, 20, true);
 	_nightFocus = new NightFocus(_playerManager->getPlayerRelPt(), 1500, 1500);
 
 	//선택 상자 init
@@ -80,7 +80,7 @@ void UIManager::release()
 void UIManager::render(HDC hdc)
 {
 	_map->play(hdc, _camera->_startPt);
-	
+	GDIPLUSMANAGER->rotate(RIK::PICKAXES_NORMAL);
 
 	for (UI* ui : _uiList) {
 		ui->play(hdc, _camera->_startPt);

@@ -19,7 +19,13 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	int nCmdShow) {
 
 	_hInstance = hInstance;
+	
+	ULONG_PTR gpToken;
+	Gdiplus::GdiplusStartupInput gpsi;
+	if (GdiplusStartup(&gpToken, &gpsi, NULL) != Gdiplus::Status::Ok) return 0;
 
+
+	/*
 	DEVMODE dm;
 
 	dm.dmBitsPerPel = 32;
@@ -33,6 +39,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	{
 		ChangeDisplaySettings(&dm, 0);
 	}
+	*/
 
 	_winsizeX = WINSIZE_X;
 	_winsizeY = WINSIZE_Y;
@@ -86,7 +93,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
 	_gm->release();
 	UnregisterClass(WINNAME, _hInstance);
-
+	Gdiplus::GdiplusShutdown(gpToken);
 	return message.wParam;
 }
 

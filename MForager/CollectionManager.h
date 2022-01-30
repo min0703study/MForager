@@ -1,8 +1,8 @@
 #pragma once
 #include "CollectionBase.h"
 #include "ProgressBar.h"
-#include "Rock.h"
-#include "Tree.h"
+//#include "Rock.h"
+//#include "Tree.h"
 
 class MapManager;
 class UIManager;

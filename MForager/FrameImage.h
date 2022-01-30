@@ -6,7 +6,7 @@ enum StartPtType {
 	RIGHT_TOP,
 	RIGHT_BOTTOM
 };
-class FrameImage: public Image
+class FrameImage: public ImageBase
 {
 public:
 

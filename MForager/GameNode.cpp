@@ -9,8 +9,6 @@ HRESULT GameNode::init(void)
 
 HRESULT GameNode::init(bool managerInit)
 {
-	RND->init();
-
 	_isManagerInit = managerInit;
 
 	_backBufferKey = "backBuffer";
@@ -26,6 +24,7 @@ HRESULT GameNode::init(bool managerInit)
 
 	if (_isManagerInit) {
 		IMAGEMANAGER->init();
+		GDIPLUSMANAGER->init(getMemDc());
 	}
 
 	return S_OK;
@@ -43,6 +42,8 @@ void GameNode::release(void)
 	if (_isManagerInit) {
 		IMAGEMANAGER->release();
 		IMAGEMANAGER->releaseSingleton();
+		GDIPLUSMANAGER->release();
+		GDIPLUSMANAGER->releaseSingleton();
 	}
 }
 
@@ -66,7 +67,6 @@ void GameNode::deleteTimer(int timerId)
 
 LRESULT GameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
-	HDC hdc;
 	PAINTSTRUCT ps;
 
 	switch (iMessage) {
@@ -81,7 +81,7 @@ LRESULT GameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 
 		break;
 	case WM_PAINT:
-		hdc = BeginPaint(hWnd, &ps);
+		BeginPaint(hWnd, &ps);
 		render();
 		EndPaint(hWnd, &ps);
 		break;

@@ -7,26 +7,26 @@
 class ImageManager : public SingletonBase<ImageManager>
 {
 private:
-	typedef map<string, Image*> mapImageList;
-	typedef map<string, Image*>::iterator mapImageIter;
+	typedef map<string, ImageBase*> mapImageList;
+	typedef map<string, ImageBase*>::iterator mapImageIter;
 private:
 	mapImageList _mImageList;
 	Renderer* _renderer;
-	Image* findImage(string strKey);
+	ImageBase* findImage(string strKey);
 public:
 	HRESULT init(void);
 	void release(void);
 
-	Image * addImage(int strKey, int width, int height);
-	Image * addImage(string strKey, int width, int height);
+	ImageBase * addImage(int strKey, int width, int height);
+	ImageBase * addImage(string strKey, int width, int height);
 
 
-	Image* addFileImage(string strKey, const char * fileName, int width, int height, bool isTranse = false);
-	Image* addFileImage(int intKey, const char * fileName, int width, int height, bool isTranse = false);
-	Image* addFrameImage(string strKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse = true);
-	Image* addFrameImage(int intKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse = true);
-	Image* addAlphaImage(string strKey, const char * fileName, int width, int height);
-	Image* addAlphaImage(int intKey, const char * fileName, int width, int height);
+	ImageBase* addFileImage(string strKey, const char * fileName, int width, int height, bool isTranse = false);
+	ImageBase* addFileImage(int intKey, const char * fileName, int width, int height, bool isTranse = false);
+	ImageBase* addFrameImage(string strKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse = true);
+	ImageBase* addFrameImage(int intKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse = true);
+	ImageBase* addAlphaImage(string strKey, const char * fileName, int width, int height);
+	ImageBase* addAlphaImage(int intKey, const char * fileName, int width, int height);
 
 	void frameRender(string strKey, HDC hdc, POINTF position);
 	void frameRender(string strKey, HDC hdc, POINT position);

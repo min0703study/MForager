@@ -12,13 +12,12 @@ protected:
 	POINT _currentPt;
 
 	string _backBufferKey;
-	Image* _backBuffer;
+	ImageBase* _backBuffer;
 
-	Image* getBackBuffer(void) { return _backBuffer; }
+	ImageBase* getBackBuffer(void) { return _backBuffer; }
 	string getBackBufferKey(void) { return _backBufferKey; }
 
 public:
-
 	HDC getMemDc() { return getBackBuffer()->getMemDC(); }
 	HDC getHdc() { return _hdc; }
 public:

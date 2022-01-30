@@ -7,10 +7,9 @@ protected:
 	SingletonBase() {};
 	~SingletonBase() {};
 public:
-	virtual HRESULT init(void) { return 0; };
-
 	static T* getSingleton(void);
 	void releaseSingleton(void);
+//	virtual HRESULT init(void) { return 0; };
 };
 
 template <typename T>

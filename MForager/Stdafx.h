@@ -1,7 +1,8 @@
 #pragma once
+
 #include <SDKDDKver.h>
 
-#define WIN32_LEAN_AND_MEAN 
+//#define WIN32_LEAN_AND_MEAN 
 
 #include <Windows.h>
 
@@ -20,9 +21,15 @@
 #include <vector>
 #include <map>
 
+using namespace std;
+
+#include <gdiplus.h>
+#pragma comment(lib, "gdiplus")
+//using namespace Gdiplus;
+
 #include "json/json.h"
 
-using namespace std;
+using namespace Gdiplus;
 
 enum IMAGE_TYPE {
 	DEFAULT = 0,
@@ -30,8 +37,10 @@ enum IMAGE_TYPE {
 	ALPHA,
 	ERR
 };
+
 //==Singleton
 #define IMAGEMANAGER		ImageManager::getSingleton()
+#define GDIPLUSMANAGER		GdiPlusManager::getSingleton()
 #define KEYMANAGER			KeyManager::getSingleton()
 #define RND					RandomFunction::getSingleton()
 //Singleton==
@@ -142,13 +151,14 @@ typedef struct tagPosInfo
 #define	RES_MAP_PATH						"Resource/Map/mapsave.map"
 #define	RES_MAP_SPRITE_PATH					"Resource/Map/map_sprite.bmp"
 #define	RES_SAVE_MAP_PATH					"Resource/Map/save_map.map"
-#define	RES_CURSOR_PATH						"Resource/images/cursor.bmp"
+#define	RES_CURSOR_PATH						L"Resource/images/cursor.bmp"
 #define	RES_SELECT_CURSOR_PATH				"Resource/images/select_cursor.bmp"
 #define RES_ROCK_NORMAL_STOP_1_PATH			"Resource/images/Rock/rock_normal_stop_1.bmp"
 #define RES_ROCK_NORMAL_STOP_2_PATH			"Resource/images/Rock/rock_normal_stop_2.bmp"
 #define RES_ROCK_IRON_STOP_1_PATH			"Resource/images/Rock/rock_iron_stop_1.bmp"
 #define RES_ROCK_IRON_STOP_2_PATH			"Resource/images/Rock/rock_iron_stop_2.bmp"
 #define RES_TREE_NORMAL_STOP_1_PATH			"Resource/images/Tree/tree_normal_stop.bmp"
+
 //==CommonFunction
 #include "FileUtil.h"
 #include "MapStruct.h"
@@ -156,6 +166,7 @@ typedef struct tagPosInfo
 #include "ShapeFunction.h"
 #include "KeyManager.h"
 #include "RandomFuction.h"
+#include "GdiPlusManager.h"
 #include "CommonData.h"
 //CommonFunction==
 
@@ -222,5 +233,5 @@ enum CURSOR_DIRECTION {
 
 
 //DevelopMode
-#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+//#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
