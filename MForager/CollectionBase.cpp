@@ -1,8 +1,8 @@
 #include "Stdafx.h"
 #include "CollectionBase.h"
 
-CollectionBase::CollectionBase(POINTF hitPt, int xSizeOfTile, int ySizeOfTile):
-	UI({ hitPt.x - TILE_SIZE * (xSizeOfTile - 1), hitPt.y - (TILE_SIZE * (ySizeOfTile - 1)) },
+CollectionBase::CollectionBase(PointF hitPt, int xSizeOfTile, int ySizeOfTile):
+	UI({ hitPt.X - TILE_SIZE * (xSizeOfTile - 1), hitPt.Y - (TILE_SIZE * (ySizeOfTile - 1)) },
 	xSizeOfTile * TILE_SIZE,
 	ySizeOfTile * TILE_SIZE),
 	_hitPt(hitPt),
@@ -42,8 +42,8 @@ void CollectionBase::setAnimationImageAuto(CollectAnimation::State state, string
 		state, 
 		key,
 		fileName, 
-		_width,
-		_height,
+		getWidth(),
+		getHeight(),
 		frameXCount, 
 		frameXCount
 	);

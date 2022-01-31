@@ -9,7 +9,7 @@ public:
 		Citrus
 	};
 
-	Food(POINTF pt, TYPE type);
+	Food(PointF pt, TYPE type);
 private:
 	TYPE _type;
 	int _energy;

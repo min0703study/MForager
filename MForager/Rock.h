@@ -12,6 +12,6 @@ public:
 	TYPE _type;
 	virtual vector<ItemBase*> getDropItem();
 	
-	Rock(POINTF hitPt, TYPE type);
+	Rock(PointF hitPt, TYPE type);
 };
 

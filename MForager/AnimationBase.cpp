@@ -13,11 +13,14 @@ void AnimationBase::setStopImage(int state, string key, char * fileName, int fra
 	IMAGEMANAGER->addFileImage(key, fileName, frameX, frameY, true);
 }
 
-void AnimationBase::init(POINTF startPt, int initState)
+void AnimationBase::setImage(int state, int intKey, int width, int height)
 {
-	_startPt = startPt;
-	_currentState = initState;
+	_imageKesInt[state] = intKey;
+}
 
+void AnimationBase::init(int initState)
+{
+	_currentState = initState;
 	_delayCount = 6;
 }
 
@@ -27,7 +30,7 @@ void AnimationBase::update()
 
 void AnimationBase::render(HDC hdc)
 {
-	render(hdc, _startPt);
+	render(hdc);
 }
 
 void AnimationBase::render(HDC hdc, POINTF startPt)
@@ -41,6 +44,11 @@ void AnimationBase::render(HDC hdc, POINTF startPt)
 			IMAGEMANAGER->nextFrame(_imageKeys[(int)_currentState]);
 		}
 	}
+}
+
+void AnimationBase::render(HDC hdc, PointF& startPt)
+{
+
 }
 
 void AnimationBase::release()

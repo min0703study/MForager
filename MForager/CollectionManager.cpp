@@ -36,7 +36,8 @@ void CollectionManager::hitCollect(int power)
 		_isSelect = false;
 	}
 	else {
-		if (SAFE_NULL_CHECK(_hitGage[_selectIndex])) {
+		/*
+				if (SAFE_NULL_CHECK(_hitGage[_selectIndex])) {
 			_hitGage[_selectIndex] = new ProgressBar (
 				_collectObjects[_selectIndex]->getProgressPt(), 
 				TILE_SIZE, 
@@ -47,6 +48,8 @@ void CollectionManager::hitCollect(int power)
 				C_PG_COLLECT_GAGE_BOTTOM);
 			_uiManager->addUI(_hitGage[_selectIndex]);
 		}
+		*/
+
 
 		_hitGage[_selectIndex]->setValue(_collectObjects[_selectIndex]->_hitGage);
 	}

@@ -1,7 +1,7 @@
 #include "Stdafx.h"
 #include "Food.h"
 
-Food::Food(POINTF pt, TYPE type):
+Food::Food(PointF pt, TYPE type):
 	ItemBase(0, pt, TILE_SIZE, TILE_SIZE)
 {
 	initAnimation();

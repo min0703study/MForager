@@ -36,9 +36,11 @@ public:
 
 	void frameRender(int intKey, HDC hdc, POINTF position) { return frameRender(to_string(intKey), hdc, position); };
 	void frameRender(int intKey, HDC hdc, POINT position) { return frameRender(to_string(intKey), hdc, position); };
+
 	void alphaRender(int intKey, HDC hdc, BYTE alpha) { return alphaRender(to_string(intKey), hdc, alpha); };
 	void alphaRender(int intKey, HDC hdc, POINTF pt, BYTE alpha) { return alphaRender(to_string(intKey), hdc,pt, alpha); };
-	
+	void alphaRender(string strKey, HDC hdc, PointF pt, BYTE alpha, bool isCenterPt = false);
+
 	void nextFrame(string strKey);
 	void nextFrame(int intKey) { nextFrame(to_string(intKey)); };
 	void setCurrentFrame(string strKey, int x, int y);

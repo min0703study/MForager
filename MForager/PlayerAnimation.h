@@ -16,7 +16,6 @@ public:
 	PlayerAnimation() : AnimationBase((int)State::END) {};
 
 	void setState(State state);
-	void setStartPoint(POINTF pt);
 	void setAnimationImage(State state, string key, char * fileName, int frameX, int frameY, int frameXCount, int frameYCount);
 
 	State getCurrentState() const { return State(_currentState); };

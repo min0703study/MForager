@@ -193,6 +193,19 @@ void ImageManager::frameRender(string strKey, HDC hdc, POINT position)
 	this->frameRender(strKey, hdc, POINTF(position));
 }
 
+void ImageManager::alphaRender(string strKey, HDC hdc, PointF pt, BYTE alpha, bool isCenterPt)
+{
+	AlphaImage* img = (AlphaImage*)findImage(strKey);
+
+	if (img) {
+		if (isCenterPt) {
+			pt.X = pt.X - img->_width / 2;
+			pt.X = pt.X - img->_height / 2;
+		}
+		_renderer->renderAlpha(hdc, img, { pt.X, pt.Y }, alpha);
+	}
+}
+
 void ImageManager::nextFrame(string strKey)
 {
 	FrameImage* img = (FrameImage*)findImage(strKey);

@@ -1,4 +1,5 @@
 #pragma once
+using namespace Gdiplus;
 /*
 inline POINT PointMake(int x, int y)
 {
@@ -200,6 +201,17 @@ inline RECT RectMake(POINTF pt, int width, int height,  bool isCenterPt = false)
 	return rc;
 }
 
+
+inline RECT RectMake(PointF pt, int width, int height, bool isCenterPt = false)
+{
+	if (isCenterPt) {
+		pt.X = pt.X - width / 2;
+		pt.Y = pt.Y - height / 2;
+	}
+	RECT rc = { pt.X, pt.Y, pt.X + width, pt.Y + height };
+	return rc;
+}
+
 inline RECT RectMakeF(POINTF pt, float width, float height)
 {
 	RECT rc = { pt.x, pt.y, pt.x + width, pt.y + height };
@@ -208,4 +220,19 @@ inline RECT RectMakeF(POINTF pt, float width, float height)
 
 inline POINTF FindCenterPt(RECT rc) {
 	return { (rc.left + rc.right) / 2, (rc.bottom + rc.top) / 2 };
+}
+
+inline PointF FindCenterPtf(RECT rc) {
+	return { (rc.left + rc.right) / 2.0f, (rc.bottom + rc.top) / 2.0f };
+}
+
+
+inline LPRECT MakeLPRECT(PointF pt, int width, int height, bool isCenterPt = false)
+{
+	if (isCenterPt) {
+		pt.X = pt.X - width / 2;
+		pt.Y = pt.Y - height / 2;
+	}
+
+	return  new RECT{ (int)pt.X, (int)pt.Y, (int)pt.X + width, (int)pt.Y + height };
 }

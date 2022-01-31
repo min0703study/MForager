@@ -38,15 +38,15 @@ void Map::release()
 	}
 }
 
-void Map::play(HDC hdc, POINTF cameraPt)
+void Map::play(HDC hdc)
 {
 	for (TILE tile : _tiles) {
 		RECT tempRect;
 		//if (IntersectRect(&tempRect, &_cameraManager->getRcCamera(), &tile.rc)) {
 			IMAGEMANAGER->setCurrentFrame(MAP_SPRITE, tile.ground % 9, tile.ground / 9);
 
-			int x = tile.pt.x - cameraPt.x;
-			int y = tile.pt.y - cameraPt.y;
+			int x = tile.pt.x - _cmRc->left;
+			int y = tile.pt.y - _cmRc->top;
 
 			IMAGEMANAGER->frameRender("701", hdc, POINTF{ x, y });
 		//}

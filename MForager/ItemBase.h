@@ -7,7 +7,7 @@ public:
 	int _ItemId;
 
 	ItemAnimation* _animation;
-	ItemBase(int _itemId, POINTF pt, int widht, int height);
+	ItemBase(int _itemId, PointF pt, int widht, int height);
 
 	void initAnimation() override;
 	int getId() { return _ItemId; };

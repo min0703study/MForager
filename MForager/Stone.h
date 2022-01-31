@@ -7,7 +7,7 @@ class Stone: public ItemBase
 {
 public:
 	TYPE _type;
-	Stone(POINTF pt, TYPE type);
+	Stone(PointF pt, TYPE type);
 
 	void initAnimation() override;
 	inline int setIdForType(TYPE type);

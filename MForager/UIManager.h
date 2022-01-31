@@ -15,6 +15,7 @@ class UIManager
 private:
 	vector<FixedUI*> _fixedUiList;
 	vector<UI*> _uiList;
+
 	UI* _map;
 
 	vector<UI*>::iterator _iUiList;
@@ -47,13 +48,6 @@ public:
 	void addMap(UI* map);
 
 	void deleteUI(UI* ui);
-	POINTF getRelPt(UI * ui);
-	RECT getRelRect(UI * ui);
-	RECT getRelCenterPt(UI * ui);
-
-	POINTF getAbsPt(POINTF pt);
-
-	RECT getRcCamera();
 
 	void mouseMoveEvent(POINT& currentPoint);
 	void clickEvent(POINT & pt, bool isClickDown);

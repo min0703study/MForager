@@ -187,6 +187,12 @@
     <ClCompile Include="GdiPlusManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Pickaxes.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PickaxesAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map.h">
@@ -344,6 +350,12 @@
     </ClInclude>
     <ClInclude Include="GdiPlusManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Pickaxes.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PickaxesAnimation.h">
+      <Filter>Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

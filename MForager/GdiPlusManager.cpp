@@ -34,19 +34,20 @@ Image* GdiPlusManager::findImage(int intKey)
 	return nullptr;
 }
 
-Image * GdiPlusManager::rotate(int intKey)
+Image * GdiPlusManager::rotate(int intKey, PointF centerPt, int angle)
 {
 	Gdiplus::Image* img = findImage(intKey);
 	if (SAFE_NULL_CHECK(img)) return img;
 
-	_graphics->TranslateTransform(100.0f, 100.0f);
-	_graphics->RotateTransform(45.0f);
-	_graphics->Clear(Gdiplus::Color(0,0,255));
-	//_graphics->Clear(TRANCE_COLOR);
-	_graphics->DrawImage(img, 100, 100);
+	//_graphics->TranslateTransform(100.0f, 100.0f);
+	//Gdiplus::Matrix* mx = new Gdiplus::Matrix(1.0f, 0.0f, 0.0f, 1.0f, 50, 50);
+	_graphics->DrawImage(img, centerPt.X , centerPt.Y, 100.0f, 100.0f);
+	Gdiplus::Matrix* mx = new Gdiplus::Matrix();
+	mx->RotateAt(angle, centerPt);
+	_graphics->SetTransform(mx);
+	//mx->TransformPoints({0,0});
 	return nullptr;
 }
-
 
 void GdiPlusManager::release()
 {

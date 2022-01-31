@@ -14,12 +14,12 @@ vector<ItemBase*> Tree::getDropItem()
 	return _dropItem;
 }
 
-Tree::Tree(POINTF hitPt, TYPE type): CollectionBase(hitPt, 1, 2),  _type(type)
+Tree::Tree(PointF hitPt, TYPE type): CollectionBase(hitPt, 1, 2),  _type(type)
 {
 	switch (type) {
 	case NOMAL:
 		setAnimationImageAuto(CollectAnimation::State::stop, "TREE", RES_TREE_NORMAL_STOP_1_PATH, 1, 1);
-		_animation->init(_absPt, CollectAnimation::State::stop);
+		_animation->init(CollectAnimation::State::stop);
 		_hitGage = NOMAL_TREE_HIT_GAGE;
 		_maxHitGage = NOMAL_TREE_HIT_GAGE;
 		break;

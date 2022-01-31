@@ -10,7 +10,7 @@ class Wood : public ItemBase
 private:
 	TYPE _type;
 public:
-	Wood(POINTF pt, int width = STONE_WIDTH, int height = STONE_HEIGHT);
+	Wood(PointF pt, int width = STONE_WIDTH, int height = STONE_HEIGHT);
 	
 	inline int setIdForType(TYPE _type);
 	void initAnimation() override;

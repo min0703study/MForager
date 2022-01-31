@@ -1,38 +1,23 @@
 #include "Stdafx.h"
 #include "ProgressBar.h"
 
-ProgressBar::ProgressBar(POINTF startPt, float bgWidth, float bgHeight, int maxValue, int currentValue, COLORREF top, COLORREF bottom)
-	:UI(startPt, bgWidth, bgHeight)
+ProgressBar::ProgressBar(PointF* absPt, float bgWidth, float bgHeight, int maxValue, int currentValue, COLORREF top, COLORREF bottom)
+	:UI(absPt, bgWidth, bgHeight)
 	, _bgWidth(bgWidth)
 	, _bgHeight(bgHeight)
 	, _valueWidth(bgWidth * 0.8)
 	, _valueHeight(bgHeight * 0.6)
-	, _startPt(startPt)
 	, _maxValue(maxValue)
 	, _currentValue(currentValue)
 	, _topColor(top)
 	, _bottomColor(bottom)
-	, _bgRect(RectMake(startPt, bgWidth, bgHeight))
 {
-
-	POINTF valueStartPt = { startPt.x + (_bgWidth * 0.1f),  startPt.y + (_bgHeight * 0.2f) };
-
-	_valueRect[0] = RectMake(valueStartPt, _valueWidth, _valueHeight / 2);
+	/*
+	_valueRect[0] = MakeLPRECT(valueStartPt, _valueWidth, _valueHeight / 2);
 	_valueRect[1] = RectMake(POINTF{ valueStartPt.x, valueStartPt.y + _valueHeight / 2 }, _valueWidth, _valueHeight / 2);
-
+	*/
 	initAnimation();
 }
-
-
-ProgressBar::ProgressBar(float bgWidth, float bgHeight, COLORREF top, COLORREF bottom)
-	:UI({0,0}, _bgWidth, _bgHeight)
-	, _bgWidth(bgWidth)
-	, _bgHeight(bgHeight)
-	, _valueWidth(bgWidth * 0.8)
-	, _valueHeight(bgHeight * 0.6)
-	, _topColor(top)
-	, _bottomColor(bottom)
-{}
 
 ProgressBar::~ProgressBar()
 {
@@ -40,6 +25,7 @@ ProgressBar::~ProgressBar()
 
 void ProgressBar::setValue(int value)
 {
+	/*
 	if (_currentValue != value) {
 		_currentValue = value;
 
@@ -54,9 +40,11 @@ void ProgressBar::setValue(int value)
 			rc.right = rc.left + _valueWidth * (_currentValue / _maxValue);
 		}
 	}
+	*/
 }
 
 void ProgressBar::setValueRelRect() {
+	/*
 	POINTF valueStartPt = { _bgRect.left + (_bgWidth * 0.1f),  _bgRect.top + (_bgHeight * 0.2f) };
 
 	_valueRect[0] = RectMake(valueStartPt, _valueWidth, _valueHeight / 2);
@@ -66,25 +54,20 @@ void ProgressBar::setValueRelRect() {
 		float a = (_currentValue / _maxValue);
 		rc.right = rc.left + _valueWidth * (_currentValue / _maxValue);
 	}
-}
-
-void ProgressBar::play(HDC hdc, POINTF cameraPt)
-{
-	_bgRect = getRRect(cameraPt);
-	setValueRelRect();
-	this->play(hdc);
+	*/
 }
 
 void ProgressBar::play(HDC hdc) {
 	HBRUSH hBBrush = CreateSolidBrush(BLACK);
-	RectangleMake(hdc, _bgRect);
-	FillRect(hdc, &_bgRect, hBBrush);
+	RectangleMake(hdc, _relRc->get());
+	FillRect(hdc, &_relRc->get(), hBBrush);
 	DeleteObject(hBBrush);
 
 	HBRUSH hWBrush = CreateSolidBrush(WHITE);
-	FrameRect(hdc, &_bgRect, hWBrush);
+	FrameRect(hdc, &_relRc->get(), hWBrush);
 	DeleteObject(hWBrush);
 
+	/*
 	HBRUSH hTBrush = CreateSolidBrush(_topColor);
 	RectangleMake(hdc, _valueRect[0]);
 	FillRect(hdc, &_valueRect[0], hTBrush);
@@ -94,4 +77,5 @@ void ProgressBar::play(HDC hdc) {
 	RectangleMake(hdc, _valueRect[1]);
 	FillRect(hdc, &_valueRect[1], hBTBrush);
 	DeleteObject(hBTBrush);
+	*/
 }

@@ -1,5 +1,5 @@
 #pragma once
-enum RIK {
+enum RES {
 	MAP = 700,
 	MAP_SPRITE,
 	SAVE_MAP,
@@ -109,7 +109,7 @@ namespace INDUSTRIAL {
 
 inline void CommonDatainit() {
 	Json::Value resJson = LoadJsonFile("jsonFile/res_path_info.json");
-	IMAGEMANAGER->addFrameImage((int)RIK::MAP_SPRITE, 
+	IMAGEMANAGER->addFrameImage((int)RES::MAP_SPRITE, 
 		resJson["map_sprite"].asCString(),
 		UI_INFO::MAP::SPRITE_X_SIZE,
 		UI_INFO::MAP::SPRITE_Y_SIZE,
@@ -117,7 +117,7 @@ inline void CommonDatainit() {
 		UI_INFO::MAP::SPRITE_Y_COUNT,
 		true);
 
-	GDIPLUSMANAGER->addImage((int)RIK::PICKAXES_NORMAL,
+	GDIPLUSMANAGER->addImage((int)RES::PICKAXES_NORMAL,
 		resJson["pickaxes_normal"].asCString(),
 		UI_INFO::MAP::SPRITE_X_SIZE,
 		UI_INFO::MAP::SPRITE_Y_SIZE,

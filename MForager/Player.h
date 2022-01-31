@@ -10,14 +10,14 @@ public:
 		D_RIGHT
 	};
 
-	Player(POINTF pt, int width, int height, int maxHp, int power, int lifeCount);
+	Player(PointF pt, int width, int height, int maxHp, int power, int lifeCount);
 	~Player();
 
 	PlayerAnimation* _animation;
 	Direction _currentDirection;
 
-	DRECT _moveRect;
-	DRECT _clickableRect;
+	SDRECT _moveRect;
+	SDRECT _clickableRect;
 	
 public:
 	int _moveLeft;
@@ -35,9 +35,8 @@ public:
 	void move(float x, float y);
 	void actionCollect();
 
-	DRECT getClickableRect();
-	DRECT getMoveRect();
-
+	SDRECT getClickableRect();
+	SDRECT getMoveRect();
 
 	virtual void initAnimation();
 

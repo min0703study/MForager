@@ -1,14 +1,14 @@
 #include "Stdafx.h"
 #include "Player.h"
 
-Player::Player(POINTF pt,int width, int height, int maxHp, int power, int lifeCount)
+Player::Player(PointF pt,int width, int height, int maxHp, int power, int lifeCount)
 	:UI(pt, width, height),
 	_maxHp(maxHp),
 	_currentHp(maxHp),
 	_power(power),
 	_lifeCount(lifeCount),
-	_moveRect(DRECT(&_absRc, 20, 40, -20, 0)),
-	_clickableRect(DRECT(&_absRc, -TILE_SIZE, -TILE_SIZE, TILE_SIZE, TILE_SIZE))
+	_moveRect(SDRECT(getARc(), 20, 40, -20, 0)),
+	_clickableRect(SDRECT(getARc(), -TILE_SIZE, -TILE_SIZE, TILE_SIZE, TILE_SIZE))
 {
 	initAnimation();
 }
@@ -27,10 +27,7 @@ void Player::setKey(int moveLeft , int moveRight, int moveUp, int moveDown, int 
 }
 
 void Player::move(float x, float y) {
-	_absPt.x += x;
-	_absPt.y += y;
-
-	ChangeRect(_absPt, &_absRc, _width, _height);
+	addApt({ x, y });
 }
 
 void Player::actionCollect()
@@ -42,12 +39,12 @@ void Player::actionCollect()
 	}
 }
 
-DRECT Player::getClickableRect()
+SDRECT Player::getClickableRect()
 {
 	return _clickableRect;
 }
 
-DRECT Player::getMoveRect()
+SDRECT Player::getMoveRect()
 {
 	return _moveRect;
 }

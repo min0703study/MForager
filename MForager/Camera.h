@@ -2,10 +2,13 @@
 class Camera
 {
 public:
-	int _xSize;
-	int _ySize;
+	UIPOS* _cameraPos;
 
-	POINTF _startPt;
-	RECT _rcCamera;
+	Camera(PointF pt, int width, int height) : _cameraPos(new UIPOS(pt, width, height)) {};
+	~Camera() {
+		delete _cameraPos->_rc;
+		delete _cameraPos->_pt;
+		delete _cameraPos;
+	}
 };
 

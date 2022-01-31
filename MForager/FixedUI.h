@@ -1,38 +1,46 @@
 #pragma once
 #include "AnimationBase.h"
 
+
+using namespace Gdiplus;
 class FixedUI
 {
+public:
+
 protected:
 	AnimationBase* _bAnimation;
-
-	POINTF _absPt;
-	RECT _absRc;
-
-	int _width;
-	int _height;
+	UIPOS* _absUiPos;
 
 	bool _isShowing;
-
 public:
-	FixedUI(POINTF absPt, int width, int height) :
-		_absPt(absPt), 
-		_absRc(RectMake(absPt, width, height)),
-		_width(width), 
-		_height(height), 
+	FixedUI(PointF* absPt, int width, int height) :
+		_absUiPos(new UIPOS(absPt, width, height)),
 		_isShowing(true) {};
 
-	POINTF getAPt() {
-		return _absPt;
+	PointF* getAPt() {
+		return _absUiPos->_pt;
 	}
 
-	RECT getARect() {
-		return _absRc;
+	LPRECT getARc() {
+		return  _absUiPos->_rc;
 	}
 
-	void setApt(POINTF pt) {
-		this->_absPt = pt;
+	void setApt(PointF pt) {
+		_absUiPos->changePt(pt);
 	}
+
+	float getWidth() {
+		return _absUiPos->_width;
+	}
+
+	float getHeight() {
+		return _absUiPos->_height;
+	}
+
+	void addApt(PointF pt) {
+		_absUiPos->addPt(pt);
+	}
+
 	
 	virtual void play(HDC hdc);
 	virtual void initAnimation();

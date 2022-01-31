@@ -14,6 +14,6 @@ public:
 
 	CollectAnimation():AnimationBase((int)State::END) {};
 	void setAnimationImage(State state, string key, char * fileName, int frameX, int frameY, int frameXCount, int frameYCount);
-	void init(POINTF startPt, State initState);
+	void init(State initState);
 };
 

@@ -6,7 +6,7 @@ void CollectAnimation::setAnimationImage(State state, string key, char * fileNam
 	AnimationBase::setAnimationImage((int)state, key, fileName, frameX, frameY, frameXCount, frameYCount);
 }
 
-void CollectAnimation::init(POINTF startPt, State initState)
+void CollectAnimation::init(State initState)
 {
-	AnimationBase::init(startPt, (int)initState);
+	AnimationBase::init((int)initState);
 }

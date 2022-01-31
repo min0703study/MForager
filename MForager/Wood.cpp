@@ -1,7 +1,7 @@
 #include "Stdafx.h"
 #include "Wood.h"
 
-Wood::Wood(POINTF pt, int width, int height) : ItemBase(
+Wood::Wood(PointF pt, int width, int height) : ItemBase(
 	setIdForType(WOOD),
 	pt, 
 	width, 
@@ -12,9 +12,10 @@ Wood::Wood(POINTF pt, int width, int height) : ItemBase(
 
 void Wood::initAnimation()
 {
+
 	_animation = new ItemAnimation();
-	_animation->setAnimationImage(ItemAnimation::State::stop, "WOOD_STOP", RES_WOOD_NORMAL_STOP_PATH, _width, _height, 1, 1);
-	_animation->init(_absPt, ItemAnimation::State::stop);
+	_animation->setAnimationImage(ItemAnimation::State::stop, "WOOD_STOP", RES_WOOD_NORMAL_STOP_PATH, getWidth(), getHeight(), 1, 1);
+	_animation->init(ItemAnimation::State::stop);
 	_bAnimation = _animation;
 }
 

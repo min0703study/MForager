@@ -10,5 +10,5 @@ class Tree : public CollectionBase
 public:
 	TYPE _type;
 	virtual vector<ItemBase*> getDropItem();
-	Tree(POINTF hitPt, TYPE type = NOMAL);
+	Tree(PointF hitPt, TYPE type = NOMAL);
 };

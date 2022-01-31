@@ -11,7 +11,7 @@ public:
 	ItemBase* _dropItem;
 	int _dropItemCount;
 
-	POINTF _hitPt;
+	PointF _hitPt;
 
 	int _xSizeOfTile; //타일 x 기준 사이즈
 	int _ySizeOfTile; //타일 y 기준 사이즈
@@ -23,16 +23,16 @@ public:
 	int _maxHitGage;
 	int _hitGage; //지워지는 게이지
 
-	CollectionBase(POINTF hitPt, int xSizeOfTile, int ySizeOfTile);
+	CollectionBase(PointF hitPt, int xSizeOfTile, int ySizeOfTile);
 
 	bool hit(int power);
 	bool isHitStart() { return _isHitStart; };
 	
-	RECT getHitRect() { return RectMake(_hitPt, TILE_SIZE, TILE_SIZE); }
-	POINTF getHitPt() { return _hitPt; }
-	POINTF getProgressPt() { 
+	RECT getHitRect() { return *MakeLPRECT(_hitPt, 60.0f, 60.0f); }
+	PointF getHitPt() { return _hitPt; }
+	PointF getProgressPt() { 
 		RECT rc = getHitRect();
-		return { rc.left , rc.bottom + 5 };
+		return { (REAL)rc.left ,(REAL)rc.bottom + 5 };
 	}
 
 	virtual vector<ItemBase*> getDropItem();

@@ -16,5 +16,5 @@ public:
 	void Load();
 	void release();
 
-	virtual void play(HDC hdc, POINTF cameraPt);
+	virtual void play(HDC hdc);
 };

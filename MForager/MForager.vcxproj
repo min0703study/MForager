@@ -48,6 +48,8 @@
     <ClCompile Include="MapTool.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="NightFocus.cpp" />
+    <ClCompile Include="Pickaxes.cpp" />
+    <ClCompile Include="PickaxesAnimation.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAnimation.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
@@ -101,6 +103,8 @@
     <ClInclude Include="MapTool.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="NightFocus.h" />
+    <ClInclude Include="Pickaxes.h" />
+    <ClInclude Include="PickaxesAnimation.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAnimation.h" />
     <ClInclude Include="PlayerManager.h" />

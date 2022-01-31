@@ -7,7 +7,7 @@ class SelectPtBox: public UI
 public:
 	SimpleAnimation* _animation;
 
-	SelectPtBox(POINTF pt, int width, int height) :UI(pt, width, height) {
+	SelectPtBox(PointF pt, int width, int height) :UI(pt, width, height) {
 		setIsShowing(false);
 		initAnimation();
 	};

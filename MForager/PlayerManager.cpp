@@ -21,16 +21,15 @@ HRESULT PlayerManager::init()
 {
 	_inventory = new Inventory;
 
-	POINTF pt = FindCenterPt(_uiManager->getRcCamera());
-	
-	pt.x -= PLAYER_SIZE_X / 2;
-	pt.y -= PLAYER_SIZE_Y / 2;
-
-	_player = new Player(pt, PLAYER_SIZE_X,PLAYER_SIZE_Y, DEFUALT_PLAYER_HP, DEFULAT_PLAYER_POWER, DEFAULT_LIFE_COUNT);
+	_player = new Player({0,0}, PLAYER_SIZE_X, PLAYER_SIZE_Y, DEFUALT_PLAYER_HP, DEFULAT_PLAYER_POWER, DEFAULT_LIFE_COUNT);
 	_player->setKey('A', 'D', 'W', 'S', 'F');
 	
+	_pickaxes = new Pickaxes(_player->getAPt(), 100, 100);
+	
 	_uiManager->addUI(_player);
-	_uiManager->addDevelopUI(_player->getMoveRect());
+	_uiManager->addUI(_pickaxes);
+
+	//_uiManager->addDevelopUI(_player->getMoveRect());
 
 	return S_OK;
 }
@@ -77,7 +76,7 @@ void PlayerManager::move(int addX, int addY, MOVE_DIRECTION mDirection)
 	rc.bottom += addY;
 
 	if (!_mapManager->rcCollsionCheck(rc)) {
-		_player->getMoveRect().getRRect(_uiManager->getRcCamera());
+		//_player->getMoveRect().getRRect(_uiManager->getRcCamera());
 		_uiManager->moveCamera(addX, addY, mDirection);
 		_player->move(addX, addY);
 	}
@@ -107,16 +106,16 @@ bool PlayerManager::ptIsClickable(POINTF pt)
 }
 
 RECT PlayerManager::getPlayerRelRect() {
-	return _uiManager->getRelRect(_player);
+	return _player->getRRc();
 }
 
 RECT PlayerManager::getPlayerAbsRect() {
-	return _player->getARect();
+	return *_player->getARc();
 }
 
-POINTF PlayerManager::getPlayerRelPt()
+PointF PlayerManager::getPlayerRelPt()
 {
-	return _uiManager->getRelPt(_player);
+	return _player->getRPt();
 }
 void PlayerManager::setState(ACTION_TYPE act, BOOL isStart)
 {

@@ -6,7 +6,7 @@ void ItemAnimation::setAnimationImage(State state, string key, char * fileName, 
 	AnimationBase::setAnimationImage((int)state, key, fileName, frameX, frameY, frameXCount, frameYCount);
 }
 
-void ItemAnimation::init(POINTF startPt, State initState)
+void ItemAnimation::init(State initState)
 {
-	AnimationBase::init(startPt, (int)initState);
+	AnimationBase::init((int)initState);
 }

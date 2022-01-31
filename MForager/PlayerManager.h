@@ -4,6 +4,7 @@
 #include "ProgressBar.h"
 #include "Inventory.h"
 #include "Heart.h"
+#include "Pickaxes.h"
 
 class ItemManager;
 class MapManager;
@@ -38,6 +39,7 @@ public:
 	ACTION_TYPE _curActType;
 	ProgressBar* _hpGage;
 	Heart* _heart[3];
+	Pickaxes* _pickaxes;
 
 	Inventory* _inventory;
 	
@@ -54,7 +56,7 @@ public:
 
 	RECT getPlayerRelRect();
 	RECT getPlayerAbsRect();
-	POINTF getPlayerRelPt();
+	PointF getPlayerRelPt();
 
 	void setState(ACTION_TYPE act, BOOL isStart);
 	void changeDirection();

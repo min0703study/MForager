@@ -97,55 +97,9 @@ typedef struct tagPointf {
 	}
 
 	POINT toPOINT() { return POINT({ (int)x, (int)y }); };
+	PointF toPointF() { return PointF(x, y); }
 } POINTF;
 
-typedef struct tagDynamicRect
-{
-	LPRECT baseRc;
-
-	int changeLeft;
-	int changeTop;
-	int changeRight;
-	int changeBottom;
-
-	tagDynamicRect(LPRECT bRc, int cLeft, int cTop, int cRight, int cBottom):
-		baseRc(bRc), 
-		changeLeft(cLeft), 
-		changeTop(cTop), 
-		changeRight(cRight), 
-		changeBottom(cBottom) {
-
-	}
-
-	RECT getARect() {
-		return {
-			baseRc->left + changeLeft,
-			baseRc->top + changeTop,
-			baseRc->right + changeRight,
-			baseRc->bottom + changeBottom
-		};
-	}
-
-	RECT getRRect(RECT cameraRc) {
-		RECT rc = getARect();
-		return {
-			rc.left - cameraRc.left,
-			rc.top - cameraRc.top,
-			rc.right - cameraRc.left,
-			rc.bottom - cameraRc.top
-		};
-	}
-} DRECT;
-
-
-typedef struct tagPosInfo
-{
-	LPRECT rc;
-	POINTF pt;
-	int width;
-	int height;
-
-} POSINFO;
 
 //resource
 #define	RES_MAP_PATH						"Resource/Map/mapsave.map"
@@ -169,6 +123,128 @@ typedef struct tagPosInfo
 #include "GdiPlusManager.h"
 #include "CommonData.h"
 //CommonFunction==
+typedef struct tagDynamicRect
+{
+	LPRECT baseRc;
+
+	int changeLeft;
+	int changeTop;
+	int changeRight;
+	int changeBottom;
+
+	tagDynamicRect(LPRECT bRc, int cLeft, int cTop, int cRight, int cBottom) :
+		baseRc(bRc),
+		changeLeft(cLeft),
+		changeTop(cTop),
+		changeRight(cRight),
+		changeBottom(cBottom) {
+
+	}
+
+	RECT getARect() {
+		return {
+			baseRc->left + changeLeft,
+			baseRc->top + changeTop,
+			baseRc->right + changeRight,
+			baseRc->bottom + changeBottom
+		};
+	}
+
+	RECT getRRect(RECT cameraRc) {
+		RECT rc = getARect();
+		return {
+			rc.left - cameraRc.left,
+			rc.top - cameraRc.top,
+			rc.right - cameraRc.left,
+			rc.bottom - cameraRc.top
+		};
+	}
+} SDRECT;
+
+typedef class tagDynamicTargetRc
+{
+private:
+	LPRECT _baseRc;
+	LPRECT _targetRc;
+public:
+	tagDynamicTargetRc(LPRECT baseRc, LPRECT targetRc) :
+		_baseRc(baseRc),
+		_targetRc(targetRc) {
+		cout << endl;
+	};
+
+	RECT get() {
+		return {
+			_targetRc->left - _baseRc->left,
+			_targetRc->top - _baseRc->top,
+			_targetRc->right - _baseRc->left,
+			_targetRc->bottom - _baseRc->top
+		};
+	}
+
+	PointF getPtf() {
+		return { (REAL)get().left, (REAL)get().top };
+	}
+} DRECT, *LPDRECT;
+
+typedef class tagDynamicPointF
+{
+private:
+	PointF* _basePf;
+	PointF* _targetPf;
+public:
+	tagDynamicPointF(PointF* basePf, PointF* targetPf) :
+		_basePf(basePf),
+		_targetPf(targetPf) {};
+
+	PointF get() {
+		return {
+			_targetPf->X - _basePf->X,
+			_targetPf->Y - _basePf->Y
+		};
+	}
+} *LPDPoinF;
+
+struct UIPOS {
+	LPRECT _rc;
+	PointF* _pt;
+
+	REAL _width;
+	REAL _height;
+
+	UIPOS(PointF* pt, int width, int height) {
+		_pt = pt;
+		_rc = MakeLPRECT(*pt, width, height);
+	}
+
+	UIPOS(PointF pt, int width, int height) {
+		_pt = new PointF(pt.X, pt.Y);
+		_rc = MakeLPRECT(pt, width, height);
+	}
+
+	void changePt(PointF pt) {
+		if (!_pt->Equals(pt)) {
+			_pt->X = pt.X;
+			_pt->Y = pt.Y;
+
+			_rc->left = pt.X;
+			_rc->top = pt.X;
+			_rc->right = pt.X + _width;
+			_rc->bottom = pt.X + _height;
+		}
+	};
+
+	void addPt(PointF pt) {
+		if (!_pt->Equals(pt)) {
+			_pt->operator+(pt);
+
+			_rc->left = pt.X;
+			_rc->top = pt.X;
+			_rc->right = pt.X + _width;
+			_rc->bottom = pt.X + _height;
+		}
+	};
+};
 
 
 //FOOD

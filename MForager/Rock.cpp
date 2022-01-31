@@ -2,7 +2,7 @@
 #include "Rock.h"
 
 
-Rock::Rock(POINTF hitPt, TYPE type) : CollectionBase(hitPt, 1, 1),  _type(type)
+Rock::Rock(PointF hitPt, TYPE type) : CollectionBase(hitPt, 1, 1),  _type(type)
 {
 	switch (type) {
 		case ROCK:
@@ -33,7 +33,7 @@ Rock::Rock(POINTF hitPt, TYPE type) : CollectionBase(hitPt, 1, 1),  _type(type)
 			break;
 	}
 
-	_animation->init(_absPt, CollectAnimation::State::stop);
+	_animation->init(CollectAnimation::State::stop);
 }
 
 
