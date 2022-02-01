@@ -11,7 +11,7 @@ public:
 	UIManager* _uiManager;
 
 	HRESULT init();
-\
+
 	void release(void);
 	void update();
 

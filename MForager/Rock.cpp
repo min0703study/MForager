@@ -33,7 +33,7 @@ Rock::Rock(PointF hitPt, TYPE type) : CollectionBase(hitPt, 1, 1),  _type(type)
 			break;
 	}
 
-	_animation->init(CollectAnimation::State::stop);
+	_animation->init((int)CollectAnimation::State::stop);
 }
 
 

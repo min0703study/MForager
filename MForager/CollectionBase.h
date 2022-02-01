@@ -6,8 +6,6 @@
 class CollectionBase: public UI
 {
 public:
-	CollectAnimation* _animation;
-
 	ItemBase* _dropItem;
 	int _dropItemCount;
 
@@ -36,7 +34,7 @@ public:
 	}
 
 	virtual vector<ItemBase*> getDropItem();
-	void initAnimation() override;
+
 	void setAnimationImageAuto(CollectAnimation::State state, string key, char * fileName, int frameXCount, int frameYCount);
 	virtual ~CollectionBase() {};
 };

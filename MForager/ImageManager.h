@@ -36,6 +36,7 @@ public:
 
 	void frameRender(int intKey, HDC hdc, POINTF position) { return frameRender(to_string(intKey), hdc, position); };
 	void frameRender(int intKey, HDC hdc, POINT position) { return frameRender(to_string(intKey), hdc, position); };
+	void frameRender(int intKey, HDC hdc, PointF position) { return frameRender(to_string(intKey), hdc, POINTF{ position.X, position.Y }); };
 
 	void alphaRender(int intKey, HDC hdc, BYTE alpha) { return alphaRender(to_string(intKey), hdc, alpha); };
 	void alphaRender(int intKey, HDC hdc, POINTF pt, BYTE alpha) { return alphaRender(to_string(intKey), hdc,pt, alpha); };
@@ -53,6 +54,8 @@ public:
 	bool deleteAll();
 
 	void render(string strKey, HDC hdc, POINTF position);
+
+	void render(string strKey, HDC hdc, PointF position);
 
 	void render(string strKey, HDC hdc, int destX = 0, int destY = 0, bool isCenter = false);
 

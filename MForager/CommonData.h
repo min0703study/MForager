@@ -1,8 +1,7 @@
 #pragma once
 enum RES {
-	MAP = 700,
+	MAP = 1000,
 	MAP_SPRITE,
-	SAVE_MAP,
 	CURSOR,
 	SELECT_BOX,
 	ROCK_NORMAL_STOP_1,
@@ -11,14 +10,19 @@ enum RES {
 	ROCK_IRON_STOP_2,
 	TREE_NORMAL_STOP,
 	PICKAXES_NORMAL,
+	HEART,
+	HEART_BLANK,
 	END
 };
 
-namespace UI_INFO {
-	static int CAMERA_TILE_X_COUNT = 17;
-	static int CAMERA_TILE_Y_COUNT = 10;
+namespace MAP_C {
+	namespace UI_INFO {
+		static int CAMERA_TILE_X_COUNT = 17;
+		static int CAMERA_TILE_Y_COUNT = 10;
 
-	namespace MAP {
+		static int CAMERA_X_SIZE = CAMERA_TILE_X_COUNT * 60;
+		static int CAMERA_Y_SIZE = CAMERA_TILE_Y_COUNT * 60;
+
 		static int TILE_SIZES = 60;
 
 		const static int TILE_X_COUNT = 20;
@@ -40,6 +44,22 @@ namespace UI_INFO {
 		const static int SPRITE_Y_SIZE = TILE_SIZES * SPRITE_Y_COUNT;
 	}
 }
+
+namespace PLAYER {
+	namespace UI_INFO {
+		const static int X_SIZE = 60;
+		const static int Y_SIZE = 60;
+	}
+
+	namespace DEFAULT_VALUE {
+		const static float START_X = MAP_C::UI_INFO::CAMERA_X_SIZE / 2.0f;
+		const static float START_Y = MAP_C::UI_INFO::CAMERA_Y_SIZE / 2.0f;
+		const static int POWER = 50;
+		const static int HP = 100;
+		const static int LIFE_COUNT = 3;
+	}
+}
+
 
 namespace ITEM {
 	namespace WOOD{
@@ -109,19 +129,24 @@ namespace INDUSTRIAL {
 
 inline void CommonDatainit() {
 	Json::Value resJson = LoadJsonFile("jsonFile/res_path_info.json");
+
 	IMAGEMANAGER->addFrameImage((int)RES::MAP_SPRITE, 
 		resJson["map_sprite"].asCString(),
-		UI_INFO::MAP::SPRITE_X_SIZE,
-		UI_INFO::MAP::SPRITE_Y_SIZE,
-		UI_INFO::MAP::SPRITE_X_COUNT,
-		UI_INFO::MAP::SPRITE_Y_COUNT,
+		MAP_C::UI_INFO::SPRITE_X_SIZE,
+		MAP_C::UI_INFO::SPRITE_Y_SIZE,
+		MAP_C::UI_INFO::SPRITE_X_COUNT,
+		MAP_C::UI_INFO::SPRITE_Y_COUNT,
 		true);
 
-	GDIPLUSMANAGER->addImage((int)RES::PICKAXES_NORMAL,
-		resJson["pickaxes_normal"].asCString(),
-		UI_INFO::MAP::SPRITE_X_SIZE,
-		UI_INFO::MAP::SPRITE_Y_SIZE,
-		true);
+	GDIPLUSMANAGER->addImage((int)RES::PICKAXES_NORMAL,			resJson["pickaxes_normal"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES::CURSOR,					resJson["cursor"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES::SELECT_BOX,				resJson["select_box"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES::ROCK_NORMAL_STOP_1,		resJson["rock_normal_stop_1"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES::ROCK_NORMAL_STOP_2,		resJson["rock_normal_stop_2"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES::ROCK_IRON_STOP_1,		resJson["rock_iron_stop_1"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES::ROCK_IRON_STOP_2,		resJson["rock_iron_stop_2"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES::HEART,					resJson["heart"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES::HEART_BLANK,				resJson["heart_blank"].asCString());
 
 	Json::Value furance = LoadJsonFile("jsonFile/furanace_crafting.json");
 	for (Json::Value::iterator itRoot = furance.begin(); itRoot != furance.end(); itRoot++) {

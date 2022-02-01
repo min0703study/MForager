@@ -9,7 +9,6 @@ public:
 	TYPE _type;
 	Stone(PointF pt, TYPE type);
 
-	void initAnimation() override;
 	inline int setIdForType(TYPE type);
 };
 

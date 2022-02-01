@@ -5,16 +5,14 @@
 class Pickaxes: public UI
 {
 private:
-	PickaxesAnimation* _animation;
-	PointF* _playerAbsPt;
-
+	float _currentAngle;
+	int i;
+	bool flag;
 public:
-	Pickaxes(PointF* plyaerAbsPt, float _width, float _height) : UI(*plyaerAbsPt, _width, _height), _playerAbsPt(plyaerAbsPt) {
-		_animation = new PickaxesAnimation;
-		_bAnimation = _animation;
-
-		_animation->setImage(PickaxesAnimation::State::action, RES::PICKAXES_NORMAL, _width, _height);
-		_animation->init(PickaxesAnimation::State::action);
+	Pickaxes(PointF* plyaerAbsPt, float _width, float _height) : UI(plyaerAbsPt, _width, _height, new PickaxesAnimation) 
+	{
+		i = -1;
+		_currentAngle = 0.0f;
 	};
 
 	void play(HDC hdc);

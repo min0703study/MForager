@@ -48,7 +48,15 @@ void AnimationBase::render(HDC hdc, POINTF startPt)
 
 void AnimationBase::render(HDC hdc, PointF& startPt)
 {
+	IMAGEMANAGER->render(_imageKeys[(int)_currentState], hdc, startPt);
 
+	if (IMAGEMANAGER->getType(_imageKeys[(int)_currentState]) == FRAME) {
+		_delayCount++;
+		if (_delayCount % 6 == 0) {
+			_delayCount = 0;
+			IMAGEMANAGER->nextFrame(_imageKeys[(int)_currentState]);
+		}
+	}
 }
 
 void AnimationBase::release()

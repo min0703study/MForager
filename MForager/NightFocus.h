@@ -10,10 +10,10 @@ private:
 
 	PointF* _playerPtf;
 public:
-	SimpleAnimation* _animation;
 	void initAnimation() override;
 
-	NightFocus(PointF pt, int width, int height) :UI(pt, width, height) {
+	NightFocus(PointF pt, int width, int height):
+		UI(pt, width, height, new SimpleAnimation) {
 		initAnimation();
 	};
 

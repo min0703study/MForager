@@ -4,7 +4,7 @@
 void FixedUI::play(HDC hdc)
 {
 	if (_isShowing) {
-		_bAnimation->render(hdc, *getAPt());
+		_animation->render(hdc, *getAPt());
 	}
 }
 

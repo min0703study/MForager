@@ -193,6 +193,9 @@
     <ClCompile Include="PickaxesAnimation.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
+    <ClCompile Include="MapTile.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map.h">
@@ -356,6 +359,9 @@
     </ClInclude>
     <ClInclude Include="PickaxesAnimation.h">
       <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="MapTile.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

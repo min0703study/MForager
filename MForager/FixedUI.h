@@ -1,21 +1,23 @@
 #pragma once
 #include "AnimationBase.h"
 
-
 using namespace Gdiplus;
+
 class FixedUI
 {
 public:
-
-protected:
-	AnimationBase* _bAnimation;
 	UIPOS* _absUiPos;
+	AnimationBase* _animation;
+protected:
 
 	bool _isShowing;
 public:
-	FixedUI(PointF* absPt, int width, int height) :
+	FixedUI(PointF* absPt, int width, int height, AnimationBase* animation) :
 		_absUiPos(new UIPOS(absPt, width, height)),
-		_isShowing(true) {};
+		_animation(animation),
+		_isShowing(true) {
+
+	};
 
 	PointF* getAPt() {
 		return _absUiPos->_pt;

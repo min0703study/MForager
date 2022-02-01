@@ -12,11 +12,9 @@ Wood::Wood(PointF pt, int width, int height) : ItemBase(
 
 void Wood::initAnimation()
 {
+	_animation->setAnimationImage((int)ItemAnimation::State::stop, "WOOD_STOP", RES_WOOD_NORMAL_STOP_PATH, getWidth(), getHeight(), 1, 1);
+	_animation->init((int)ItemAnimation::State::stop);
 
-	_animation = new ItemAnimation();
-	_animation->setAnimationImage(ItemAnimation::State::stop, "WOOD_STOP", RES_WOOD_NORMAL_STOP_PATH, getWidth(), getHeight(), 1, 1);
-	_animation->init(ItemAnimation::State::stop);
-	_bAnimation = _animation;
 }
 
 inline int Wood::setIdForType(TYPE type) {

@@ -2,7 +2,7 @@
 #include "ProgressBar.h"
 
 ProgressBar::ProgressBar(PointF* absPt, float bgWidth, float bgHeight, int maxValue, int currentValue, COLORREF top, COLORREF bottom)
-	:UI(absPt, bgWidth, bgHeight)
+	:UI(absPt, bgWidth, bgHeight, nullptr)
 	, _bgWidth(bgWidth)
 	, _bgHeight(bgHeight)
 	, _valueWidth(bgWidth * 0.8)

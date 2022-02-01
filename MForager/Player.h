@@ -13,7 +13,6 @@ public:
 	Player(PointF pt, int width, int height, int maxHp, int power, int lifeCount);
 	~Player();
 
-	PlayerAnimation* _animation;
 	Direction _currentDirection;
 
 	SDRECT _moveRect;

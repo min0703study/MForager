@@ -14,12 +14,6 @@ Stone::Stone(PointF pt, TYPE type): ItemBase(setIdForType(type), pt, TILE_SIZE, 
 	}
 }
 
-void Stone::initAnimation()
-{
-	_animation = new ItemAnimation();
-	_bAnimation = _animation;
-}
-
 inline int Stone::setIdForType(TYPE type)
 {
 	switch (type)

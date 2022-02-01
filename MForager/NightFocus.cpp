@@ -3,9 +3,6 @@
 
 void NightFocus::initAnimation()
 {
-	_animation = new SimpleAnimation;
-	_bAnimation = _animation;
-
 	IMAGEMANAGER->addAlphaImage("night", RES_BACKGROUND_PATH, getWidth(), getHeight());
 }
 

@@ -75,6 +75,7 @@ void MainGame::render(void)
 	DeleteObject(brush);
 	
 	_uim->render(getMemDc());
+	
 	IMAGEMANAGER->render(getBackBufferKey(), getHdc());
 }
 

@@ -2,7 +2,7 @@
 #include "Player.h"
 
 Player::Player(PointF pt,int width, int height, int maxHp, int power, int lifeCount)
-	:UI(pt, width, height),
+	:UI(pt, width, height, new PlayerAnimation),
 	_maxHp(maxHp),
 	_currentHp(maxHp),
 	_power(power),
@@ -51,16 +51,13 @@ SDRECT Player::getMoveRect()
 
 void Player::initAnimation()
 {
-	_animation = new PlayerAnimation();
+	_animation->setAnimationImage((int)PlayerAnimation::State::stop_right, "Stop_Right", "Resource/Images/Motion/stop_right.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
+	_animation->setAnimationImage((int)PlayerAnimation::State::stop_left, "Stop_Left", "Resource/Images/Motion/stop_left.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
+	_animation->setAnimationImage((int)PlayerAnimation::State::action_right, "Action_Right", "Resource/Images/Motion/action_right.bmp", PLAYER_SIZE_X, PLAYER_SIZE_Y, 1, 1);
+	_animation->setAnimationImage((int)PlayerAnimation::State::action_left, "Action_Left", "Resource/Images/Motion/action_left.bmp", PLAYER_SIZE_X, PLAYER_SIZE_Y, 1, 1);
+	_animation->setAnimationImage((int)PlayerAnimation::State::walk_right, "Walk_Right", "Resource/Images/Motion/walk_right.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
+	_animation->setAnimationImage((int)PlayerAnimation::State::walk_left, "Walk_Left", "Resource/Images/Motion/walk_left.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
 
-	_animation->setAnimationImage(PlayerAnimation::State::stop_right, "Stop_Right", "Resource/Images/Motion/stop_right.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
-	_animation->setAnimationImage(PlayerAnimation::State::stop_left, "Stop_Left", "Resource/Images/Motion/stop_left.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
-	_animation->setAnimationImage(PlayerAnimation::State::action_right, "Action_Right", "Resource/Images/Motion/action_right.bmp", PLAYER_SIZE_X, PLAYER_SIZE_Y, 1, 1);
-	_animation->setAnimationImage(PlayerAnimation::State::action_left, "Action_Left", "Resource/Images/Motion/action_left.bmp", PLAYER_SIZE_X, PLAYER_SIZE_Y, 1, 1);
-	_animation->setAnimationImage(PlayerAnimation::State::walk_right, "Walk_Right", "Resource/Images/Motion/walk_right.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
-	_animation->setAnimationImage(PlayerAnimation::State::walk_left, "Walk_Left", "Resource/Images/Motion/walk_left.bmp", PLAYER_SIZE_X * 3, PLAYER_SIZE_Y, 3, 1);
-
-	_animation->setState(PlayerAnimation::State::stop_right);
+	//_animation->setState((int)PlayerAnimation::State::stop_right);
 	
-	_bAnimation = _animation;
 }

@@ -5,7 +5,8 @@ HRESULT MapManager::init()
 {
 	_map = new Map();
 	_map->init();
-
+	
+	_uiManager->map = _map;
 	_uiManager->addMap(_map);
 
 	return S_OK;

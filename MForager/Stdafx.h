@@ -113,16 +113,11 @@ typedef struct tagPointf {
 #define RES_ROCK_IRON_STOP_2_PATH			"Resource/images/Rock/rock_iron_stop_2.bmp"
 #define RES_TREE_NORMAL_STOP_1_PATH			"Resource/images/Tree/tree_normal_stop.bmp"
 
-//==CommonFunction
 #include "FileUtil.h"
 #include "MapStruct.h"
-#include "ImageManager.h"
 #include "ShapeFunction.h"
-#include "KeyManager.h"
 #include "RandomFuction.h"
-#include "GdiPlusManager.h"
-#include "CommonData.h"
-//CommonFunction==
+
 typedef struct tagDynamicRect
 {
 	LPRECT baseRc;
@@ -206,20 +201,27 @@ public:
 } *LPDPoinF;
 
 struct UIPOS {
+	RectF* _rcf;
 	LPRECT _rc;
 	PointF* _pt;
 
-	REAL _width;
-	REAL _height;
+	INT _width;
+	INT _height;
 
 	UIPOS(PointF* pt, int width, int height) {
 		_pt = pt;
 		_rc = MakeLPRECT(*pt, width, height);
+		_width = width;
+		_height = height;
+		_rcf = new RectF(*_pt, SizeF(_width, _height));
 	}
 
 	UIPOS(PointF pt, int width, int height) {
 		_pt = new PointF(pt.X, pt.Y);
 		_rc = MakeLPRECT(pt, width, height);
+		_width = width;
+		_height = height;
+		_rcf = new RectF(*_pt, SizeF(_width, _height));
 	}
 
 	void changePt(PointF pt) {
@@ -231,21 +233,41 @@ struct UIPOS {
 			_rc->top = pt.X;
 			_rc->right = pt.X + _width;
 			_rc->bottom = pt.X + _height;
+
+			_rcf->X = pt.X;
+			_rcf->Y = pt.Y;
 		}
 	};
 
 	void addPt(PointF pt) {
-		if (!_pt->Equals(pt)) {
-			_pt->operator+(pt);
+		_pt->X += pt.X;
+		_pt->Y += pt.Y;
 
-			_rc->left = pt.X;
-			_rc->top = pt.X;
-			_rc->right = pt.X + _width;
-			_rc->bottom = pt.X + _height;
-		}
+		_rc->left += pt.X;
+		_rc->top += pt.Y;
+		_rc->right += pt.X;
+		_rc->bottom += pt.Y;
+
+		_rcf->Offset(pt);
 	};
+
+	PointF getCenter() {
+		return { (_rc->left + _rc->right) / 2.0f, (_rc->bottom + _rc->top) / 2.0f };
+	}
+
+	RectF getRectF() {
+		return *_rcf;
+	}
 };
 
+
+//==CommonFunction
+
+#include "ImageManager.h"
+#include "KeyManager.h"
+#include "GdiPlusManager.h"
+#include "CommonData.h"
+//CommonFunction==
 
 //FOOD
 #define RES_FOOD_BERRY_STOP_1_PATH			"Resource/images/Tree/tree_normal_stop.bmp"

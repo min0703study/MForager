@@ -4,16 +4,16 @@
 CollectionBase::CollectionBase(PointF hitPt, int xSizeOfTile, int ySizeOfTile):
 	UI({ hitPt.X - TILE_SIZE * (xSizeOfTile - 1), hitPt.Y - (TILE_SIZE * (ySizeOfTile - 1)) },
 	xSizeOfTile * TILE_SIZE,
-	ySizeOfTile * TILE_SIZE),
+	ySizeOfTile * TILE_SIZE,
+	new CollectAnimation),
 	_hitPt(hitPt),
 	_xSizeOfTile(xSizeOfTile),
 	_ySizeOfTile(ySizeOfTile),
 	_isBeforDrop(false),
 	_isHitStart(false)
 {
-	initAnimation();
+	
 }
-
 
 bool CollectionBase::hit(int power)
 {
@@ -31,15 +31,9 @@ vector<ItemBase*> CollectionBase::getDropItem()
 	return vector<ItemBase*>();
 }
 
-void CollectionBase::initAnimation()
-{
-	_animation = new CollectAnimation();
-	_bAnimation = _animation;
-}
-
 void CollectionBase::setAnimationImageAuto(CollectAnimation::State state, string key, char * fileName, int frameXCount, int frameYCount) {
 	_animation->setAnimationImage(
-		state, 
+		(int)state, 
 		key,
 		fileName, 
 		getWidth(),

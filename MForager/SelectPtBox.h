@@ -5,16 +5,11 @@
 class SelectPtBox: public UI
 {
 public:
-	SimpleAnimation* _animation;
-
-	SelectPtBox(PointF pt, int width, int height) :UI(pt, width, height) {
+	
+	SelectPtBox(PointF pt, int width, int height) 
+		:UI(pt, width, height, new SimpleAnimation) {
 		setIsShowing(false);
 		initAnimation();
 	};
-
-	void initAnimation() {
-		_animation = new SimpleAnimation;
-		_bAnimation = _animation;
-	}
 };
 

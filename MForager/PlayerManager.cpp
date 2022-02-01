@@ -8,10 +8,6 @@
 #include "ProgressBar.h"
 #include "UIManager.h"
 
-void PlayerManager::moveKeyCheck()
-{
-}
-
 void PlayerManager::addInventoryItem(ItemBase* item)
 {
 	//_inventory->_items.push_back(item);
@@ -21,10 +17,16 @@ HRESULT PlayerManager::init()
 {
 	_inventory = new Inventory;
 
-	_player = new Player({0,0}, PLAYER_SIZE_X, PLAYER_SIZE_Y, DEFUALT_PLAYER_HP, DEFULAT_PLAYER_POWER, DEFAULT_LIFE_COUNT);
+	_player = new Player({(float)PLAYER::DEFAULT_VALUE::START_X, (float)PLAYER::DEFAULT_VALUE::START_Y},
+		PLAYER::UI_INFO::X_SIZE,
+		PLAYER::UI_INFO::Y_SIZE,
+		PLAYER::DEFAULT_VALUE::HP,
+		PLAYER::DEFAULT_VALUE::POWER,
+		PLAYER::DEFAULT_VALUE::LIFE_COUNT);
+
 	_player->setKey('A', 'D', 'W', 'S', 'F');
 	
-	_pickaxes = new Pickaxes(_player->getAPt(), 100, 100);
+	_pickaxes = new Pickaxes(_player->getAPt(), 60, 60);
 	
 	_uiManager->addUI(_player);
 	_uiManager->addUI(_pickaxes);
@@ -129,11 +131,12 @@ void PlayerManager::changeDirection() {
 
 void PlayerManager::changeAnimation()
 {
+	/*
 	if (_uiManager->getCursorDirection() == C_LEFT) {
 		switch (_curActType)
 		{
 		case STOP:
-			_player->_animation->setState(PlayerAnimation::State::stop_left);
+			_player->_animation->setState((int)PlayerAnimation::State::stop_left);
 			break;
 		case WALK:
 			_player->_animation->setState(PlayerAnimation::State::walk_left);
@@ -156,4 +159,5 @@ void PlayerManager::changeAnimation()
 			_player->_animation->setState(PlayerAnimation::State::action_right);
 		}
 	}
+	*/
 }

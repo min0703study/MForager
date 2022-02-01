@@ -12,17 +12,16 @@ class CameraManager;
 class UIManager;
 class CollectionManager;
 
-
 #define DEFUALT_PLAYER_HP		100
 #define DEFULAT_PLAYER_POWER	10
 #define DEFAULT_LIFE_COUNT		3
+
+using namespace PLAYER;
 
 class PlayerManager
 {
 
 private:
-	void moveKeyCheck();
-
 	enum ACTION_TYPE {
 		STOP,
 		WALK,
@@ -36,6 +35,7 @@ public:
 	UIManager* _uiManager;
 
 	Player* _player;
+
 	ACTION_TYPE _curActType;
 	ProgressBar* _hpGage;
 	Heart* _heart[3];

@@ -11,10 +11,10 @@ private:
 	mapImageList _mImageList;
 public:
 	void init(HDC hdc);
-	Image* addImage(int intKey, const string fileName, int width, int height, bool isTranse);
+	Image* addImage(int intKey, const string fileName, bool isTranse = true);
 	Image * findImage(int intKey);
-	Image * rotate(int intKey, PointF centerPt, int angle);
-
+	void render(int intKey, UIPOS * uiPos);
+	Image * rotate(int intKey, UIPOS * uiPos, int angle);
 	void release();
 };
 

@@ -4,8 +4,6 @@
 Food::Food(PointF pt, TYPE type):
 	ItemBase(0, pt, TILE_SIZE, TILE_SIZE)
 {
-	initAnimation();
-
 	switch (type)
 	{
 		case Berry:

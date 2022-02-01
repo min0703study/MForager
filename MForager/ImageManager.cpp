@@ -175,6 +175,24 @@ void ImageManager::render(string strKey, HDC hdc, POINTF position)
 }
 
 
+void ImageManager::render(string strKey, HDC hdc, PointF position)
+{
+
+	ImageBase* img = findImage(strKey);
+	if (img) {
+		switch (img->_type)
+		{
+		case FRAME:
+			_renderer->renderFrame(hdc, (FrameImage*)img, {position.X, position.Y});
+			break;
+		case DEFAULT:
+			_renderer->renderPtf(hdc, img, { position.X, position.Y });
+			break;
+		}
+	}
+}
+
+
 void ImageManager::render(string strKey, HDC hdc, int destX, int destY, bool isCenter)
 {
 	ImageBase* img = findImage(strKey);

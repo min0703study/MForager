@@ -5,6 +5,7 @@
 #include "NightFocus.h"
 #include "Heart.h"
 #include "Camera.h"
+#include "Map.h"
 
 class CollectionManager;
 class PlayerManager;
@@ -15,10 +16,6 @@ class UIManager
 private:
 	vector<FixedUI*> _fixedUiList;
 	vector<UI*> _uiList;
-
-	UI* _map;
-
-	vector<UI*>::iterator _iUiList;
 	vector<DRECT> _developUi;
 
 	POINT _currentPt;
@@ -39,6 +36,7 @@ public:
 
 	void moveCamera(float x, float y, MOVE_DIRECTION mDirection);
 
+	Map* map;
 	void update();
 	void release();
 	void render(HDC hdc);

@@ -9,6 +9,8 @@ public:
 		END
 	};
 	float _currentAngle;
+	int i;
+	bool flag;
 	PickaxesAnimation() :AnimationBase((int)State::END), _currentAngle(45.0) {};
 
 	void render(HDC hdc, POINTF startPt);

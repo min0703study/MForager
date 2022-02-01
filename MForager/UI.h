@@ -11,9 +11,8 @@ public:
 public:
 	LPDRECT _relRc;
 	
-	UI(PointF* absPt, int width, int height);
-	//UI(POINTF absPt, int width, int height);
-	UI(PointF absPt, int width, int height);
+	UI(PointF* absPt, int width, int height, AnimationBase* animation);
+	UI(PointF absPt, int width, int height, AnimationBase* animation);
 
 	PointF getRPt() {
 		return _relRc->getPtf();
@@ -25,11 +24,10 @@ public:
 
 	void setIsShowing(bool isShowing) { this->_isShowing = isShowing; }
 
-	virtual void play(HDC hdc);
-	virtual void initAnimation();
 
 	void setAnimationImage(int state, char * fileName, int frameXCount, int frameYCount);
 	void setStopImage(int state, char * fileName);
-
+	
+	virtual void play(HDC hdc);
 };
 

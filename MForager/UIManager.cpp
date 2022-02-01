@@ -10,8 +10,8 @@ HRESULT UIManager::init()
 	_nightFocus = new NightFocus(_playerManager->getPlayerRelPt(), 1500, 1500);
 
 	//선택 상자 init
-	_selectPtBox = new SelectPtBox({ 0,0 }, TILE_SIZE + 20, TILE_SIZE + 20);
-	_selectPtBox->_animation->setAnimationImage("select_cursor", RES_SELECT_CURSOR_PATH, (TILE_SIZE + 20) * 5, (TILE_SIZE + 20), 5, 1);
+	_selectPtBox = new SelectPtBox({ 0,0 }, 70, 70);
+	//_selectPtBox->_animation->setAnimationImage("select_cursor", RES_SELECT_CURSOR_PATH, (TILE_SIZE + 20) * 5, (TILE_SIZE + 20), 5, 1);
 	addUI(_selectPtBox);
 
 	for (int i = 0; i < 3; i++) {
@@ -42,7 +42,7 @@ void UIManager::update()
 	_hpGage->setValue(_playerManager->getHp());
 
 	for (int i = 0; i < 3; i++) {
-		_lifeCount[i]->_animation->setState(_playerManager->getLifeCount() < (i + 1) ? HeartAnimation::State::blank : HeartAnimation::State::live);
+		_lifeCount[i]->_animation->init((int)(_playerManager->getLifeCount() < (i + 1) ? HeartAnimation::State::blank : HeartAnimation::State::live));
 	}
 }
 
@@ -52,13 +52,19 @@ void UIManager::release()
 
 void UIManager::render(HDC hdc)
 {
-	_map->play(hdc);
+	//_map->play(hdc);
 	
-	for (UI* ui : _uiList) {
+
+	for (UI* ui : map->_mapTiles) {
 		ui->play(hdc);
 	}
 
+	for (UI* ui : _uiList) {
+		ui->play(hdc);
+	}
 	_nightFocus->render(hdc);
+
+
 
 	for (DRECT rc : _developUi) {
 		//RectangleMake(hdc, rc.getRRect(_cameraManager->getRcCamera()));
@@ -66,7 +72,7 @@ void UIManager::render(HDC hdc)
 	for (FixedUI* fUi : _fixedUiList) {
 		fUi->play(hdc);
 	}
-
+	//GDIPLUSMANAGER->render(RES::SELECT_BOX, _selectPtBox->_absUiPos);
 	IMAGEMANAGER->render("cursor", hdc, _currentPt.x, _currentPt.y);
 }
 
@@ -82,17 +88,19 @@ void UIManager::addUI(UI* ui)
 
 void UIManager::addMap(UI * map)
 {
-	_map = map;
+	//_map = map;
 }
 
 void UIManager::deleteUI(UI* ui)
 {
+	/*
 	for (_iUiList = _uiList.begin(); _iUiList != _uiList.end(); _iUiList++) {
 		if (*_iUiList == ui) {
 			_uiList.erase(_iUiList);
 			break;
 		}
 	}
+	*/
 }
 
 void UIManager::mouseMoveEvent(POINT& curPt)
