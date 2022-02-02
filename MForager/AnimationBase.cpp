@@ -28,11 +28,6 @@ void AnimationBase::update()
 {
 }
 
-void AnimationBase::render(HDC hdc)
-{
-	render(hdc);
-}
-
 void AnimationBase::render(HDC hdc, POINTF startPt)
 {
 	IMAGEMANAGER->render(_imageKeys[(int)_currentState], hdc, startPt);

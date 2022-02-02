@@ -9,7 +9,7 @@ public:
 	ItemBase* _dropItem;
 	int _dropItemCount;
 
-	PointF _hitPt;
+	SRECT _hitRc;
 
 	int _xSizeOfTile; //타일 x 기준 사이즈
 	int _ySizeOfTile; //타일 y 기준 사이즈
@@ -26,16 +26,29 @@ public:
 	bool hit(int power);
 	bool isHitStart() { return _isHitStart; };
 	
-	RECT getHitRect() { return *MakeLPRECT(_hitPt, 60.0f, 60.0f); }
-	PointF getHitPt() { return _hitPt; }
-	PointF getProgressPt() { 
-		RECT rc = getHitRect();
-		return { (REAL)rc.left ,(REAL)rc.bottom + 5 };
+	RECT getHitRRect() { 
+		return _hitRc.getRect(getRRc()); 
+	}
+
+	PointF getHitAPt() {
+		RECT rc = getHitARc();
+		return PointF{ (REAL)rc.left, (REAL)rc.top };
+	};
+
+	RECT getHitARc() {
+		return _hitRc.getRect(*getARc());
+	};
+
+	PointF getProgressAPt() { 
+		RECT rc = getHitARc();
+		return { ((REAL)rc.left + (REAL)rc.right) / 2 - (COLLECT::UI_INFO::PROGRESS::X_SIZE / 2) ,(REAL)rc.bottom + COLLECT::UI_INFO::PROGRESS::SPACE_SIZE };
 	}
 
 	virtual vector<ItemBase*> getDropItem();
 
 	void setAnimationImageAuto(CollectAnimation::State state, string key, char * fileName, int frameXCount, int frameYCount);
-	virtual ~CollectionBase() {};
+	~CollectionBase() {
+		
+	};
 };
 

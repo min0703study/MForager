@@ -187,14 +187,35 @@
     <ClCompile Include="GdiPlusManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Pickaxes.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="PickaxesAnimation.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
     <ClCompile Include="MapTile.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryBox.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SizeChangeAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="BerryBush.cpp">
+      <Filter>Collect</Filter>
+    </ClCompile>
+    <ClCompile Include="IndustrialManager.cpp">
+      <Filter>GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Toolbar.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Bundlable.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Pickaxes.cpp">
+      <Filter>Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -354,14 +375,35 @@
     <ClInclude Include="GdiPlusManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Pickaxes.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="PickaxesAnimation.h">
       <Filter>Animation</Filter>
     </ClInclude>
     <ClInclude Include="MapTile.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryBox.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SizeChangeAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="BerryBush.h">
+      <Filter>Collect</Filter>
+    </ClInclude>
+    <ClInclude Include="IndustrialManager.h">
+      <Filter>GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolbar.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Bundlable.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Pickaxes.h">
+      <Filter>Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

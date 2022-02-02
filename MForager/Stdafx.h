@@ -63,7 +63,7 @@ enum IMAGE_TYPE {
 #define SEE_COLOR							RGB(0, 142, 239)	
 
 #define TRANCE_COLOR			MAGENTA
-
+#define DEVELOP_MODE			false
 // =============================================
 // # 매크로 함수 # (클래스에서 동적할당된 부분 해제)
 // =============================================
@@ -118,8 +118,37 @@ typedef struct tagPointf {
 #include "ShapeFunction.h"
 #include "RandomFuction.h"
 
-typedef struct tagDynamicRect
+typedef struct tagDynamicRECT
 {
+	float changeLeft;
+	float changeTop;
+	float changeRight;
+	float changeBottom;
+
+	tagDynamicRECT(float cLeft, float cTop, float cRight, float cBottom) :
+		changeLeft(cLeft),
+		changeTop(cTop),
+		changeRight(cRight),
+		changeBottom(cBottom) {
+
+	}
+
+	float getWidth(RECT baseRc) {
+		RECT rc = getRect(baseRc);
+		return rc.right - rc.left;
+	}
+
+	RECT getRect(RECT baseRc) {
+		return {
+			baseRc.left += changeLeft,
+			baseRc.top += changeTop,
+			baseRc.right += changeRight,
+			baseRc.bottom += changeBottom
+		};
+	}
+} SRECT;
+
+typedef struct tagDynamicLPRect {
 	LPRECT baseRc;
 
 	int changeLeft;
@@ -127,7 +156,7 @@ typedef struct tagDynamicRect
 	int changeRight;
 	int changeBottom;
 
-	tagDynamicRect(LPRECT bRc, int cLeft, int cTop, int cRight, int cBottom) :
+	tagDynamicLPRect(LPRECT bRc, int cLeft, int cTop, int cRight, int cBottom):
 		baseRc(bRc),
 		changeLeft(cLeft),
 		changeTop(cTop),
@@ -198,7 +227,11 @@ public:
 			_targetPf->Y - _basePf->Y
 		};
 	}
-} *LPDPoinF;
+
+	PointF getTarget() {
+		return { _targetPf->X, _targetPf->Y };
+	}
+} DPF, *LPDPoinF;
 
 struct UIPOS {
 	RectF* _rcf;
@@ -225,18 +258,16 @@ struct UIPOS {
 	}
 
 	void changePt(PointF pt) {
-		if (!_pt->Equals(pt)) {
-			_pt->X = pt.X;
-			_pt->Y = pt.Y;
+		_pt->X = pt.X;
+		_pt->Y = pt.Y;
 
-			_rc->left = pt.X;
-			_rc->top = pt.X;
-			_rc->right = pt.X + _width;
-			_rc->bottom = pt.X + _height;
+		_rc->left = pt.X;
+		_rc->top = pt.Y;
+		_rc->right = pt.X + _width;
+		_rc->bottom = pt.Y + _height;
 
-			_rcf->X = pt.X;
-			_rcf->Y = pt.Y;
-		}
+		_rcf->X = pt.X;
+		_rcf->Y = pt.Y;
 	};
 
 	void addPt(PointF pt) {
@@ -257,6 +288,12 @@ struct UIPOS {
 
 	RectF getRectF() {
 		return *_rcf;
+	}
+
+	~UIPOS() {
+		SAFE_DELETE(_rcf);
+		SAFE_DELETE(_rc);
+		SAFE_DELETE(_pt);
 	}
 };
 
@@ -281,7 +318,7 @@ struct UIPOS {
 #define RES_HEART_BLANK_PATH				"Resource/images/Etc/heart_blank.bmp"
 #define RES_BACKGROUND_PATH					"Resource/images/background1.bmp"
 
-#define TILE_SIZE				60
+#define TILE_SIZE				40
 
 #define TILE_X_COUNT			20
 #define TILE_Y_COUNT			20
@@ -325,8 +362,8 @@ enum MOVE_DIRECTION {
 };
 
 enum CURSOR_DIRECTION {
-	C_LEFT = 0,
-	C_RIGHT
+	C_RIGHT = 0,
+	C_LEFT
 };
 
 

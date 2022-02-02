@@ -3,15 +3,13 @@
 
 class Food: public ItemBase
 {
-public:
-	enum TYPE {
-		Berry = 3,
-		Citrus
-	};
-
-	Food(PointF pt, TYPE type);
 private:
+	typedef ITEM::FOOD::TYPE TYPE;
 	TYPE _type;
 	int _energy;
+public:
+	Food(PointF pt, TYPE type);
+	int setIdForType(TYPE type);
+	int getEnergy() { return _energy; };
 };
 

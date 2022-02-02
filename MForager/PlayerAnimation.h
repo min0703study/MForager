@@ -3,7 +3,7 @@
 
 class PlayerAnimation: public AnimationBase {
 public:
-	enum class State {
+	enum class AniState {
 		walk_right,
 		walk_left,
 		action_right,
@@ -12,12 +12,14 @@ public:
 		stop_left,
 		END
 	};
-public:
-	PlayerAnimation() : AnimationBase((int)State::END) {};
 
-	void setState(State state);
-	void setAnimationImage(State state, string key, char * fileName, int frameX, int frameY, int frameXCount, int frameYCount);
-
-	State getCurrentState() const { return State(_currentState); };
+	PlayerAnimation() : AnimationBase((int)AniState::END) {
+		mapping((int)AniState::stop_right,		RES::PLAYER_STOP_R);
+		mapping((int)AniState::stop_left,		RES::PLAYER_STOP_L);
+		mapping((int)AniState::action_right,	RES::PLAYER_ACTION_R);
+		mapping((int)AniState::action_left,		RES::PLAYER_ACTION_L);
+		mapping((int)AniState::walk_right,		RES::PLAYER_WALK_R);
+		mapping((int)AniState::walk_left,		RES::PLAYER_WALK_L);
+	};
 };
 

@@ -6,11 +6,11 @@ static int UI_AMOUNT = 1;
 
 class UI: public FixedUI
 {
+private:
+	LPDRECT _relRc;
 public:
 	static LPRECT _cmRc;
 public:
-	LPDRECT _relRc;
-	
 	UI(PointF* absPt, int width, int height, AnimationBase* animation);
 	UI(PointF absPt, int width, int height, AnimationBase* animation);
 
@@ -29,5 +29,10 @@ public:
 	void setStopImage(int state, char * fileName);
 	
 	virtual void play(HDC hdc);
+	void play(HDC hdc, PointF ptf);
+
+	virtual ~UI() {
+		SAFE_DELETE(_relRc);
+	}
 };
 

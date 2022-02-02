@@ -10,11 +10,9 @@ private:
 
 	PointF* _playerPtf;
 public:
-	void initAnimation() override;
-
 	NightFocus(PointF pt, int width, int height):
 		UI(pt, width, height, new SimpleAnimation) {
-		initAnimation();
+		IMAGEMANAGER->addAlphaImage("night", RES_BACKGROUND_PATH, getWidth(), getHeight());
 	};
 
 	void render(HDC hdc);

@@ -3,26 +3,40 @@
 #include "ItemManager.h"
 #include "UIManager.h"
 
+
 HRESULT ItemManager::init()
 {
+
 	return S_OK;
 }
 
 void ItemManager::update()
 {
-	for (DropItem* dItem : _dropItems) {
-		if (!dItem->_isEndDrop && 
-			dItem->_endPt.y > dItem->_dropItem->getAPt()->Y) {
-			dItem->_dropItem->setApt({ dItem->_dropItem->getAPt()->X + (dItem->_dropSpeed * dItem->_dropDirection) , dItem->_dropItem->getAPt()->Y - (dItem->_dropSpeed + dItem->_gravity) });
-			dItem->_gravity -= 0.4f;
+	for (vector<DropItem*>::iterator _iDropItem = _dropItems.begin(); _iDropItem != _dropItems.end();) {
+		if ((*_iDropItem)->_isDropToPlayer) {
+			_iDropItem = _dropItems.erase(_iDropItem);
 		}
 		else {
-			dItem->_isEndDrop = true;
-			dItem->_dropRc = RectMake(*dItem->_dropItem->getAPt(), 50, 50);
+			_iDropItem++;
 		}
 	}
-
-	RcCollisionCheckForDropItem();
+	for (vector<DropItem*>::iterator _iDropItem = _dropItems.begin(); _iDropItem != _dropItems.end(); _iDropItem++) {
+		if ((*_iDropItem)->_isDropToPlayer) {
+			_iDropItem = _dropItems.erase(_iDropItem);
+		}
+		if (!(*_iDropItem)->_isEndDrop &&
+			(*_iDropItem)->_endPt.y > (*_iDropItem)->_dropItem->getAPt()->Y) {
+			(*_iDropItem)->_dropItem->setApt(
+				{ (*_iDropItem)->_dropItem->getAPt()->X + ((*_iDropItem)->_dropSpeed * (*_iDropItem)->_dropDirection),
+				(*_iDropItem)->_dropItem->getAPt()->Y - ((*_iDropItem)->_dropSpeed + (*_iDropItem)->_gravity) });
+			(*_iDropItem)->_gravity -= 0.4f;
+			
+		}
+		else {
+			(*_iDropItem)->_isEndDrop = true;
+			(*_iDropItem)->_dropRc = RectMake(*(*_iDropItem)->_dropItem->getAPt(), 50, 50);
+		}
+	}
 }
 
 void ItemManager::createDropItem(vector<ItemBase*> dropItems)
@@ -36,17 +50,26 @@ void ItemManager::createDropItem(vector<ItemBase*> dropItems)
 	}
 }
 
-void ItemManager::RcCollisionCheckForDropItem()
+void ItemManager::createDropItem(ItemBase* dropItems)
+{
+	DropItem* dropItem = new DropItem(dropItems, { dropItems->getAPt()->X, dropItems->getAPt()->Y + 20 }, RND->getFlag() ? 1: -1);
+	_uiManager->addUI(dropItems);
+	_dropItems.push_back(dropItem);
+}
+
+void ItemManager::CollisionCheckForDropItem(RECT& playerRRc)
 {
 	RECT tempRect;
 	for (DropItem* dropItem : _dropItems) {
 		if (!dropItem->_isEndDrop || dropItem->_isDropToPlayer) continue;
-		/*		if (IntersectRect(&tempRect, &_playerManager->getPlayerRelRect(), &_uiManager->getRelRect(dropItem->_dropItem))) {
+		if (IntersectRect(&tempRect, &playerRRc, &dropItem->_dropItem->getRRc())) {
 			dropItem->_isDropToPlayer = true;
 			dropItem->_dropItem->setIsShowing(false);
+			
+			_playerManager->addInventoryItem(dropItem->_dropItem);
+			_uiManager->deleteUI(dropItem->_dropItem);
+			break;
 		}
-		*/
-
 	}
 }
 

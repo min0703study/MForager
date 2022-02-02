@@ -6,7 +6,8 @@
 #include "ItemManager.h"
 #include "MapManager.h"
 #include "UIManager.h"
-
+#include "MenuManager.h"
+#include "IndustrialManager.h"
 #define TICK_TIMER_ID			201
 
 class MainGame: public GameNode
@@ -17,6 +18,8 @@ private:
 	PlayerManager* _pm;
 	ItemManager* _im;
 	UIManager* _uim;
+	MenuManager* _mem;
+	IndustrialManager* _idm;
 public:
 	HRESULT init(void);
 	void update(void);

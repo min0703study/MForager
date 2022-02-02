@@ -1,18 +1,18 @@
 [
   {
-    "crafting_item_id": 10001,
+    "crafting_item_id": 7001,//coal
     "need_level_min": 1,
-    "make_time": 10,
+    "make_time": 400,
 
     "make_item": [{
-      "item_id": 101, //wood
+      "item_id": 200, //wood
       "count": 2
     }]
   },
   {
     "crafting_item_id": 10001,
     "need_level_min": 1,
-    "make_time": 10,
+    "make_time": 400,
 
     "make_item": [{
       "item_id": 101, //wood

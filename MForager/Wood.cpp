@@ -1,27 +1,21 @@
 #include "Stdafx.h"
 #include "Wood.h"
 
-Wood::Wood(PointF pt, int width, int height) : ItemBase(
-	setIdForType(WOOD),
+Wood::Wood(PointF pt) : ItemBase (
+	setIdForType(TYPE::WOOD),
 	pt, 
-	width, 
-	height)
+	ITEM::WOOD::UI_INFO::X_SIZE,
+	ITEM::WOOD::UI_INFO::Y_SIZE)
 {
-	initAnimation();
-}
-
-void Wood::initAnimation()
-{
-	_animation->setAnimationImage((int)ItemAnimation::State::stop, "WOOD_STOP", RES_WOOD_NORMAL_STOP_PATH, getWidth(), getHeight(), 1, 1);
+	_animation->mapping((int)ItemAnimation::State::stop, RES::WOOD_NORMAL_STOP);
 	_animation->init((int)ItemAnimation::State::stop);
-
 }
 
 inline int Wood::setIdForType(TYPE type) {
 	switch (type)
 	{
-		case WOOD:
-			return (int)WOOD_ID;
+	case TYPE::WOOD:
+			return (int)ID::WOOD_ID;
 	}
 	return -1;
 }

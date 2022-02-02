@@ -5,22 +5,32 @@
 
 HRESULT UIManager::init()
 {
+	_currentPtf = new PointF();
+
 	//커스텀 cursor
-	IMAGEMANAGER->addFileImage("cursor", "Resource/images/cursor.bmp", 20, 20, true);
-	_nightFocus = new NightFocus(_playerManager->getPlayerRelPt(), 1500, 1500);
+	_cursor = new CustomCursor(
+		_currentPtf,
+		_camera->_cameraPos->_pt, 
+		ETC::CURSOR::UI_INFO::X_SIZE, 
+		ETC::CURSOR::UI_INFO::Y_SIZE);
+
+	_nightFocus = new NightFocus({ CAMERA_R_X_SIZE /2.0f , CAMERA_R_Y_SIZE / 2.0f}, CAMERA_R_X_SIZE, CAMERA_R_Y_SIZE);
 
 	//선택 상자 init
 	_selectPtBox = new SelectPtBox({ 0,0 }, 70, 70);
-	//_selectPtBox->_animation->setAnimationImage("select_cursor", RES_SELECT_CURSOR_PATH, (TILE_SIZE + 20) * 5, (TILE_SIZE + 20), 5, 1);
 	addUI(_selectPtBox);
 
 	for (int i = 0; i < 3; i++) {
-		_lifeCount[i] = new Heart({(float)i * 50 + 10, (float)TILE_SIZE}, TILE_SIZE, TILE_SIZE);
+		_lifeCount[i] = new Heart(
+			{
+				MAIN::LIFE_COUNT::UI_INFO::START_X + (i * (MAIN::LIFE_COUNT::UI_INFO::X_SIZE + MAIN::LIFE_COUNT::UI_INFO::SPACE_SIZE)),
+				MAIN::LIFE_COUNT::UI_INFO::START_Y
+			}, 
+			MAIN::LIFE_COUNT::UI_INFO::X_SIZE,
+			MAIN::LIFE_COUNT::UI_INFO::Y_SIZE);
+
 		addFixedUI(_lifeCount[i]);
 	}
-
-	//_hpGage = new ProgressBar(new PointF{ 10, 10 }, TILE_SIZE * 1.3, TILE_SIZE * 0.5, DEFUALT_PLAYER_HP, DEFUALT_PLAYER_HP, C_PG_HP_TOP, C_PG_HP_BOTTOM);
-	//addFixedUI(_hpGage);
 
 	return S_OK;
 }
@@ -39,8 +49,7 @@ void UIManager::moveCamera(float x, float y, MOVE_DIRECTION mDirection)
 
 void UIManager::update()
 {
-	_hpGage->setValue(_playerManager->getHp());
-
+	//_hpGage->setValue(_playerManager->getHp());
 	for (int i = 0; i < 3; i++) {
 		_lifeCount[i]->_animation->init((int)(_playerManager->getLifeCount() < (i + 1) ? HeartAnimation::State::blank : HeartAnimation::State::live));
 	}
@@ -54,26 +63,48 @@ void UIManager::render(HDC hdc)
 {
 	//_map->play(hdc);
 	
-
 	for (UI* ui : map->_mapTiles) {
 		ui->play(hdc);
 	}
-
+#if DEVELOP_MODE
+	for (RECT* rc : _developUi) {
+		RectangleMake(hdc, *rc);
+	}
+#endif
+	_furanace->play(hdc);
 	for (UI* ui : _uiList) {
 		ui->play(hdc);
 	}
 	_nightFocus->render(hdc);
 
-
-
-	for (DRECT rc : _developUi) {
-		//RectangleMake(hdc, rc.getRRect(_cameraManager->getRcCamera()));
-	}
 	for (FixedUI* fUi : _fixedUiList) {
-		fUi->play(hdc);
+		fUi->playFixed(hdc);
 	}
-	//GDIPLUSMANAGER->render(RES::SELECT_BOX, _selectPtBox->_absUiPos);
-	IMAGEMANAGER->render("cursor", hdc, _currentPt.x, _currentPt.y);
+
+	_nightFocus->render(hdc);
+
+	wstring w = 
+		L"레벨 " 
+		+ to_wstring(_playerManager->_player->getLevel()) + 
+		L" (" + 
+		to_wstring(_playerManager->_player->getExpPoint()) + 
+		L"/" +
+		to_wstring(_playerManager->getMaxEtcPointOfLevel(_playerManager->_player->getLevel()))+
+		L")";
+
+	GDIPLUSMANAGER->drawTextCenter(hdc , w, _playerManager->_expGage->_absUiPos->getRectF(), 18, Gdiplus::Color(255, 255, 255));
+
+	if (_playerManager->_player->_skillPoint > 0) {
+		RECT rc = *_playerManager->_expGage->getARc();
+		RectF temprc = RectF(rc.left, rc.top + 40, rc.right - rc.left, rc.bottom - rc.top);
+		wstring s =
+			L"스킬 포인트 :  "
+			+ to_wstring(_playerManager->_player->_skillPoint);
+
+		GDIPLUSMANAGER->drawTextCenter(hdc, s, temprc, 18, Gdiplus::Color(255, 191, 34));
+	}
+	
+
 }
 
 void UIManager::addFixedUI(FixedUI* ui)
@@ -86,6 +117,12 @@ void UIManager::addUI(UI* ui)
 	_uiList.push_back(ui);
 }
 
+
+void UIManager::addf(UI* ui)
+{
+	_furanace = ui;
+}
+
 void UIManager::addMap(UI * map)
 {
 	//_map = map;
@@ -93,24 +130,25 @@ void UIManager::addMap(UI * map)
 
 void UIManager::deleteUI(UI* ui)
 {
-	/*
-	for (_iUiList = _uiList.begin(); _iUiList != _uiList.end(); _iUiList++) {
+	
+	for (vector<UI*>::iterator _iUiList = _uiList.begin(); _iUiList != _uiList.end(); _iUiList++) {
 		if (*_iUiList == ui) {
 			_uiList.erase(_iUiList);
 			break;
 		}
 	}
-	*/
+	
 }
 
 void UIManager::mouseMoveEvent(POINT& curPt)
 {
-	_currentPt = curPt;
+	_currentPtf->X = curPt.x;
+	_currentPtf->Y = curPt.y;
 
-	if (_playerManager->ptIsClickable(curPt)) { //사용자의 click 가능 범위에 있는지
-		if (_collectionManager->isPtInCollect(curPt)) { //암석 위에 있는지
+	if (_playerManager->ptIsClickable(_cursor->getPos())) { //사용자의 click 가능 범위에 있는지
+		if (_collectionManager->isPtInCollect(_cursor->getPos())) { //암석 위에 있는지ASDW
 			_selectPtBox->setIsShowing(true);
-			_selectPtBox->setApt(_collectionManager->getSelectCollect()->getHitPt());
+			_selectPtBox->setARc(_collectionManager->getSelectCollect()->getHitARc());
 		};
 	}
 	else {
@@ -131,6 +169,7 @@ void UIManager::clickEvent(POINT & pt, bool isClickDown)
 	if (isClickDown) {
 		if (_collectionManager->_isSelect) {
 			_playerManager->actionCollect();
+			_selectPtBox->setIsShowing(_collectionManager->_isSelect);
 		}
 	}
 	else {
@@ -142,10 +181,15 @@ void UIManager::clickEvent(POINT & pt, bool isClickDown)
 void UIManager::addGameTime()
 {
 	_nightFocus->addTime(1);
+	_playTimeSec += 1;
+
+	if (_playTimeSec % 10 == 0) {
+		_collectionManager->makeRandomCollection(false);
+	}
 }
 
 
-void UIManager::addDevelopUI(DRECT rc)
+void UIManager::addDevelopUI(LPRECT rc)
 {
 	_developUi.push_back(rc);
 }

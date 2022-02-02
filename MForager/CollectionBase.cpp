@@ -6,14 +6,18 @@ CollectionBase::CollectionBase(PointF hitPt, int xSizeOfTile, int ySizeOfTile):
 	xSizeOfTile * TILE_SIZE,
 	ySizeOfTile * TILE_SIZE,
 	new CollectAnimation),
-	_hitPt(hitPt),
+	_hitRc(
+		SRECT(0,
+			TILE_SIZE * (ySizeOfTile - 1),
+			0,
+			0
+		)
+	),
 	_xSizeOfTile(xSizeOfTile),
 	_ySizeOfTile(ySizeOfTile),
 	_isBeforDrop(false),
 	_isHitStart(false)
-{
-	
-}
+{}
 
 bool CollectionBase::hit(int power)
 {

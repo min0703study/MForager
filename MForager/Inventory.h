@@ -4,19 +4,29 @@
 class Inventory
 {
 public:
-	bool addItem(ItemBase* _item);
+
 struct InventoryItem {
 	ItemBase* _item;
 	int _count;
 
-	InventoryItem(ItemBase* item) :_item(item), _count(0) {};
+	InventoryItem(ItemBase* item) :
+		_item(item), 
+		_count(1)
+	{};
 };
+bool addItem(ItemBase* _item);
+
+Inventory(): _inventorySize(16) {};
+
+	vector<InventoryItem*> _items;
+	int _inventorySize;
 
 	int getSize() { return _inventorySize; };
 	void setSize(int size) { _inventorySize = size; }
 
 	vector<InventoryItem*> getItems() { return _items; };
-private:
-	vector<InventoryItem*> _items;
-	int _inventorySize;
+
+
+	~Inventory();
+
 };

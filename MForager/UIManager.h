@@ -6,6 +6,7 @@
 #include "Heart.h"
 #include "Camera.h"
 #include "Map.h"
+#include "CustomCursor.h"
 
 class CollectionManager;
 class PlayerManager;
@@ -16,9 +17,12 @@ class UIManager
 private:
 	vector<FixedUI*> _fixedUiList;
 	vector<UI*> _uiList;
-	vector<DRECT> _developUi;
+	vector<RECT*> _developUi;
 
-	POINT _currentPt;
+
+
+	PointF* _currentPtf;
+
 	SelectPtBox* _selectPtBox;
 	NightFocus* _nightFocus;
 
@@ -26,7 +30,13 @@ private:
 	ProgressBar* _hpGage;
 	
 	CURSOR_DIRECTION _cursorDirection;
+
+	int _playTimeSec;
+
 public:
+	CustomCursor* _cursor;
+
+	UI* _furanace;
 	Camera* _camera;
 	CollectionManager* _collectionManager;
 	PlayerManager* _playerManager;
@@ -43,15 +53,17 @@ public:
 
 	void addFixedUI(FixedUI * ui);
 	void addUI(UI* ui);
+	void addf(UI * ui);
 	void addMap(UI* map);
 
 	void deleteUI(UI* ui);
 
 	void mouseMoveEvent(POINT& currentPoint);
+
 	void clickEvent(POINT & pt, bool isClickDown);
 	void addGameTime();
 
-	void addDevelopUI(DRECT rc);
+	void addDevelopUI(LPRECT rc);
 
 	void changeCursorDirection(CURSOR_DIRECTION dirc);
 

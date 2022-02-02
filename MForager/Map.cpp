@@ -4,19 +4,6 @@
 HRESULT Map::init()
 {
 	this->load();
-
-	_collisionTilesCount = 0;
-	for (TILE& tile : _tiles)
-	{
-		for (int cTile : COLLISION_GROUND) {
-			if (tile.ground == cTile) {
-				_collisionTiles[_collisionTilesCount] = &tile;
-				_collisionTilesCount++;
-				break;
-			}
-		}
-	}
-
 	return S_OK;
 }
 
@@ -31,21 +18,28 @@ void Map::load()
 	}
 
 	for (int i = 0; i < TILE_COUNT; i++) {
-		_mapTiles.push_back(new MapTile(
-			_tiles[i].ground, 
-			_tiles[i].ground % SPRITE_X_COUNT, 
-			_tiles[i].ground / SPRITE_X_COUNT, 
+		MapTile* mapTile = new MapTile(
+			_tiles[i].ground,
+			_tiles[i].ground % SPRITE_X_COUNT,
+			_tiles[i].ground / SPRITE_X_COUNT,
 			PointF(_tiles[i].xIndex * TILE_SIZE, _tiles[i].yIndex * TILE_SIZE),
 			TILE_SIZE,
-			TILE_SIZE));
+			TILE_SIZE);
+
+		_mapTiles.push_back(mapTile);
+
+		for (int cTile : COLLISION_GROUND) {
+			if (_tiles[i].ground == cTile) {
+				_collisionTile.push_back(mapTile);
+				break;
+			}
+		}
 	}
 }
 
 void Map::release()
 {
-	for (TILE* tile : _collisionTiles) {
-		SAFE_DELETE(tile);
-	}
+
 }
 
 void Map::play(HDC hdc)

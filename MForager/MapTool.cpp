@@ -1,7 +1,6 @@
 #include "Stdafx.h"
 #include "MapTool.h"
 
-/*
 HRESULT MapTool::init(void)
 {
 	GameNode::init();
@@ -149,4 +148,3 @@ void MapTool::mouseMoveEvent(POINT & pt)
 		}
 	};
 }
-*/

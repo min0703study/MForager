@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClCompile Include="AlphaImage.cpp" />
     <ClCompile Include="AnimationBase.cpp" />
+    <ClCompile Include="BerryBush.cpp" />
+    <ClCompile Include="Bundlable.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollectAnimation.cpp" />
     <ClCompile Include="CollectionBase.cpp" />
@@ -36,8 +38,10 @@
     <ClCompile Include="HeartAnimation.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="IndustrialManager.cpp" />
     <ClCompile Include="Industrial.cpp" />
     <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="InventoryBox.cpp" />
     <ClCompile Include="ItemAnimation.cpp" />
     <ClCompile Include="ItemBase.cpp" />
     <ClCompile Include="ItemManager.cpp" />
@@ -57,14 +61,17 @@
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Rock.cpp" />
+    <ClCompile Include="SelectAnimation.cpp" />
     <ClCompile Include="SelectPtBox.cpp" />
     <ClCompile Include="SimpleAnimation.cpp" />
+    <ClCompile Include="SizeChangeAnimation.cpp" />
     <ClCompile Include="Stone.cpp" />
     <ClCompile Include="TempSoundManager.cpp" />
     <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Toolbar.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIManager.cpp" />
@@ -74,6 +81,8 @@
   <ItemGroup>
     <ClInclude Include="AlphaImage.h" />
     <ClInclude Include="AnimationBase.h" />
+    <ClInclude Include="BerryBush.h" />
+    <ClInclude Include="Bundlable.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollectAnimation.h" />
     <ClInclude Include="CollectionBase.h" />
@@ -91,8 +100,10 @@
     <ClInclude Include="HeartAnimation.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="IndustrialManager.h" />
     <ClInclude Include="Industrial.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="InventoryBox.h" />
     <ClInclude Include="ItemAnimation.h" />
     <ClInclude Include="ItemBase.h" />
     <ClInclude Include="ItemManager.h" />
@@ -114,13 +125,16 @@
     <ClInclude Include="RandomFuction.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Rock.h" />
+    <ClInclude Include="SelectAnimation.h" />
     <ClInclude Include="SelectPtBox.h" />
     <ClInclude Include="ShapeFunction.h" />
     <ClInclude Include="SimpleAnimation.h" />
     <ClInclude Include="SingletonBase.h" />
+    <ClInclude Include="SizeChangeAnimation.h" />
     <ClInclude Include="Stone.h" />
     <ClInclude Include="TempSoundManager.h" />
     <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="Toolbar.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="json/json.h" />

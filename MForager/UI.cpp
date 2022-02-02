@@ -20,6 +20,13 @@ void UI::play(HDC hdc)
 	}
 }
 
+void UI::play(HDC hdc, PointF ptf)
+{
+	if (_isShowing) {
+		_animation->render(hdc, ptf);
+	}
+}
+
 void UI::setAnimationImage(int state, char* fileName, int frameXCount, int frameYCount)
 {
 	_animation->setAnimationImage (

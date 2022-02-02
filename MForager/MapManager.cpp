@@ -15,18 +15,18 @@ HRESULT MapManager::init()
 bool MapManager::rcCollsionCheck(RECT& rc)
 {
 	RECT tempRect;
-	for (int i = 0; i < _map->_collisionTilesCount; i++) {
-		if (IntersectRect(&tempRect, &_map->_collisionTiles[i]->rc, &rc)) {
+	for (UI* cTile: _map->_collisionTile) {
+		if (IntersectRect(&tempRect, &cTile->getRRc(), &rc)) {
 			return true;
 		}
 	}
 	return false;
 }
 
-bool MapManager::ptInCollsionTile(int x, int y)
+bool MapManager::ptInCollsionTile(int rX, int rY)
 {
-	for (int i = 0; i < _map->_collisionTilesCount; i++) {
-		if (_map->_collisionTiles[i]->pt.x == x && _map->_collisionTiles[i]->pt.y == y) {
+	for (UI* cTile : _map->_collisionTile) {
+		if (cTile->getAPt()->X == rX && cTile->getAPt()->Y == rY) {
 			return true;
 		}
 	}

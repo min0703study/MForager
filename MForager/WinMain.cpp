@@ -48,7 +48,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	_winRealSizeX = _winsizeX - 15;
 	_winRealSizeY = _winsizeY - 40;
 
-	_gm = new MainGame;
+	_gm = new MapTool;
 
 	WNDCLASS wndClass;
 	wndClass.cbClsExtra = 0;
@@ -68,10 +68,10 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 		WINNAME,
 		WINNAME,
 		WINSTYLE,
-		WINSTART_X,
-		WINSTART_Y,
-		CAMERASIZE_X,
-		CAMERASIZE_Y,
+		20,
+		20,
+		WINSIZE_X,
+		WINSIZE_Y,
 		NULL,
 		(HMENU)NULL,
 		hInstance,

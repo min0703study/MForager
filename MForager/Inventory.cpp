@@ -19,3 +19,11 @@ bool Inventory::addItem(ItemBase * _item)
 
 	return isAddItem;
 }
+
+Inventory::~Inventory()
+{
+	for (vector<InventoryItem*>::iterator _item = _items.begin(); _item != _items.end();) {
+		_item = _items.erase(_item);
+		SAFE_DELETE(*_item);
+	}
+}

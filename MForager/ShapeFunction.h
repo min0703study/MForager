@@ -226,6 +226,12 @@ inline PointF FindCenterPtf(RECT rc) {
 	return { (rc.left + rc.right) / 2.0f, (rc.bottom + rc.top) / 2.0f };
 }
 
+inline void copyRect(RECT* baseRc, RECT rc) {
+	baseRc->left = rc.left;
+	baseRc->top = rc.top;
+	baseRc->right = rc.right;
+	baseRc->bottom = rc.bottom;
+}
 
 inline LPRECT MakeLPRECT(PointF pt, int width, int height, bool isCenterPt = false)
 {

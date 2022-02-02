@@ -1,10 +1,10 @@
 #pragma once
 #include "ItemAnimation.h"
-#include "UI.h"
-class ItemBase: public UI
+#include "Bundlable.h"
+class ItemBase: public Bundlable
 {
 public:
-	int _ItemId;
+
 	ItemBase(int _itemId, PointF pt, int widht, int height);
 
 	int getId() { return _ItemId; };
