@@ -1,19 +1,12 @@
 #pragma once
 #include "Image.h"
-enum StartPtType {
-	LEFT_TOP,
-	LEFT_BOTTOM,
-	RIGHT_TOP,
-	RIGHT_BOTTOM
-};
+
 class FrameImage: public ImageBase
 {
 public:
-
-	StartPtType	_startPtType;
-
 	int			_frameWidth;
 	int			_frameHeight;
+
 	int			_frameXCount;
 	int			_frameYCount;
 

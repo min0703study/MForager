@@ -8,13 +8,13 @@ Stone::Stone(PointF pt, TYPE type):
 	switch (type)
 	{
 	case STONE:
-		_animation->mapping((int)ItemAnimation::State::stop, RES::STONE_NORMAL_STOP);
+		_animation->mapping((int)ItemAnimation::State::stop, RES_KEY::STONE_NORMAL_STOP);
 		break;
 	case IRON_ORE:
-		_animation->mapping((int)ItemAnimation::State::stop, RES::IRON_ORE_STOP);
+		_animation->mapping((int)ItemAnimation::State::stop, RES_KEY::IRON_ORE_STOP);
 		break;
 	case COAL :
-		_animation->mapping((int)ItemAnimation::State::stop, RES::COAL_STOP);
+		_animation->mapping((int)ItemAnimation::State::stop, RES_KEY::COAL_STOP);
 		break;
 	}
 	_animation->init((int)ItemAnimation::State::stop);

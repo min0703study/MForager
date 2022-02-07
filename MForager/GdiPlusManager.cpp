@@ -4,7 +4,6 @@
 void GdiPlusManager::init(HDC hdc)
 {
 	fontFamily = new FontFamily(L"Leferi Base Type Bold");
-	//_graphics = new Graphics(hdc);
 	centerFormat.SetAlignment(StringAlignmentCenter);
 }
 
@@ -109,8 +108,6 @@ Image * GdiPlusManager::rotate(HDC hdc, int intKey, RectF rcf, int angle, bool i
 		Color(255, 0, 255),
 		ColorAdjustTypeDefault
 	);
-
-
 
 	Gdiplus::Matrix matrix;
 	if (isRight) {

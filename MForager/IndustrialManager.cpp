@@ -34,7 +34,7 @@ void IndustrialManager::update()
 void IndustrialManager::render(HDC hdc) {
 	if (isOpen) {
 		GDIPLUSMANAGER->DrawRectangle(hdc, 0, 0, MAP_C::UI_INFO::CAMERA_X_SIZE, MAP_C::UI_INFO::CAMERA_Y_SIZE);
-		IMAGEMANAGER->render(to_string(RES::FURANACE_MENU), hdc, 
+		IMAGEMANAGER->render(to_string(RES_KEY::FURANACE_MENU), hdc, 
 			INDUSTRIAL::FURANACE::MENU::UI_INFO::START_X,
 			INDUSTRIAL::FURANACE::MENU::UI_INFO::START_Y);
 	}

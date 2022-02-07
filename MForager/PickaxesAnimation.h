@@ -12,7 +12,7 @@ public:
 	int i;
 	bool flag;
 	PickaxesAnimation() :AnimationBase((int)State::END), _currentAngle(45.0) {
-		mapping((int)State::stop, RES::PICKAXES_NORMAL);
+		mapping((int)State::stop, RES_KEY::PICKAXES_NORMAL);
 	};
 
 	void render(HDC hdc, POINTF startPt);

@@ -1,5 +1,6 @@
 #pragma once
-enum RES {
+
+enum RES_KEY {
 	MAP = 1000,
 	MAP_SPRITE,
 	CURSOR,
@@ -317,7 +318,7 @@ namespace INDUSTRIAL {
 inline void CommonDatainit() {
 	Json::Value resJson = LoadJsonFile("jsonFile/res_path_info.json");
 
-	IMAGEMANAGER->addFrameImage((int)RES::MAP_SPRITE,
+	IMAGEMANAGER->addFrameImage(RES_KEY::MAP_SPRITE,
 		resJson["map_sprite"].asCString(),
 		MAP_C::UI_INFO::SPRITE_X_SIZE,
 		MAP_C::UI_INFO::SPRITE_Y_SIZE,
@@ -325,7 +326,7 @@ inline void CommonDatainit() {
 		MAP_C::UI_INFO::SPRITE_Y_COUNT,
 		true);
 
-	IMAGEMANAGER->addFrameImage((int)RES::SELECT_BOX,
+	IMAGEMANAGER->addFrameImage(RES_KEY::SELECT_BOX,
 		resJson["select_box"].asCString(),
 		ETC::SELECT_BOX::UI_INFO::X_SIZE * ETC::SELECT_BOX::UI_INFO::SPRITE_X_COUNT,
 		ETC::SELECT_BOX::UI_INFO::Y_SIZE * ETC::SELECT_BOX::UI_INFO::SPRITE_Y_COUNT,
@@ -334,7 +335,7 @@ inline void CommonDatainit() {
 		true);
 
 
-	IMAGEMANAGER->addFrameImage((int)RES::PLAYER_STOP_R, 
+	IMAGEMANAGER->addFrameImage(RES_KEY::PLAYER_STOP_R, 
 		resJson["player_stop_right"].asCString(),
 		PLAYER::UI_INFO::STOP_SPRITE_X * PLAYER::UI_INFO::X_SIZE,
 		PLAYER::UI_INFO::STOP_SPRITE_Y * PLAYER::UI_INFO::Y_SIZE,
@@ -342,7 +343,7 @@ inline void CommonDatainit() {
 		PLAYER::UI_INFO::STOP_SPRITE_Y,
 		true);
 
-	IMAGEMANAGER->addFrameImage((int)RES::PLAYER_STOP_L,
+	IMAGEMANAGER->addFrameImage(RES_KEY::PLAYER_STOP_L,
 		resJson["player_stop_left"].asCString(),
 		PLAYER::UI_INFO::STOP_SPRITE_X * PLAYER::UI_INFO::X_SIZE,
 		PLAYER::UI_INFO::STOP_SPRITE_Y * PLAYER::UI_INFO::Y_SIZE,
@@ -350,7 +351,7 @@ inline void CommonDatainit() {
 		PLAYER::UI_INFO::STOP_SPRITE_Y,
 		true);
 
-	IMAGEMANAGER->addFrameImage((int)RES::PLAYER_WALK_R,
+	IMAGEMANAGER->addFrameImage(RES_KEY::PLAYER_WALK_R,
 		resJson["player_walk_right"].asCString(),
 		PLAYER::UI_INFO::WALK_SPRITE_X * PLAYER::UI_INFO::X_SIZE,
 		PLAYER::UI_INFO::WALK_SPRITE_Y * PLAYER::UI_INFO::Y_SIZE,
@@ -358,7 +359,7 @@ inline void CommonDatainit() {
 		PLAYER::UI_INFO::WALK_SPRITE_Y,
 		true);
 
-	IMAGEMANAGER->addFrameImage((int)RES::PLAYER_WALK_L,
+	IMAGEMANAGER->addFrameImage((int)RES_KEY::PLAYER_WALK_L,
 		resJson["player_walk_left"].asCString(),
 		PLAYER::UI_INFO::WALK_SPRITE_X * PLAYER::UI_INFO::X_SIZE,
 		PLAYER::UI_INFO::WALK_SPRITE_Y * PLAYER::UI_INFO::Y_SIZE,
@@ -366,52 +367,52 @@ inline void CommonDatainit() {
 		PLAYER::UI_INFO::WALK_SPRITE_Y,
 		true);
 
-	IMAGEMANAGER->addFileImage((int)RES::PLAYER_ACTION_R,
+	IMAGEMANAGER->addFileImage((int)RES_KEY::PLAYER_ACTION_R,
 		resJson["player_action_right"].asCString(),
 		PLAYER::UI_INFO::X_SIZE,
 		PLAYER::UI_INFO::Y_SIZE, true);
 
-	IMAGEMANAGER->addFileImage((int)RES::PLAYER_ACTION_L,
+	IMAGEMANAGER->addFileImage((int)RES_KEY::PLAYER_ACTION_L,
 		resJson["player_action_left"].asCString(),
 		PLAYER::UI_INFO::X_SIZE,
 		PLAYER::UI_INFO::Y_SIZE, true);
 
-	IMAGEMANAGER->addFileImage((int)RES::FURANACE_MENU,
+	IMAGEMANAGER->addFileImage((int)RES_KEY::FURANACE_MENU,
 		resJson["furanace_menu"].asCString(),
 		INDUSTRIAL::FURANACE::MENU::UI_INFO::X_SIZE,
 		INDUSTRIAL::FURANACE::MENU::UI_INFO::Y_SIZE, true);
 
 
-	IMAGEMANAGER->addFileImage((int)RES::WOOD_NORMAL_STOP,
+	IMAGEMANAGER->addFileImage((int)RES_KEY::WOOD_NORMAL_STOP,
 		resJson["wood_stop"].asCString(),
 		ITEM::WOOD::UI_INFO::X_SIZE,
 		ITEM::WOOD::UI_INFO::Y_SIZE, true);
 
-	IMAGEMANAGER->addFileImage((int)RES::COAL_STOP,
+	IMAGEMANAGER->addFileImage((int)RES_KEY::COAL_STOP,
 		resJson["coal_stop"].asCString(),
 		ITEM::WOOD::UI_INFO::X_SIZE,
 		ITEM::WOOD::UI_INFO::Y_SIZE, true);
 
 
-	IMAGEMANAGER->addFileImage((int)RES::BERRY_STOP,			resJson["berry_stop"].asCString(), 50, 50, true);
-	IMAGEMANAGER->addFileImage((int)RES::STONE_NORMAL_STOP,		resJson["stone_stop"].asCString(), 50, 50, true);
-	IMAGEMANAGER->addFileImage((int)RES::IRON_ORE_STOP,			resJson["iron_ore_stop"].asCString(), 50, 50, true);
-	IMAGEMANAGER->addFileImage((int)RES::BERRY_BUSH_STOP,		resJson["berry_bush_stop"].asCString(), 50, 50, true);
-	IMAGEMANAGER->addFileImage((int)RES::HEART,					resJson["heart"].asCString(), MAIN::LIFE_COUNT::UI_INFO::X_SIZE, MAIN::LIFE_COUNT::UI_INFO::Y_SIZE, true);
-	IMAGEMANAGER->addFileImage((int)RES::HEART_BLANK,			resJson["heart_blank"].asCString(), MAIN::LIFE_COUNT::UI_INFO::X_SIZE, MAIN::LIFE_COUNT::UI_INFO::Y_SIZE, true);
-	IMAGEMANAGER->addFileImage((int)RES::FURANACE_STOP,			resJson["furanace"].asCString(), INDUSTRIAL::FURANACE::UI_INFO::X_SIZE, INDUSTRIAL::FURANACE::UI_INFO::Y_SIZE, true);
+	IMAGEMANAGER->addFileImage((int)RES_KEY::BERRY_STOP,			resJson["berry_stop"].asCString(), 50, 50, true);
+	IMAGEMANAGER->addFileImage((int)RES_KEY::STONE_NORMAL_STOP,		resJson["stone_stop"].asCString(), 50, 50, true);
+	IMAGEMANAGER->addFileImage((int)RES_KEY::IRON_ORE_STOP,			resJson["iron_ore_stop"].asCString(), 50, 50, true);
+	IMAGEMANAGER->addFileImage((int)RES_KEY::BERRY_BUSH_STOP,		resJson["berry_bush_stop"].asCString(), 50, 50, true);
+	IMAGEMANAGER->addFileImage((int)RES_KEY::HEART,					resJson["heart"].asCString(), MAIN::LIFE_COUNT::UI_INFO::X_SIZE, MAIN::LIFE_COUNT::UI_INFO::Y_SIZE, true);
+	IMAGEMANAGER->addFileImage((int)RES_KEY::HEART_BLANK,			resJson["heart_blank"].asCString(), MAIN::LIFE_COUNT::UI_INFO::X_SIZE, MAIN::LIFE_COUNT::UI_INFO::Y_SIZE, true);
+	IMAGEMANAGER->addFileImage((int)RES_KEY::FURANACE_STOP,			resJson["furanace"].asCString(), INDUSTRIAL::FURANACE::UI_INFO::X_SIZE, INDUSTRIAL::FURANACE::UI_INFO::Y_SIZE, true);
 
-	GDIPLUSMANAGER->addImage((int)RES::PICKAXES_NORMAL,			resJson["pickaxes_normal"].asCString());
-	GDIPLUSMANAGER->addImage((int)RES::PICKAXES,				resJson["pickaxes_normal"].asCString());
-	GDIPLUSMANAGER->addImage((int)RES::CURSOR,					resJson["cursor"].asCString());
-	GDIPLUSMANAGER->addImage((int)RES::SELECT_BOX,				resJson["select_box"].asCString());
-	GDIPLUSMANAGER->addImage((int)RES::ROCK_NORMAL_STOP_1,		resJson["rock_normal_stop_1"].asCString());
-	GDIPLUSMANAGER->addImage((int)RES::ROCK_NORMAL_STOP_2,		resJson["rock_normal_stop_2"].asCString());
-	GDIPLUSMANAGER->addImage((int)RES::ROCK_IRON_STOP_1,		resJson["rock_iron_stop_1"].asCString());
-	GDIPLUSMANAGER->addImage((int)RES::ROCK_IRON_STOP_2,		resJson["rock_iron_stop_2"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES_KEY::PICKAXES_NORMAL,			resJson["pickaxes_normal"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES_KEY::PICKAXES,				resJson["pickaxes_normal"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES_KEY::CURSOR,					resJson["cursor"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES_KEY::SELECT_BOX,				resJson["select_box"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES_KEY::ROCK_NORMAL_STOP_1,		resJson["rock_normal_stop_1"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES_KEY::ROCK_NORMAL_STOP_2,		resJson["rock_normal_stop_2"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES_KEY::ROCK_IRON_STOP_1,		resJson["rock_iron_stop_1"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES_KEY::ROCK_IRON_STOP_2,		resJson["rock_iron_stop_2"].asCString());
 
-	GDIPLUSMANAGER->addImage((int)RES::CITRUS_STOP,				resJson["citrus_stop"].asCString());
-	GDIPLUSMANAGER->addImage((int)RES::INVENTORY_BOX,			resJson["inventory_box"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES_KEY::CITRUS_STOP,				resJson["citrus_stop"].asCString());
+	GDIPLUSMANAGER->addImage((int)RES_KEY::INVENTORY_BOX,			resJson["inventory_box"].asCString());
 
 	cout << endl;
 }

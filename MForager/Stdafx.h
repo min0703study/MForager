@@ -32,9 +32,10 @@ using namespace std;
 using namespace Gdiplus;
 
 enum IMAGE_TYPE {
-	DEFAULT = 0,
+	NORMAL_FILE = 0,
 	FRAME,
 	ALPHA,
+	GDI,
 	ERR
 };
 

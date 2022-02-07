@@ -23,7 +23,7 @@ public:
 
 	void changeDirect() { 
 		_direction *= -1; 
-		GDIPLUSMANAGER->flipeX((int)RES::PICKAXES_NORMAL);
+		GDIPLUSMANAGER->flipeX((int)RES_KEY::PICKAXES_NORMAL);
 	}
 
 	void startAction() {

@@ -8,10 +8,10 @@ public:
 	InventoryBox(PointF pt, int width, int height)
 		:FixedUI(pt, width, height, new SizeChangeAnimation) {
 		_isShowing = true;
-		_animation->mapping((int)SizeChangeAnimation::State::stop, RES::INVENTORY_BOX);
+		_animation->mapping((int)SizeChangeAnimation::State::stop, RES_KEY::INVENTORY_BOX);
 	};
 	virtual void playFixed(HDC hdc) {
-		GDIPLUSMANAGER->render(hdc, RES::INVENTORY_BOX, _absUiPos);
+		GDIPLUSMANAGER->render(hdc, RES_KEY::INVENTORY_BOX, _absUiPos);
 	};
 
 	RectF getCountRect() {

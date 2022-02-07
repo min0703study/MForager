@@ -7,7 +7,7 @@ BerryBush::BerryBush(PointF hitPt, TYPE type) : CollectionBase(hitPt, 1, 1), _ty
 	using namespace COLLECT::BERRY_BUSH::DEFAULT_VALUE;
 	switch (type) {
 	case TYPE::NOMAL:
-		_animation->mapping((int)CollectAnimation::State::stop, RES::BERRY_BUSH_STOP);
+		_animation->mapping((int)CollectAnimation::State::stop, RES_KEY::BERRY_BUSH_STOP);
 		_animation->init((int)CollectAnimation::State::stop);
 		break;
 	}

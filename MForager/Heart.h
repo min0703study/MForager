@@ -9,8 +9,8 @@ public:
 		:FixedUI(pt, width, height, new HeartAnimation) {
 		_isShowing = true;
 
-		_animation->mapping((int)HeartAnimation::State::live, RES::HEART);
-		_animation->mapping((int)HeartAnimation::State::blank,RES::HEART_BLANK);
+		_animation->mapping((int)HeartAnimation::State::live, RES_KEY::HEART);
+		_animation->mapping((int)HeartAnimation::State::blank,RES_KEY::HEART_BLANK);
 
 		_animation->init((int)HeartAnimation::State::live);
 	};

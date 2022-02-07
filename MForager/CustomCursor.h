@@ -26,7 +26,7 @@ public:
 	};
 
 	void render(HDC hdc) {
-		GDIPLUSMANAGER->render(hdc, RES::CURSOR, *_pt, _size);
+		GDIPLUSMANAGER->render(hdc, RES_KEY::CURSOR, *_pt, _size);
 	}
 	
 };

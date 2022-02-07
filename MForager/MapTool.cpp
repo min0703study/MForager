@@ -102,8 +102,6 @@ void MapTool::loadMap(void)
 		tile.pt = POINTF(tile.xIndex * TILE_SIZE, tile.yIndex * TILE_SIZE);
 		tile.rc = RectMakeF(tile.pt, TILE_SIZE, TILE_SIZE);
 	}
-
-	
 }
 
 void MapTool::clickEvent(POINT & pt, bool isClickDown)

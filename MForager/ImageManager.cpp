@@ -18,15 +18,9 @@ void ImageManager::release(void)
 	this->deleteAll();
 }
 
-ImageBase * ImageManager::addFileImage(int intKey, const char * fileName, int width, int height, bool isTranse)
+ImageBase * ImageManager::addFileImage(int key, const char * fileName, int width, int height, bool isTranse)
 {
-	return addFileImage(to_string(intKey), fileName, width, height, isTranse);
-}
-
-ImageBase * ImageManager::addFileImage(string strKey, const char * fileName, int width, int height, bool isTranse)
-{
-	ImageBase* img = findImage(strKey);
-
+	ImageBase* img = findImage(key);
 	if (img) return img;
 
 	img = new ImageBase;
@@ -37,40 +31,32 @@ ImageBase * ImageManager::addFileImage(string strKey, const char * fileName, int
 		return NULL;
 	}
 
-	_mImageList.insert(make_pair(strKey, img));
+	_mImageList.insert(make_pair(key, img));
 
 	return img;
 }
 
-ImageBase* ImageManager::addFrameImage(string strKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse)
+ImageBase* ImageManager::addFrameImage(int key, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse)
 {
-	FrameImage* img = (FrameImage*)findImage(strKey);
-
+	FrameImage* img = (FrameImage*)findImage(key);
 	if (img) return img;
 
 	img = new FrameImage;
-
 	if (FAILED(img->initFile(fileName, width, height, frameXCount, frameYCount, isTranse)))
 	{
 		SAFE_DELETE(img);
 		return NULL;
 	}
 
-	_mImageList.insert(make_pair(strKey, img));
+	_mImageList.insert(make_pair(key, img));
 
 	return img;
 }
 
-ImageBase * ImageManager::addFrameImage(int intKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse)
+
+ImageBase* ImageManager::addAlphaImage(int key, const char * fileName, int width, int height)
 {
-	return addFrameImage(to_string(intKey), fileName, width, height, frameXCount, frameYCount, isTranse);
-}
-
-
-ImageBase* ImageManager::addAlphaImage(string strKey, const char * fileName, int width, int height)
-{
-	AlphaImage* img = (AlphaImage*)findImage(strKey);
-
+	AlphaImage* img = (AlphaImage*)findImage(key);
 	if (img) return img;
 
 	img = new AlphaImage;
@@ -81,56 +67,90 @@ ImageBase* ImageManager::addAlphaImage(string strKey, const char * fileName, int
 		return NULL;
 	}
 
-	_mImageList.insert(make_pair(strKey, img));
+	_mImageList.insert(make_pair(key, img));
 
 	return img;
 }
 
-ImageBase * ImageManager::addAlphaImage(int intKey, const char * fileName, int width, int height)
+void ImageManager::addtImage(int key, int width, int height)
 {
-	return addAlphaImage(to_string(intKey), fileName, width, height);
+	ImageBase* img = findImage(key);
+	if (img) return ;
+
+	img = new ImageBase;
+	img->_imageInfo = new IMAGE_INFO(width, height);
+	img->_isLoadSuccess = false;
 }
 
-ImageBase * ImageManager::addImage(string strKey, int width, int height)
+void ImageManager::addtFileImage(int key, const char * fileName, int width, int height, bool isTranse)
+{
+	ImageBase* img = findImage(key);
+	if (img) return;
+
+	img = new ImageBase;
+	img->_isLoadSuccess = false;
+}
+
+void ImageManager::addtFrameImage(int key, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse)
+{
+}
+
+void ImageManager::addtAlphaImage(int key, const char * fileName, int width, int height)
+{
+}
+
+
+void ImageManager::loadImage(HDC hdc)
+{
+	for (mapImageIter iter = _mImageList.begin(); iter != _mImageList.end();)
+	{
+		switch (iter->second->_type)
+		{
+		case FRAME:
+			break;
+		case NORMAL_FILE;
+		default:
+			break;
+		}
+	}
+}
+
+ImageBase* ImageManager::addImage(int intKey, int width, int height)
 {
 	{
-		ImageBase* img = findImage(strKey);
-
-		if (img) return img;
+		ImageBase* img = findImage(intKey);
+		if (SAFE_NULL_CHECK(img)) return img;
 
 		img = new ImageBase;
-
 		if (FAILED(img->init(width, height)))
 		{
 			SAFE_DELETE(img);
 			return NULL;
 		}
 
-		_mImageList.insert(make_pair(strKey, img));
-
+		_mImageList.insert(make_pair(intKey, img));
 		return img;
 	}
 }
 
-ImageBase* ImageManager::findImage(string strKey)
+ImageBase* ImageManager::findImage(int key)
 {
-	auto key = _mImageList.find(strKey);
-	if (key != _mImageList.end())
-	{
-		return key->second;
-	}
+	auto findImage = _mImageList.find(key);
+
+	if (findImage != _mImageList.end()) 
+		return findImage->second;
 
 	return nullptr;
 }
 
-bool ImageManager::deleteImage(string strKey)
+bool ImageManager::deleteImage(int key)
 {
-	auto key = _mImageList.find(strKey);
+	auto findImage = _mImageList.find(key);
 
-	if (key != _mImageList.end())
+	if (findImage != _mImageList.end())
 	{
-		key->second->release();
-		SAFE_DELETE(key->second);
+		findImage->second->release();
+		SAFE_DELETE(findImage->second);
 		_mImageList.erase(key);
 
 		return true;
@@ -141,7 +161,7 @@ bool ImageManager::deleteImage(string strKey)
 bool ImageManager::deleteAll()
 {
 	auto iter = _mImageList.begin();
-	for (; iter != _mImageList.end();)
+	for (iter = _mImageList.begin(); iter != _mImageList.end();)
 	{
 		if (iter->second != NULL)
 		{
@@ -157,63 +177,33 @@ bool ImageManager::deleteAll()
 	return true;
 }
 
-void ImageManager::render(string strKey, HDC hdc, POINTF position)
-{
-	
-	ImageBase* img = findImage(strKey);
-	if (img) {
-		switch (img->_type)
-		{
-			case FRAME:
-				_renderer->renderFrame(hdc, (FrameImage*)img, position);
-				break;
-			case DEFAULT:
-				_renderer->renderPtf(hdc, img, position);
-				break;
-		}
-	}
-}
-
-
-void ImageManager::render(string strKey, HDC hdc, PointF position)
+void ImageManager::render(int key, HDC hdc, PointF position)
 {
 
-	ImageBase* img = findImage(strKey);
+	ImageBase* img = findImage(key);
+
 	if (img) {
 		switch (img->_type)
 		{
 		case FRAME:
 			_renderer->renderFrame(hdc, (FrameImage*)img, {position.X, position.Y});
 			break;
-		case DEFAULT:
+		case NORMAL_FILE:
 			_renderer->renderPtf(hdc, img, { position.X, position.Y });
 			break;
 		}
 	}
 }
 
-
-void ImageManager::render(string strKey, HDC hdc, int destX, int destY, bool isCenter)
+void ImageManager::render(int key, HDC hdc, int destX, int destY, bool isCenter)
 {
-	ImageBase* img = findImage(strKey);
+	ImageBase* img = findImage(key);
 	if (img)  _renderer->renderPt(hdc, img, { destX, destY }, isCenter);
 }
 
-
-void ImageManager::frameRender(string strKey, HDC hdc, POINTF position)
+void ImageManager::alphaRender(int key, HDC hdc, PointF pt, BYTE alpha, bool isCenterPt)
 {
-	FrameImage* img = (FrameImage*)findImage(strKey);
-	if (img) _renderer->renderFrame(hdc, img, position);
-}
-
-void ImageManager::frameRender(string strKey, HDC hdc, POINT position)
-{
-	this->frameRender(strKey, hdc, POINTF(position));
-}
-
-void ImageManager::alphaRender(string strKey, HDC hdc, PointF pt, BYTE alpha, bool isCenterPt)
-{
-	AlphaImage* img = (AlphaImage*)findImage(strKey);
+	AlphaImage* img = (AlphaImage*)findImage(key);
 
 	if (img) {
 		if (isCenterPt) {
@@ -224,43 +214,30 @@ void ImageManager::alphaRender(string strKey, HDC hdc, PointF pt, BYTE alpha, bo
 	}
 }
 
-void ImageManager::nextFrame(string strKey)
+void ImageManager::nextFrame(int key)
 {
-	FrameImage* img = (FrameImage*)findImage(strKey);
+	FrameImage* img = (FrameImage*)findImage(key);
 	if (img) img->nextFrame();
 }
 
-void ImageManager::setCurrentFrame(string strKey, int x, int y)
+void ImageManager::setCurrentFrame(int key, int x, int y)
 {
-	FrameImage* img = (FrameImage*)findImage(strKey);
+	FrameImage* img = (FrameImage*)findImage(key);
 	if (img) img->setCurrentFrame(x, y);
 }
 
-IMAGE_TYPE ImageManager::getType(string strKey)
+IMAGE_TYPE ImageManager::getType(int key)
 {
-	ImageBase* img = findImage(strKey);
+	ImageBase* img = findImage(key);
 	if (img) {
 		return img->_type;
 	}
 	return ERR;
 }
 
-void ImageManager::loopRender(string strKey, HDC hdc, const LPRECT drawArea, int offsetX, int offsetY)
-{
-	ImageBase* img = findImage(strKey);
-	if (img) _renderer->renderLoop(hdc, img, drawArea, offsetX, offsetY);
-}
 
-
-void ImageManager::alphaRender(string strKey, HDC hdc, BYTE alpha)
+void ImageManager::alphaRender(int key, HDC hdc, BYTE alpha)
 {
-	AlphaImage* img = (AlphaImage*)findImage(strKey);
+	AlphaImage* img = (AlphaImage*)findImage(key);
 	if (img) _renderer->renderAlpha(hdc, img, alpha);
 }
-
-void ImageManager::alphaRender(string strKey, HDC hdc, POINTF pt, BYTE alpha)
-{
-	AlphaImage* img = (AlphaImage*)findImage(strKey);
-	if (img) _renderer->renderAlpha(hdc, img, pt, alpha);
-}
-

@@ -8,7 +8,7 @@ public:
 	SelectPtBox(PointF pt, int width, int height) 
 		:UI(pt, width, height, new SimpleAnimation) {
 		setIsShowing(false);
-		_animation->mapping((int)SimpleAnimation::State::oneMove, RES::SELECT_BOX);
+		_animation->mapping((int)SimpleAnimation::State::oneMove, RES_KEY::SELECT_BOX);
 	};
 };
 

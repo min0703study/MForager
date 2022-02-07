@@ -7,57 +7,45 @@
 class ImageManager : public SingletonBase<ImageManager>
 {
 private:
-	typedef map<string, ImageBase*> mapImageList;
-	typedef map<string, ImageBase*>::iterator mapImageIter;
+	typedef map<int, ImageBase*> mapImageList;
+	typedef map<int, ImageBase*>::iterator mapImageIter;
 private:
 	mapImageList _mImageList;
 	Renderer* _renderer;
-	ImageBase* findImage(string strKey);
+	ImageBase* findImage(int strKey);
 public:
 	HRESULT init(void);
 	void release(void);
 
-	ImageBase * addImage(int strKey, int width, int height);
-	ImageBase * addImage(string strKey, int width, int height);
+	//이미지 등록
+	ImageBase* addImage(int key, int width, int height);
+	ImageBase* addFileImage(int key, const char * fileName, int width, int height, bool isTranse = false);
+	ImageBase* addFrameImage(int key, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse = true);
+	ImageBase* addAlphaImage(int key, const char * fileName, int width, int height);
 
+	void addtImage(int key, int width, int height);
+	void addtFileImage(int key, const char * fileName, int width, int height, bool isTranse = false);
+	void addtFrameImage(int key, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse = true);
+	void addtAlphaImage(int key, const char * fileName, int width, int height);
 
-	ImageBase* addFileImage(string strKey, const char * fileName, int width, int height, bool isTranse = false);
-	ImageBase* addFileImage(int intKey, const char * fileName, int width, int height, bool isTranse = false);
-	ImageBase* addFrameImage(string strKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse = true);
-	ImageBase* addFrameImage(int intKey, const char * fileName, int width, int height, int frameXCount, int frameYCount, bool isTranse = true);
-	ImageBase* addAlphaImage(string strKey, const char * fileName, int width, int height);
-	ImageBase* addAlphaImage(int intKey, const char * fileName, int width, int height);
+	//이미지 로드
+	void loadImage(HDC hdc);
 
-	void frameRender(string strKey, HDC hdc, POINTF position);
-	void frameRender(string strKey, HDC hdc, POINT position);
-	void loopRender(string strKey, HDC hdc, const LPRECT drawArea, int offsetX, int offsetY);
-	void alphaRender(string strKey, HDC hdc, BYTE alpha);
-	void alphaRender(string strKey,HDC hdc, POINTF pt, BYTE alpha);
+	void frameRender(int key, HDC hdc, PointF position);
+	void alphaRender(int key, HDC hdc, BYTE alpha);
 
-	void frameRender(int intKey, HDC hdc, POINTF position) { return frameRender(to_string(intKey), hdc, position); };
-	void frameRender(int intKey, HDC hdc, POINT position) { return frameRender(to_string(intKey), hdc, position); };
-	void frameRender(int intKey, HDC hdc, PointF position) { return frameRender(to_string(intKey), hdc, POINTF{ position.X, position.Y }); };
+	void nextFrame(int key);
+	void setCurrentFrame(int intKey, int x, int y);
 
-	void alphaRender(int intKey, HDC hdc, BYTE alpha) { return alphaRender(to_string(intKey), hdc, alpha); };
-	void alphaRender(int intKey, HDC hdc, POINTF pt, BYTE alpha) { return alphaRender(to_string(intKey), hdc,pt, alpha); };
-	void alphaRender(string strKey, HDC hdc, PointF pt, BYTE alpha, bool isCenterPt = false);
+	IMAGE_TYPE getType(int intKey);
 
-	void nextFrame(string strKey);
-	void nextFrame(int intKey) { nextFrame(to_string(intKey)); };
-	void setCurrentFrame(string strKey, int x, int y);
-	void setCurrentFrame(int intKey, int x, int y) { setCurrentFrame(to_string(intKey), x, y); };;
-
-	IMAGE_TYPE getType(string strKey);
-	IMAGE_TYPE getType(int intKey) { getType(to_string(intKey)); };;
-
-	bool deleteImage(string strKey);
+	bool deleteImage(int key);
 	bool deleteAll();
 
-	void render(string strKey, HDC hdc, POINTF position);
-
-	void render(string strKey, HDC hdc, PointF position);
-
-	void render(string strKey, HDC hdc, int destX = 0, int destY = 0, bool isCenter = false);
+	void render(int key, HDC hdc, PointF position);
+	void render(int key, HDC hdc, int destX, int destY, bool isCenter);
+	void alphaRender(int key, HDC hdc, PointF pt, BYTE alpha, bool isCenterPt);
+	void render(int key, HDC hdc, int destX = 0, int destY = 0, bool isCenter = false);
 
 	ImageManager();
 	~ImageManager();
